@@ -1,0 +1,77 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/WhosWho:layout.html.twig" %}
+
+{% block title %}{{ block('headline') }} | {{ phone.fra }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Supprimer un numéro de téléphone' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous"><a href="{{ path('asbo_whoswho_fra_show', {'slug': phone.fra.slug}) }}">&larr; Retourner au profil de {{ phone.fra }}</a></li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block asbo_whoswho_content %}
+
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {% if phone is same as(phone.fra.principalPhone) %}
+                    <div class="alert alert-danger">
+                        <h4>Numéro de téléphone de contact</h4>
+                        Vous êtes sur le point de supprimer votre numéro de téléphone de contact. <br />
+                        <div class="text-center"><br /><strong>{{ phone }}</strong> ?</div> <br />
+                        La chancellerie rappelle qu'il est important de fournir un numéro de téléphone valide afin de pouvoir vous contacter en tout temps !
+                    </div>
+                {% endif %}
+
+                {% if phone.fra.phones.count == 1 %}
+                    <div class="alert alert-danger">
+                        <h4>Dernier numéro de téléphone</h4>
+                        Vous êtes sur le point de supprimer votre dernier numéro de téléphone. <br />
+
+                        <div class="text-center"><br /><strong>{{ phone }}</strong> ?</div> <br />
+                        Dès lors, nous ne pourrons plus vous contacter ! <br />
+                        La chancellerie rappelle qu'il est important de fournir un numéro de téléphone valide afin de pouvoir vous contacter en tout temps !
+                    </div>
+                {% endif %}
+
+                {% if phone is not same as(phone.fra.principalPhone) and phone.fra.phones.count != 1 %}
+                    <div class="well">
+                        Êtes-vous sûr de vouloir supprimer ce numéro de téléphone
+                        <div class="text-center"><br /><strong>{{ phone }}</strong> ? <br /></div>
+                        Cette action est irréversible !
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {{ form_start(form, {'action': path('asbo_whoswho_phone_delete', {'slug': phone.fra.slug, 'id': phone.id}), 'method': 'POST'}) }}
+                <input type="hidden" name="_method" value="DELETE" />
+                {{ form_row(form.submit, {'attr': {'class': 'btn btn-danger col-lg-12 col-md-12 col-sm-12 col-xs-12'}, 'label': 'Confirmer la suppression'}) }}
+                {{ form_rest(form) }}
+            </div>
+
+        </div>
+
+    {% endblock %}

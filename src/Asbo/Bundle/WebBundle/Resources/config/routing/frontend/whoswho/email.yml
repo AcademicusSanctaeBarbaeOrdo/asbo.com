@@ -1,0 +1,48 @@
+asbo_whoswho_email_list:
+    pattern: /
+    defaults:
+        _controller: asbo_whoswho.controller.email:listAction
+        _method: GET|POST
+
+asbo_whoswho_email_delete:
+    pattern: /{id}/delete
+    methods: [GET, DELETE]
+    defaults:
+        _controller: asbo_whoswho.controller.email:deleteAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Email:delete.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_email_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.email:createAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Email:create.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_email_update:
+    pattern: /{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.email:updateAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Email:update.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_email_set_principal:
+    pattern: /principal/{id}/{token}
+    methods: [GET]
+    defaults:
+        namespace: email
+        _controller: asbo_whoswho.controller.fra:setDefaultSubResourceAction
+        _sylius:
+            criteria:
+                slug: $slug

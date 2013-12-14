@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo_whoswho.security.acl.roles.class">Asbo\Bundle\WhosWhoBundle\Security\Acl\RoleFraAcl</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="asbo_whoswho.security.acl.role_fra_acl" class="%asbo_whoswho.security.acl.roles.class%">
+            <argument type="service" id="security.context" />
+            <argument>%asbo_whoswho.security.role.list%</argument>
+            <argument>%asbo_whoswho.security.role.create%</argument>
+            <argument>%asbo_whoswho.security.role.view%</argument>
+            <argument>%asbo_whoswho.security.role.edit%</argument>
+            <argument>%asbo_whoswho.security.role.delete%</argument>
+            <argument>%asbo_whoswho.security.role.export%</argument>
+            <tag name="security.expressions.function_evaluator" function="canListFras" method="canList" />
+            <tag name="security.expressions.function_evaluator" function="canExportFras" method="canExport" />
+            <tag name="security.expressions.function_evaluator" function="canCreateFra" method="canCreate" />
+            <tag name="security.expressions.function_evaluator" function="canViewFra" method="canView" />
+            <tag name="security.expressions.function_evaluator" function="canEditFra" method="canEdit" />
+            <tag name="security.expressions.function_evaluator" function="canDeleteFra" method="canDelete" />
+        </service>
+
+    </services>
+</container>

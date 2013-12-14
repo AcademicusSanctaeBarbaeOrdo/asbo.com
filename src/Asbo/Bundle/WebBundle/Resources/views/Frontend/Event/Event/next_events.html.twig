@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-calendar"></i> Prochains événements</div>
+    <div class="panel-body">
+        <ul class="list-unstyled">
+            {% for event in events %}
+                <li>
+                    <a href="{{ path('asbo_event_show', {'id': event.id}) }}">{{ event }}</a>
+                    <br />
+                    <small>{{ event.startsAt|date('d-M-Y')|localizeddate('medium', 'none') }} @ {{ event.startsAt|date('H:i')|localizeddate('none', 'short') }} {{ event.location ? '- ' ~ event.location }}</small>
+                    <span class="badge pull-right">{{ event.eventHasFras.count }} vets</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

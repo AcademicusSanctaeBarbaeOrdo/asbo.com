@@ -1,0 +1,35 @@
+asbo_whoswho_diploma_list:
+    pattern: /
+    defaults:
+        _controller: asbo_whoswho.controller.diploma:listAction
+        _method: GET|POST
+
+asbo_whoswho_diploma_delete:
+    pattern: /{id}/delete
+    methods: [GET, DELETE]
+    defaults:
+        _controller: asbo_whoswho.controller.diploma:deleteAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_diploma_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.diploma:createAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_diploma_update:
+    pattern: /{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.diploma:updateAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }

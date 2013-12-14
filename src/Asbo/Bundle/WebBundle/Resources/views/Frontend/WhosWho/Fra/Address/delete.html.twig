@@ -1,0 +1,76 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/WhosWho:layout.html.twig" %}
+
+{% block title %}{{ block('headline') }} | {{ address.fra }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Supprimer une adresse' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous"><a href="{{ path('asbo_whoswho_fra_show', {'slug': address.fra.slug}) }}">&larr; Retourner au profil de {{ address.fra }}</a></li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block asbo_whoswho_content %}
+
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {% if address is same as(address.fra.principalAddress) %}
+                    <div class="alert alert-danger">
+                        <h4>Adresse de contact</h4>
+                        Vous êtes sur le point de supprimer votre adresse de contact. <br />
+                        <div class="text-center"><br /><strong class="text-center">{{ address }}</strong></div> <br />
+                        La chancellerie rappelle qu'il est important de fournir une adresse valide afin de pouvoir vous contacter par la poste et ne pas perdre de l'argent inutilement !
+                    </div>
+                {% endif %}
+
+                {% if address.fra.addresses.count == 1 %}
+                    <div class="alert alert-danger">
+                        <h4>Dernière adresse</h4>
+                        Vous êtes sur le point de supprimer votre dernière adresse de contact. <br />
+                        <div class="text-center"><br /><strong class="text-center">{{ address }}</strong> ?</div> <br />
+                        Dès lors, nous ne pourrons plus vous contacter par la poste ! <br />
+                        La chancellerie rappelle qu'il est important de fournir une adresse valide afin de pouvoir vous contacter par la poste et ne pas perdre de l'argent inutilement !
+                    </div>
+                {% endif %}
+
+                {% if address is not same as(address.fra.principalAddress) and address.fra.addresses.count != 1 %}
+                    <div class="well">
+                        Êtes-vous sûr de vouloir supprimer cette adresse:<br />
+                        <div class="text-center"><br /><strong class="text-center">{{ address }}</strong> ?</div> <br />
+                        Cette action est irréversible !
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {{ form_start(form, {'action': path('asbo_whoswho_address_delete', {'slug': address.fra.slug, 'id': address.id}), 'method': 'POST'}) }}
+                <input type="hidden" name="_method" value="DELETE" />
+                {{ form_row(form.submit, {'attr': {'class': 'btn btn-danger col-lg-12 col-md-12 col-sm-12 col-xs-12'}, 'label': 'Confirmer la suppression'}) }}
+                {{ form_rest(form) }}
+            </div>
+
+        </div>
+
+    {% endblock %}

@@ -1,0 +1,54 @@
+asbo_whoswho_address_list:
+    pattern: /
+    defaults:
+        _controller: asbo_whoswho.controller.address:listAction
+        _method: GET|POST
+
+asbo_whoswho_address_delete:
+    pattern: /{id}/delete
+    methods: [GET, DELETE]
+    defaults:
+        _controller: asbo_whoswho.controller.address:deleteAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Address:delete.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_address_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.address:createAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Address:create.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_address_show:
+    pattern: /{id}/show
+    methods: [GET]
+    defaults:
+        _controller: asbo_whoswho.controller.address:showAction
+
+asbo_whoswho_address_update:
+    pattern: /{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.address:updateAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Address:update.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_address_set_principal:
+    pattern: /principal/{id}/{token}
+    methods: [GET]
+    defaults:
+        namespace: address
+        _controller: asbo_whoswho.controller.fra:setDefaultSubResourceAction
+        _sylius:
+            criteria:
+                slug: $slug

@@ -1,0 +1,31 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<form action="{{ url('fos_message_thread_new') }}" method="post">
+
+    {{ form_rest(form) }}
+
+    <input type="submit" class="btn btn-success col-lg-12" value="Envoyer"/>
+</form>
+
+{% endblock %}
+
+
+{% block page_title %}
+    {% trans from 'FOSMessageBundle' %}send_new{% endtrans %}
+{% endblock %}
+
+{% block headline %}
+    {% trans from 'FOSMessageBundle' %}send_new{% endtrans %}
+{% endblock %}

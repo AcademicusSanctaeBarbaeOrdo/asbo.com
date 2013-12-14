@@ -1,0 +1,86 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source Label.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/WhosWho:layout.html.twig' %}
+
+{% set allowed_to_edit_fra = is_expr_granted("canEditFra(object)", fra) %}
+
+{% block title %}Deniers | {{ fra }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Deniers Supplémentaires' %}
+
+{% block asbo_whoswho_content %}
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fa fa-file fa fa-white"> </i>
+                Art. 224-bis du Formularum Codex
+            </h3>
+        </div>
+
+        <div class="panel-body">
+        {% if fra.status != constant('Asbo\\Bundle\\WhosWhoBundle\\Model\\Status\\FraStatus::VETERANUS') %}
+            <div class="alert alert-warning">Tu n'es pas Vétéran, et cet article ne s'applique donc pas (encore?) à toi :-)</div>
+        {% endif %}
+
+        <p>Suivant l'ancienneté et suivant les postes occupés, il sera proposé au Vétéran, une participation complémentaire et volontaire, basée sur le principe suivant :</p>
+        <ul>
+            <li>Un denier par année de présence à l'Ordre</li>
+            <li>Deux deniers pour un poste de Conseiller occupé</li>
+            <li>Trois deniers pour un poste de Comité (hormis Magister) occupé</li>
+            <li>Quatre deniers pour le poste de Magister</li>
+        </ul>
+        <p>Cette participation complémentaire sera effectuée avant les Agapes et intégralement reversée au Trésor.</p>
+        </div>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {% set total_denier = asbo_calculate_denier(fra, asbo_current_anno()) %}
+                {% set time = asbo_current_anno() - fra.anno %}
+                {% set denier = 1.25 %}
+                {% set total = denier*total_denier %}
+                <i class="fa fa-money fa fa-white"></i>
+                Ce qui fait un total de {{ total_denier }} deniers ou encore {{ total }}€
+            </h3>
+        </div>
+        <div class="panel-body">
+        <p>
+            Parce qu'on est gentil, on a fait le calcul pour toi !
+        </p>
+        <p>
+            Voici les postes que tu as occupé et les deniers correspondants :
+        </p>
+            <ul>
+                {% for fraHasPost in fra.fraHasPosts if fraHasPost.post.denier > 0 %}
+                    <li>{{ fraHasPost.post }} en Anno {{ fraHasPost.anno }} : <b>{{ fraHasPost.post.denier }} deniers</b></li>
+                {%  endfor %}
+            </ul>
+        <p>Tu est dans l'Ordre depuis déjà <strong>{{ time }}</strong> ans : <strong>{{ time }}</strong> deniers.</p>
+
+        <p>Au total, ta participation complémentaire et volontaire s'éleverait à <strong>{{ total_denier }}</strong> deniers par an.</p>
+
+
+        <p>Un denier vaut actuellement {{ denier }}€, ce qui correspond à un total de <strong>{{ total }}</strong>€ par an... Fais en ce que tu veux !</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#edit-mode').click(function () {
+            $('.edit-mode').toggle('fast');
+        });
+    </script>
+{% endblock %}

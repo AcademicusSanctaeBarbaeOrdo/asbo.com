@@ -1,0 +1,48 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend:layout.html.twig' %}
+
+{% block title %}Messagerie - {{ parent() }}{% endblock %}
+{% block page_title %}Messagerie{% endblock %}
+
+{% block content_content %}
+        <ul class="breadcrumb text-right">
+            {% block menu_message %}
+                <li>
+                    <a href="{{ url('fos_message_sent') }}" class="btn">
+                        <i class="fa fa-envelope"></i>
+                        Messages envoyés
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('fos_message_thread_new' )}}" class="btn">
+                        <i class="fa fa-pencil"></i>
+                        {% trans from 'FOSMessageBundle' %}send_new{% endtrans %}
+                    </a>
+                </li>
+            {% endblock %}
+        </ul>
+    	   {% block fos_message_content %}{% endblock %}
+{% endblock %}
+
+{% block sidebar_bottom %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <div class="sidebar">
+        <h2> &nbsp; <a href="#">Messagerie</a></h2>
+        <ul class="unstyled">
+            <li><a href="{{ url('fos_message_inbox') }}" title="Mon compte">Boite de réception</a></li>
+            <li><a href="{{ url('fos_message_sent') }}">Messages envoyés</a></li>
+            <li><a href="{{ url('fos_message_thread_new' )}}">Nouveau message</a></li>
+        </ul>
+    </div>
+    {% endif %}
+{% endblock %}

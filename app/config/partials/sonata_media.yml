@@ -1,0 +1,43 @@
+sonata_media:
+    default_context: default
+    class:
+        media:              Asbo\Bundle\CoreBundle\Entity\Media
+        gallery:            Asbo\Bundle\CoreBundle\Entity\Gallery
+        gallery_has_media:  Asbo\Bundle\CoreBundle\Entity\GalleryHasMedia
+    db_driver: doctrine_orm
+    contexts:
+        default:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+        whoswho:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 500 , quality: 90}
+        news:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 500 , quality: 90}
+
+    cdn:
+        server:
+            path: %asbo_upload_path%
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web%asbo_upload_path%
+            create:     true

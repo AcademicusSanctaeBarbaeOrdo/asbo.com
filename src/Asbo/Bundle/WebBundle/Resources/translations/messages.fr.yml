@@ -1,0 +1,3 @@
+fos_user:
+    condition:
+        invalid: Please accept conditions in order to register

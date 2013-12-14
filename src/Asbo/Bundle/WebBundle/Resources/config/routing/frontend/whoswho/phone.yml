@@ -1,0 +1,51 @@
+asbo_whoswho_phone_list:
+    pattern: /
+    defaults:
+        _controller: asbo_whoswho.controller.phone:listAction
+        _method: GET|POST
+
+asbo_whoswho_phone_delete:
+    pattern: /{id}/delete
+    methods: [GET, DELETE]
+    defaults:
+        _controller: asbo_whoswho.controller.phone:deleteAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Phone:delete.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_phone_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.phone:createAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Phone:create.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_phone_update:
+    pattern: /{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.phone:updateAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Phone:update.html.twig
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_phone_set_principal:
+    pattern: /principal/{id}/{token}
+    methods: [GET]
+    defaults:
+        namespace: phone
+        _controller: asbo_whoswho.controller.fra:setDefaultSubResourceAction
+        _sylius:
+            criteria:
+                slug: $slug
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug' : $slug }

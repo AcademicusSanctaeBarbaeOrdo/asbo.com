@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-gift fa-fw"></i> Prochains anniversaires</div>
+    <div class="panel-body">
+        <ul class="list-unstyled">
+            {% for fra in fras %}
+                <li>
+                    <a href="{{ path('asbo_whoswho_fra_show', {'slug': fra.slug}) }}">{{ fra }}</a>
+                    ({{ fra.birthday|date('d-M-Y')|localizeddate('medium', 'none') }})
+                    <i class="fa fa-long-arrow-right"></i> {{ fra.age + 1 }} ans
+                </li>
+            {% else %}
+                <li>Aucun fra :(</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

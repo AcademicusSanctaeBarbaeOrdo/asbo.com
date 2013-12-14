@@ -1,0 +1,9 @@
+
+<strong>
+    {% if post.date.timestamp is defined %}
+        En {{ post.date|date('Y') }}
+    {% else %}
+        Anno {{ post.date }}
+    {% endif %}
+</strong>
+<i class="icon fa fa-long-arrow-right"></i> {{ post.post }}

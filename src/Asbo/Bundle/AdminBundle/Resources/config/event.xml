@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo.event.admin.groupname">Event</parameter>
+        <parameter key="asbo.event.admin.controller.crud">SonataAdminBundle:CRUD</parameter>
+        <parameter key="asbo_event.translation_domain">AsboEventBundle</parameter>
+    </parameters>
+
+
+    <services>
+
+        <service id="asbo.event.admin.event" class="Asbo\Bundle\AdminBundle\Event\EventAdmin">
+            <tag name="sonata.admin" manager_type="orm" label="Event" group="%asbo.event.admin.groupname%"  />
+            <argument />
+            <argument>Asbo\Bundle\CoreBundle\Entity\Event</argument>
+            <argument>%asbo.event.admin.controller.crud%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%asbo_event.translation_domain%</argument>
+            </call>
+
+            <call method="addChild">
+                <argument type="service" id="asbo.event.admin.event_has_fra" />
+            </call>
+        </service>
+
+        <service id="asbo.event.admin.calendar" class="Asbo\Bundle\AdminBundle\event\CalendarAdmin">
+            <tag name="sonata.admin" manager_type="orm" label="Calendar" group="%asbo.event.admin.groupname%"  />
+            <argument />
+            <argument>Asbo\Bundle\EventBundle\Model\Calendar</argument>
+            <argument>%asbo.event.admin.controller.crud%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%asbo_event.translation_domain%</argument>
+            </call>
+
+            <call method="addChild">
+                <argument type="service" id="asbo.event.admin.event" />
+            </call>
+        </service>
+
+        <service id="asbo.event.admin.event_has_fra" class="Asbo\Bundle\AdminBundle\Event\EventHasFraAdmin">
+            <tag name="sonata.admin" manager_type="orm" label="Fras participant à l'événement" show_in_dashboard="false" group="%asbo.event.admin.groupname%" />
+            <argument />
+            <argument>Asbo\Bundle\CoreBundle\Entity\EventHasFra</argument>
+            <argument>%asbo.event.admin.controller.crud%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%asbo_event.translation_domain%</argument>
+            </call>
+
+            <call method="addChild">
+                <argument type="service" id="asbo.whoswho.admin.fra" />
+            </call>
+        </service>
+
+    </services>
+</container>

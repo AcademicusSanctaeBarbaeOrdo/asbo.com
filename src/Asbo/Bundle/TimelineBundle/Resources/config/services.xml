@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="asbo_timeline.timeline.address.spread" class="Asbo\Bundle\TimelineBundle\Timeline\FraResourceSpread">
+            <tag name="spy_timeline.spread"/>
+
+            <argument type="service" id="asbo_whoswho.repository.fra" />
+            <argument>address</argument>
+        </service>
+
+        <service id="asbo_timeline.event_listener.address.listener" class="Asbo\Bundle\TimelineBundle\EventListener\FraResourceListener">
+            <tag name="kernel.event_listener" event="asbo_whoswho.address.post_create" method="addResource" />
+            <tag name="kernel.event_listener" event="asbo_whoswho.address.post_update" method="updateResource" />
+            <tag name="kernel.event_listener" event="asbo_whoswho.address.pre_remove" method="deleteResource" />
+            <tag name="kernel.event_listener" event="asbo_whoswho.fra.post_update_principal_address" method="updatePrincipalResource" />
+            <argument type="service" id="spy_timeline.action_manager" />
+            <argument type="service" id="asbo.core.twig.global" />
+            <argument>address</argument>
+        </service>
+
+        <service id="kernel.listener.your_listener_name" class="Acme\DemoBundle\EventListener\AcmeExceptionListener">
+        </service>
+    </services>
+
+</container>

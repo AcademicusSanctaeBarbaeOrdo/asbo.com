@@ -1,0 +1,19 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {%- if value is empty -%}
+        -
+    {%- else -%}
+        {% if constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_JOIN') == value %}
+            <span class="label label-success">Join</span>
+        {% elseif constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_DECLINE') == value %}
+            <span class="label label-important">Decline</span>
+        {% elseif constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_MAYBE') == value %}
+            <span class="label label-info">Maybe</span>
+        {% elseif constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_NOT_RESPONDED') == value %}
+            <span class="label label-inverse">Not Responded</span>
+        {% else %}
+            {{ value }}
+        {% endif %}
+    {%- endif -%}
+{% endblock %}

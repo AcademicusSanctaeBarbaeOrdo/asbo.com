@@ -1,0 +1,24 @@
+homepage:
+    pattern: /
+    defaults: { _controller: asbo.controller.frontend.homepage:mainAction }
+
+about:
+    pattern: /about
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    'AsboWebBundle:Frontend/Static:about.html.twig'
+        private:     false
+
+roadmap:
+    pattern: /roadmap
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    'AsboWebBundle:Frontend/Static:roadmap.html.twig'
+        private:     false
+
+ordre:
+    pattern: /ordre
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    'AsboWebBundle:Frontend/Static:ordre.html.twig'
+        private:     false

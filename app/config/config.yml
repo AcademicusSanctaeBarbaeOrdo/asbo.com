@@ -1,0 +1,110 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: user.yml }
+    - { resource: oauth.yml }
+    - { resource: asbo.yml }
+    - { resource: partials/sonata_admin.yml }
+    - { resource: partials/sonata_media.yml }
+    - { resource: partials/sonata_news.yml }
+    - { resource: partials/sonata_formatter.yml }
+    - { resource: partials/sonata_message.yml }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] }
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments: { path: /_fragment }
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+            - 'LexikFormFilterBundle:Form:form_div_layout.html.twig'
+            - 'AsboWebBundle::form.html.twig'
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+
+    # Ajouter ici tous les bundles où vous voulez pouvoir utiliser les tags stylsheets et javascripts
+    bundles: ['AsboWebBundle']
+    java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        yui_css:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
+        yui_js:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
+    orm:
+        auto_mapping: true
+        auto_generate_proxy_classes: %kernel.debug%
+        resolve_target_entities:
+            Asbo\Bundle\WhosWhoBundle\Model\FraUserInterface: Asbo\Bundle\CoreBundle\Entity\User
+            Asbo\Bundle\WhosWhoBundle\Model\FraImageInterface: Asbo\Bundle\CoreBundle\Entity\Media
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+sonata_intl:
+    timezone:
+        default: %asbo_default_timezone%
+
+jms_security_extra:
+    expressions: true
+
+genemu_form:
+    date: ~
+    captcha: ~
+    recaptcha:
+        enabled:    true
+        public_key:  %recaptcha_public_key%
+        private_key: %recaptcha_private_key%
+        configs:
+           theme: white
+
+ornicar_gravatar: ~
+
+knp_time: ~
+
+# Doctrine Extensions
+stof_doctrine_extensions:
+    default_locale: %locale%
+    orm:
+        default:
+            sluggable: true
+            softdeleteable: true
+            timestampable: true
+            tree: true

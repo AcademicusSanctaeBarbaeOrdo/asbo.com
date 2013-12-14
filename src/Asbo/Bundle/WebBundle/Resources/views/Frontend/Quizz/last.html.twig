@@ -1,0 +1,47 @@
+{% if quizz is not empty %}
+{% set quizz_title = quizz.quizz.title|capitalize %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-pencil fa-clock-o"></i>
+        Dernière interrogation
+        {{ quizz_title ? '- ' ~ quizz_title }}
+        {% if quizz is not empty %}
+            -
+                {% if quizz.defaultAverage < 10 %}
+                    <span style="color: red">{{ quizz.defaultAverage }}</span>
+                {% elseif quizz.defaultAverage >= 10 and quizz.defaultAverage < 12 %}
+                    <span style="color: orange">{{ quizz.defaultAverage }}</span>
+                {% else %}
+                    <span style="color: green">{{ quizz.defaultAverage }}</span>
+                {% endif %}
+                /20
+        {% endif %}
+    </div>
+    <div class="panel-body">
+        {% if quizz is not empty %}
+
+            <ul class="list-unstyled">
+                {% for points in quizz.quizzAnnoHasfras %}
+                    {% set point = points.points ~ '/' ~ quizz.weighting %}
+                    <li>
+                        <a href="{{ path('asbo_whoswho_fra_show', {'slug': points.fra.slug}) }}">{{ points.fra }}</a>:
+                        {% if points.points < quizz.weighting/2 %}
+                            <span style="color: red">{{ point }}</span>
+                        {% elseif points.points >= quizz.weighting/2 and points.points/quizz.weighting*20 < 12 %}
+                            <span style="color: orange">{{ point }}</span>
+                        {% else %}
+                            <span style="color: green">{{ point }}</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        {% else %}
+
+            <p>Aucune interro n'a encore eu lieue pour cette anno !</p>
+
+        {% endif %}
+    </div>
+</div>
+{% endif %}

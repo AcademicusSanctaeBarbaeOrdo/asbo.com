@@ -1,0 +1,35 @@
+asbo_whoswho_rank_list:
+    pattern: /
+    defaults:
+        _controller: asbo_whoswho.controller.rank:listAction
+        _method: GET|POST
+
+asbo_whoswho_rank_delete:
+    pattern: /{id}/delete
+    methods: [GET, DELETE]
+    defaults:
+        _controller: asbo_whoswho.controller.rank:deleteAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_rank_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.rank:createAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_rank_update:
+    pattern: /{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.rank:updateAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }

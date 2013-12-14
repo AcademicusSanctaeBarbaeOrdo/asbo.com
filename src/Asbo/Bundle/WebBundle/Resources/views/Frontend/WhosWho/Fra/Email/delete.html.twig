@@ -1,0 +1,77 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/WhosWho:layout.html.twig" %}
+
+{% block title %}{{ block('headline') }} | {{ email.fra }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Supprimer une adresse email' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous"><a href="{{ path('asbo_whoswho_fra_show', {'slug': email.fra.slug}) }}">&larr; Retourner au profil de {{ email.fra }}</a></li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block asbo_whoswho_content %}
+
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {% if email is same as(email.fra.principalEmail) %}
+                        <div class="alert alert-danger">
+                            <h4>Email de contact</h4>
+                            Vous êtes sur le point de supprimer votre adresse email de contact. <br />
+                            <div class="text-center"><br /><strong>{{ email }}</strong> ?</div> <br />
+                            La chancellerie rappelle qu'il est important de fournir une adresse email valide afin de pouvoir vous contacter en tout temps !
+                        </div>
+                    {% endif %}
+
+                    {% if email.fra.emails.count == 1 %}
+                        <div class="alert alert-danger">
+                            <h4>Dernier email</h4>
+                            Vous êtes sur le point de supprimer votre dernière adresse email de contact. <br />
+
+                            <div class="text-center"><br /><strong>{{ email }}</strong> ?</div> <br />
+                            Dès lors, nous ne pourrons plus vous contacter ! <br />
+                            La chancellerie rappelle qu'il est important de fournir une adresse email valide afin de pouvoir vous contacter en tout temps !
+                        </div>
+                    {% endif %}
+
+                    {% if email is not same as(email.fra.principalEmail) and email.fra.emails.count != 1 %}
+                        <div class="well">
+                            Êtes-vous sûr de vouloir supprimer cette adresse email:
+                            <div class="text-center"><br /><strong>{{ email }}</strong> ? <br /></div>
+                            Cette action est irréversible !
+                        </div>
+                    {% endif %}
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {{ form_start(form, {'action': path('asbo_whoswho_email_delete', {'slug': email.fra.slug, 'id': email.id}), 'method': 'POST'}) }}
+                <input type="hidden" name="_method" value="DELETE" />
+                {{ form_row(form.submit, {'attr': {'class': 'btn btn-danger col-lg-12 col-md-12 col-sm-12 col-xs-12'}, 'label': 'Confirmer la suppression'}) }}
+                {{ form_rest(form) }}
+            </div>
+
+        </div>
+
+    {% endblock %}

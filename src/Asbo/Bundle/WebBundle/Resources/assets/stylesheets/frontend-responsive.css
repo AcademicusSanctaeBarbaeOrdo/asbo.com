@@ -1,0 +1,86 @@
+/*
+ * This file is part of the ASBO package.
+ *
+ * (c) De Ron Malian <deronmalian@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  h1.title {
+    font-size: 20px!important;
+  }
+
+  .navigation p {
+    margin-top: -3px;
+  }
+
+  .body-content {
+    padding: 0 15px !important;
+    margin-left: 0;
+  }
+}
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  body {
+    background: none;
+  }
+
+  .container {
+    background: #FFF;
+  }
+
+  .body-content {
+    padding: 0 25px 0 30px;
+  }
+
+  .date-bubble {
+    display: none;
+  }
+
+  .navigation p {
+    margin-top: 0px;
+    font-size: 180%!important;
+  }
+
+  .navigation img {
+    margin-top: -5px;
+    width: 20px;
+  }
+
+  .navigation li a h2 {
+    display: none;
+  }
+
+  h1.title {
+    font-size: 30px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+  .navigation h2 {
+    font-size: 12px!important;
+  }
+
+  .sidebar h2 {
+    display: none;
+  }
+  .sidebar ul i {
+    display: none;
+  }
+
+  h1.title {
+    font-size: 30px;
+  }
+}
+@media (max-width: 1199px) {
+  .sidebar ul {
+    font-size: 11px;
+  }
+}
+/* Large desktop */

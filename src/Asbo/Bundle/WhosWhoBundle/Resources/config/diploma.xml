@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo_whoswho.controller.diploma.class">Asbo\Bundle\WhosWhoBundle\Controller\ResourceController</parameter>
+        <parameter key="asbo_whoswho.form.type.diploma.class">Asbo\Bundle\WhosWhoBundle\Form\Type\DiplomaType</parameter>
+        <parameter key="asbo_whoswho.entity.diploma.class">Asbo\Bundle\WhosWhoBundle\Entity\Diploma</parameter>
+        <parameter key="asbo_whoswho.repository.diploma.class">Asbo\Bundle\WhosWhoBundle\Doctrine\ResourceRepository</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="asbo_whoswho.form.type.diploma" class="%asbo_whoswho.form.type.diploma.class%">
+            <argument>%asbo_whoswho.entity.diploma.class%</argument>
+            <tag name="form.type" alias="asbo_whoswho_diploma" />
+        </service>
+
+        <service id="asbo_whoswho.controller.diploma" class="%asbo_whoswho.controller.diploma.class%">
+            <argument>asbo_whoswho</argument>
+            <argument>diploma</argument>
+            <argument>AsboWhosWhoBundle:Diploma</argument>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="asbo_whoswho.manager.diploma" alias="doctrine.orm.entity_manager" />
+        <service id="asbo_whoswho.repository.diploma" class="%asbo_whoswho.repository.diploma.class%">
+            <argument type="service" id="asbo_whoswho.manager.diploma" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo_whoswho.entity.diploma.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,4 @@
+timeline_timeline:
+    path: /timeline/
+    defaults:
+        _controller: AsboTimelineBundle:Timeline:timeline

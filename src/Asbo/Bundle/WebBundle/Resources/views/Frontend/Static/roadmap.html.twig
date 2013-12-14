@@ -1,0 +1,129 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend:layout.html.twig' %}
+
+{% block title 'Roadmap' %}
+
+{% block content %}
+
+<p>Comme vous avez pu le constater, la sortie de la v3 a engendré de nombreux problèmes sur le site (problème de performances, fonctionnalités manquantes, etc.). C'est un mal pour un bien !</p>
+
+<p>Cette page va vous détailler où nous en sommes et ce que nous comptons faire dans les prochains jours, semaines et années (Un mandat de 3 ans ça se prépare !). Elle sera mise à jour et complétée régulièrement. <br /><br /></p>
+
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a href="#ameliorations" data-toggle="tab">Améliorations</a></li>
+  <li><a href="#bugs" data-toggle="tab">Bugs</a></li>
+  <li class="pull-right" style="margin-top: 10px">
+    <span class="label">Faible</span>
+    <span class="label label-warning">Importante</span>
+    <span class="label label-danger">Urgente</span>
+    <span class="label label-success">Terminée</span>
+    <span class="label label-info">À confirmer</span>
+  </li>
+</ul>
+
+<div class="tab-content">
+
+    <div class="tab-pane active" id="ameliorations">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Catégorie</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="success">
+              <td>1</td>
+              <td>Design</td>
+              <td>Améliorer le design pour qu'il soit plus convivial et moins faire part de baptême !</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>TB - Monthly</td>
+              <td>02/04/2012</td>
+            </tr>
+            <tr class="warning">
+              <td>3</td>
+              <td>TB - Monthly</td>
+              <td>03/04/2012</td>
+            </tr>
+            <tr class="info">
+              <td>4</td>
+              <td>TB - Monthly</td>
+              <td>04/04/2012</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div class="tab-pane" id="bugs">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product</th>
+              <th>Payment Taken</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="success">
+              <td>1</td>
+              <td>TB - Monthly</td>
+              <td>01/04/2012</td>
+              <td>Approved</td>
+            </tr>
+            <tr class="error">
+              <td>2</td>
+              <td>TB - Monthly</td>
+              <td>02/04/2012</td>
+              <td>Declined</td>
+            </tr>
+            <tr class="warning">
+              <td>3</td>
+              <td>TB - Monthly</td>
+              <td>03/04/2012</td>
+              <td>Pending</td>
+            </tr>
+            <tr class="info">
+              <td>4</td>
+              <td>TB - Monthly</td>
+              <td>04/04/2012</td>
+              <td>Call in to confirm</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
+
+    <iframe id="forum_embed"
+            src="javascript:void(0)"
+            scrolling="no"
+            frameborder="0"
+            width="900"
+            height="700">
+    </iframe>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+<script type="text/javascript">
+    document.getElementById('forum_embed').src =
+            'https://groups.google.com/forum/embed/?place=forum/tyros-anno-xxvii'
+                    + '&showsearch=true&showpopout=true&showtabs=false'
+                    + '&parenturl=' + encodeURIComponent(window.location.href);
+</script>
+{% endblock %}

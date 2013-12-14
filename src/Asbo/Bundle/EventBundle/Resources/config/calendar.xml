@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the ASBO package.
+
+ (c) De Ron Malian <deronmalian@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo.form.type.calendar.class">Asbo\Bundle\EventBundle\Form\Type\CalendarType</parameter>
+        <parameter key="asbo.form.type.calendar_choice.class">Asbo\Bundle\EventBundle\Form\Type\CalendarEntityChoiceType</parameter>
+
+    </parameters>
+
+    <services>
+
+        <service id="asbo.form.type.calendar" class="%asbo.form.type.calendar.class%">
+            <argument>%asbo.model.calendar.class%</argument>
+            <argument>%asbo.validation_group.calendar%</argument>
+            <tag name="form.type" alias="asbo_calendar" />
+        </service>
+
+        <service id="asbo.form.type.calendar_choice" class="%asbo.form.type.calendar_choice.class%">
+            <argument>%asbo.model.calendar.class%</argument>
+            <tag name="form.type" alias="asbo_calendar_choice" />
+        </service>
+
+        <service id="asbo.controller.calendar" class="%asbo.controller.calendar.class%">
+            <argument>asbo</argument>
+            <argument>calendar</argument>
+            <argument>AsboEventBundle:Calendar</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+    </services>
+
+</container>

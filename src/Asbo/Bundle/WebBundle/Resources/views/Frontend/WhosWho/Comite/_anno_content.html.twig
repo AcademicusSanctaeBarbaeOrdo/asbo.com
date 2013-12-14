@@ -1,0 +1,39 @@
+{% for post in posts %}
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="image-wrapper">
+
+            <div class="image-title">
+                <p class="image-title-content">
+                    {{ post }}
+                </p>
+            </div>
+            {% if post.fra.principalImage is not empty %}
+                {% thumbnail post.fra.principalImage.image, 'small' %}
+            {% else %}
+                {% if post.fra.gender == 'f' %}
+                    <img src="{{ asset('assets/img/avatar_female.png')}}" />
+                {% else %}
+                    <img src="{{ asset('assets/img/avatar_male.png')}}" />
+                {% endif %}
+            {% endif %}
+
+            <div class="image-description">
+                <p class="image-description-content">
+                    {% if is_granted('ROLE_WHOSWHO_USER') %}
+                        <a href="{{ path('asbo_whoswho_fra_show', {'slug': post.fra.slug}) }}" title="Voir la fiche du fra">{{ post.fra }}</a>
+                    {% else %}
+                        {{ post.fra }}
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {% if loop.index is divisibleby(3) %}
+        </div>
+        <hr />
+        <div class="row">
+    {% endif %}
+
+{% endfor %}

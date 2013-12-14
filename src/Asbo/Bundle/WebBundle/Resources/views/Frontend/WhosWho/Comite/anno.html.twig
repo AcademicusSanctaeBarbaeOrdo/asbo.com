@@ -1,0 +1,31 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend:layout.html.twig' %}
+
+{% block title %} {{ block('headline') }} | {{ parent() }} {% endblock %}
+
+{% block headline %}Comité anno {{ anno }}{% endblock %}
+
+{% block content_content %}
+    <div class="row">
+        {% if is_granted('ROLE_WHOSWHO_USER') %}
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            {{ knp_menu_render('sidebar.comite.anno', {'currentClass': 'active'}) }}
+        </div>
+        {% endif %}
+        <div class="col-lg-10 col-md-10 col-sm-10">
+            <div class="row">
+                {{  include('AsboWebBundle:Frontend/WhosWho/Comite:_anno_content.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

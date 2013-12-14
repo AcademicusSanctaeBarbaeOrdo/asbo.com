@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the ASBO package.
+
+ (c) De Ron Malian <deronmalian@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo.repository.calendar.class">Asbo\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="asbo.repository.event.class">Asbo\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+    </parameters>
+
+    <services>
+        <service id="asbo.manager.calendar" alias="doctrine.orm.entity_manager" />
+        <service id="asbo.repository.calendar" class="%asbo.repository.calendar.class%">
+            <argument type="service" id="asbo.manager.calendar" />
+            <argument type="service">
+                <service
+                        factory-service="asbo.manager.calendar"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo.model.calendar.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="asbo.manager.event" alias="doctrine.orm.entity_manager" />
+        <service id="asbo.repository.event" class="%asbo.repository.event.class%">
+            <argument type="service" id="asbo.manager.event" />
+            <argument type="service">
+                <service
+                        factory-service="asbo.manager.event"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo.model.event.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+
+</container>

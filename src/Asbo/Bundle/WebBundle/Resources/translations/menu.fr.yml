@@ -1,0 +1,33 @@
+asbo:
+    frontend:
+        menu:
+            main:
+                homepage: Accueil
+                ordre: L'Ordre
+                ephemeride: Les éphémérides
+                comite: Le comité
+                contact: Contact
+                login: Se connecter
+                logout: Se déconnecter
+
+            sidebar:
+                main:
+                    title: Menu
+                    profile: Mon profil
+                    message: Messagerie
+                    whoswho: Who's Who ?
+                    events: Éphémérides
+                admin:
+                    title: Administration
+                    dashboard: Dashboard
+                    switch: Revenir à l'administration
+                whoswho:
+                    title: Who's Who ?
+                    owner: Mon compte
+                    list: Liste des fras
+                    search: Recherche de fras
+
+                comite:
+                    anno:
+                        title: Comité
+                        anno: Anno %anno%

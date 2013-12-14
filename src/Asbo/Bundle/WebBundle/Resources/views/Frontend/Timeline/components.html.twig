@@ -1,0 +1,21 @@
+{% block _asbo_bundle_whoswhobundle_entity_fra_subject_component %}
+
+    <a class="pull-left" href="{{ path('asbo_whoswho_fra_show', {'slug': value.slug}) }}">
+        {% if value.principalImage is not empty %}
+            {% thumbnail value.principalImage.image, 'small' with {'class': 'media-object img-thumbnail pull-left', 'width': '50px'} %}
+        {% else %}
+            {% if value.gender == 'f'%}
+                <img class="media-object img-thumbnail" src="{{ asset('assets/img/avatar_female.png')}}" />
+            {% else %}
+                <img class="media-object img-thumbnail" src="{{ asset('assets/img/avatar_male.png')}}" />
+            {% endif %}
+        {% endif %}
+    </a>
+    <div class="media-body">
+    <h4 class="media-heading">{{ value }}
+{% endblock _asbo_bundle_whoswhobundle_entity_fra_subject_component %}
+
+{% block _asbo_bundle_whoswhobundle_entity_address_target_component %}
+    <a href="{{ path('asbo_whoswho_address_show', {'slug': value.fra.slug, 'id': value.id}) }}">{{ value }}</a>
+    </div>
+{% endblock _asbo_bundle_whoswhobundle_entity_address_target_component %}

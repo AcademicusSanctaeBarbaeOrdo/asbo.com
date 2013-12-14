@@ -1,0 +1,25 @@
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Asbo\Bundle\CoreBundle\Entity\User
+    group:
+        group_class: Asbo\Bundle\CoreBundle\Entity\Group
+    registration:
+        form:
+            type: asbo_user_registration
+        confirmation:
+            enabled:    true
+    from_email:
+        address:        %asbo_email_sender%
+        sender_name:    %asbo_email_sender_name%
+
+sonata_user:
+    class:
+        user:  Asbo\Bundle\CoreBundle\Entity\User
+        group: Asbo\Bundle\CoreBundle\Entity\Group
+    impersonating:
+        route:                homepage
+        parameters:           { path: / }
+    admin:
+        user:
+            class: Asbo\Bundle\AdminBundle\User\UserAdmin

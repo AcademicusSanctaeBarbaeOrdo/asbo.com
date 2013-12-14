@@ -1,0 +1,166 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/WhosWho:layout.html.twig' %}
+
+{% block title %}{{ fra }} | {{ parent() }}{% endblock %}
+
+{% block headline "Editer son profil" %}
+
+{% block asbo_whoswho_content %}
+
+    {% if form.vars.errors is not empty%}
+        <div class="alert alert-danger">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+
+    <form novalidate action="{{ path('asbo_whoswho_fra_update', {'slug': fra.slug}) }}" {{ form_enctype(form) }} method="POST">
+
+        <div class="row">
+            <div class="col-lg-4">
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.nickname) }}
+                {{ form_row(form.gender) }}
+                {{ form_row(form.birthday) }}
+                {{ form_row(form.birthplace) }}
+            </div>
+            <div class="col-lg-4">
+                    {{ form_row(form.type) }}
+                    {{ form_row(form.status) }}
+                    {{ form_row(form.anno) }}
+                    {{ form_row(form.pontif) }}
+            </div>
+            <div class="col-lg-4">
+                {% if form.principalAddress is defined %}
+                        {{ form_row(form.principalAddress) }}
+                {% endif %}
+
+                {% if form.principalPhone is defined %}
+                        {{ form_row(form.principalPhone) }}
+                {% endif %}
+
+                {% if form.principalEmail is defined %}
+                        {{ form_row(form.principalEmail) }}
+                {% endif %}
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
+        <input type="submit" value="Editer" class="btn btn-success" />
+    </form>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    {% javascripts output='assets/compiled/address.js'
+    '@AsboWebBundle/Resources/assets/js/jquery.ui.addresspicker.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#asbo_whoswho_fra_edit_addresses');
+
+            // On ajoute un lien pour ajouter une nouvelle catégorie
+            var $lienAjout = $('<a href="#" id="add_address" class="btn">Ajouter une addresse</a>');
+            $container.append($lienAjout);
+
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $lienAjout.click(function(e) {
+                addAddress($container);
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+            });
+
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = $container.find(':input').length;
+
+
+            // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+            $container.children('div').each(function() {
+                addDeleteLink($(this));
+            });
+
+            // La fonction qui ajoute un formulaire Categorie
+            function addAddress($container) {
+                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                // - le texte "__name__label__" qu'il contient par le label du champ
+                // - le texte "__name__" qu'il contient par le numéro du champ
+                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Addresse n°' + (index+1))
+                        .replace(/__name__/g, index));
+
+                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                addDeleteLink($prototype);
+
+                // On ajoute le prototype modifié à la fin de la balise <div>
+                $container.append($prototype);
+
+                addAddressPicker($prototype);
+
+                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+
+            // La fonction qui ajoute un lien de suppression d'une catégorie
+            function addDeleteLink($prototype) {
+                // Création du lien
+                $lienSuppression = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+                // Ajout du lien
+                $prototype.append($lienSuppression);
+
+                // Ajout du listener sur le clic du lien
+                $lienSuppression.click(function(e) {
+                    $prototype.remove();
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                });
+            }
+
+            function addAddressPicker($prototype) {
+                $addresse = $prototype.find('[id^="asbo_whoswho_fra_edit_addresses_"][id$="_address"]');
+                $map = $prototype.find('[id^="asbo_whoswho_fra_edit_addresses_"][id$="_map"]');
+                $locality = $prototype.find('[id^="asbo_whoswho_fra_edit_addresses_"][id$="_locality"]');
+                $country = $prototype.find('[id^="asbo_whoswho_fra_edit_addresses_"][id$="_country"]');
+                $lat = $prototype.find('[id^="asbo_whoswho_fra_edit_addresses_"][id$="_lat"]');
+                $lng = $prototype.find('[id^="asbo_whoswho_fra_edit_addresses_"][id$="_lng"]');
+
+                    var addresspickerMap = $addresse.addresspicker({
+                        regionBias: "be",
+                        elements: {
+                            locality: '#' + $locality[0].id,
+                            country:  '#' + $country[0].id,
+                            lat:      '#' + $lat[0].id,
+                            lng:      '#' + $lng[0].id
+                        }
+                    });
+                    var gmarker = addresspickerMap.addresspicker("marker");
+                    gmarker.setVisible(true);
+                    addresspickerMap.addresspicker("updatePosition");
+            }
+
+
+
+        });
+
+    </script>
+
+
+    {{ form_javascript(form) }}
+{% endblock %}

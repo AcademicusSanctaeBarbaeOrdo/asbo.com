@@ -1,0 +1,50 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     asbo
+    database_user:     root
+    database_password: ~
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            fr
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    google_client_id:           ThisTokenIsNotSoSecretChangeIt
+    google_client_secret:       ThisTokenIsNotSoSecretChangeIt
+
+    twitter_client_id:           ThisTokenIsNotSoSecretChangeIt
+    twitter_client_secret:       ThisTokenIsNotSoSecretChangeIt
+
+    github_client_id:           ThisTokenIsNotSoSecretChangeIt
+    github_client_secret:       ThisTokenIsNotSoSecretChangeIt
+
+    facebook_client_id:         ThisTokenIsNotSoSecretChangeIt
+    facebook_client_secret:     ThisTokenIsNotSoSecretChangeIt
+
+    linkedin_client_id:         ThisTokenIsNotSoSecretChangeIt
+    linkedin_client_secret:     ThisTokenIsNotSoSecretChangeIt
+
+    recaptcha_public_key:       ThisTokenIsNotSoSecretChangeIt
+    recaptcha_private_key:      ThisTokenIsNotSoSecretChangeIt
+
+    asbo_backend_title:         Administration
+    asbo_backend_logo:          /assets/img/blason.png
+
+    asbo_emails_notification:   [xxxx@asbo.com, ci@asbo.com]
+    asbo_email_sender:          ci@asbo.com
+    asbo_email_sender_name:     Webmaster
+    asbo_email_reply:           no-reply@asbo.com
+
+    asbo_default_timezone:      Europe/Brussels
+    asbo_upload_path:           /uploads/media
+
+    asbo_frontend_title:        ASBO Site
+    asbo_frontend_description:  Academicus Sanctae Barbae Ordo
+    asbo_frontend_domain:       http://www.asbo.com
+
+    intercept_redirects_dev:    false

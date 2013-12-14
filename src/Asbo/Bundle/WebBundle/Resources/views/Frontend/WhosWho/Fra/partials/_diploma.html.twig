@@ -1,0 +1,10 @@
+<strong>{{ diploma.name }}</strong>
+{% if diploma.specialty is not empty %}
+    ({{ diploma.specialty }})
+{% endif %}
+{% if diploma.institution is not empty %}
+    <br />{{ diploma.institution }}
+{% endif %}
+{% if diploma.graduatedAt is not empty %}
+    en {{ diploma.graduatedAt|date('Y') }}
+{% endif %}

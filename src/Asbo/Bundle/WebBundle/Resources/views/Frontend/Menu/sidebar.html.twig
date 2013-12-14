@@ -1,0 +1,21 @@
+{% extends 'knp_menu.html.twig' %}
+
+
+{% block root %}
+    {% set listAttributes = item.childrenAttributes %}
+    {{ block('list') -}}
+{% endblock %}
+
+{% block list %}
+    {% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
+
+        <div class="sidebar">
+            <h2> &nbsp; <a href="#">{{ item.label }}</a></h2>
+
+            {% import 'knp_menu.html.twig' as knp_menu %}
+            <ul{{ knp_menu.attributes(listAttributes) }}>
+                {{ block('children') }}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

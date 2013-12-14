@@ -1,0 +1,29 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend:layout.html.twig' %}
+
+{% block title %}Who's Who ? | {{ parent() }}{% endblock %}
+
+{% block content_content %}
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+        {% block asbo_whoswho_content '' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar_menu_main %}
+    {{ parent() }}
+    <div class="col-lg-12 col-md-12 col-sm-6">
+        {{ knp_menu_render(['sidebar.main', 'whoswho'], {'currentAsLink': false, 'template': 'AsboWebBundle:Frontend/Menu:sidebar.html.twig'}) }}
+    </div>
+{% endblock %}

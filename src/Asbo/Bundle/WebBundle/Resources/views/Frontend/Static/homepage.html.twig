@@ -1,0 +1,107 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend:layout.html.twig' %}
+
+{% block title 'Accueil' %}
+
+
+{% set menu = menu|default(false) %}
+
+{% block page_header %}
+    <div class="row" style="margin-bottom: 20px">
+
+            <div class="col-lg-12" style="text-align: center">
+                <img src="{{ asset('assets/img/drapeau.png') }}" alt="drapeau" class="drapeau" />
+            </div>
+
+        <div class="col-lg-12 main-title">
+            <h1>
+                <span class="color">A</span>cademicus
+                <span class="color">S</span>anctae
+                <span class="color">B</span>arbae
+                <span class="color">O</span>rdo
+            </h1>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content_content %}
+
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+        {{ render(controller('asbo_core.controller.post:getLastPostAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Quizz:last.html.twig'}})) }}
+
+        {% if is_granted('ROLE_WHOSWHO_USER') %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><i class="fa fa-gift fa-fw"></i> Prochains anniversaires</div>
+                                <div class="panel-body">
+                                    {{ render(controller('asbo_whoswho.controller.fra:getNextBirthdayInAnIntervalOfAction',
+                                    {'_sylius': {'template': 'AsboWebBundle:Frontend/WhosWho/Fra/Partials:_birthdayBetween.html.twig'}})) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            {{ render(controller('asbo_quizz.controller.quizz:getLastQuizzAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Quizz:last.html.twig'}})) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{ render(controller('asbo.controller.event:indexAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Event/Event:next_event.html.twig', 'paginate': false, 'method': 'findUpcomingConfirmedEvents', 'arguments': [1]}}))}}
+                        </div>
+
+                        <div class="col-lg-12">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><i class="fa fa-calendar"></i> Prochains événements</div>
+                                <div class="panel-body">
+                                    {{ render(controller('asbo.controller.event:indexAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Event/Event:next_events.html.twig', 'paginate': false, 'method': 'findUpcomingConfirmedEvents', 'arguments': [5]}}))}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><i class="fa fa-clock-o"></i> Derniers connectés</div>
+                                <div class="panel-body">
+                                    {{ render(controller('asbo_whoswho.controller.fra:getLastLoginAction', {'nb': 5, '_sylius': {'template': 'AsboWebBundle:Frontend/WhosWho/Fra/Partials:_lastConnection.html.twig'}})) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if asbo.fra %}
+                <div class="row">
+                    {{ render(controller('AsboTimelineBundle:Timeline:timeline', {'subject': asbo.fra.slug, '_sylius': {'template': 'AsboWebBundle:Frontend/Timeline:timeline.html.twig'}})) }}
+                </div>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Bienvenue sur le site officiel de l'ASBO
+            </div>
+            <div class="panel-body">
+                <p>Ami visiteur, peut-être ne le sais-tu pas, l'Ordre Académique de Sainte Barbe, plus connu sous son acronyme latin d'ASBO (Academicus Sanctae Barbae Ordo), est une confrérie estudiantine regroupant des étudiants majoritairement ingénieurs civils. Le passant trouvera sur ce site quelques informations utiles sur l'origine de l'Ordre, sa vie, la formation qu'il offre à ses membres, mais surtout, il pourra y trouver tout ce qui offre un intérêt aux yeux des membres au jour le jour...</p>
+                <p>Que vive, croisse et fleurisse toujours l'Ordre Académique de Sainte Barbe !</p>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

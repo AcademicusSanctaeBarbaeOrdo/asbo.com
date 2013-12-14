@@ -1,0 +1,6 @@
+asbo_frontend:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/main.yml
+
+asbo_backend:
+    resource: @AsboWebBundle/Resources/config/routing/backend/main.yml
+    prefix: /admin

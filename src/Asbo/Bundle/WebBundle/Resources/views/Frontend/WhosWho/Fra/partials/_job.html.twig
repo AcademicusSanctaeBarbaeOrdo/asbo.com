@@ -1,0 +1,17 @@
+{% block company%}
+<strong>{{ job.company }}</strong>
+
+    {% if job.dateBegin is not empty %}
+
+        {% if job.dateEnd is not empty %}
+            de {{ job.dateBegin|date('Y') }} à {{ job.dateEnd|date('Y') }}
+        {% else %}
+            depuis {{ job.dateBegin|date('Y') }}
+        {% endif %}
+
+    {% endif %}
+{% endblock %}
+
+{% block other %}
+{{ job.position }} {% if job.sector is not empty %}({{ job.sector }}){% endif %}
+{% endblock %}

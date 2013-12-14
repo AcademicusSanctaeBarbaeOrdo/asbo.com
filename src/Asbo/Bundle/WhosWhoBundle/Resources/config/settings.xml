@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo_whoswho.controller.settings.class">Asbo\Bundle\WhosWhoBundle\Controller\ResourceController</parameter>
+        <parameter key="asbo_whoswho.form.type.settings.class">Asbo\Bundle\WhosWhoBundle\Form\Type\settingsType</parameter>
+        <parameter key="asbo_whoswho.entity.settings.class">Asbo\Bundle\WhosWhoBundle\Entity\settings</parameter>
+        <parameter key="asbo_whoswho.repository.settings.class">Asbo\Bundle\WhosWhoBundle\Doctrine\ResourceRepository</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="asbo_whoswho.form.type.settings" class="%asbo_whoswho.form.type.settings.class%">
+            <argument>%asbo_whoswho.entity.settings.class%</argument>
+            <tag name="form.type" alias="asbo_whoswho_settings" />
+        </service>
+
+        <service id="asbo_whoswho.controller.settings" class="%asbo_whoswho.controller.settings.class%">
+            <argument>asbo_whoswho</argument>
+            <argument>settings</argument>
+            <argument>AsboWhosWhoBundle:settings</argument>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="asbo_whoswho.manager.settings" alias="doctrine.orm.entity_manager" />
+        <service id="asbo_whoswho.repository.settings" class="%asbo_whoswho.repository.settings.class%">
+            <argument type="service" id="asbo_whoswho.manager.settings" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo_whoswho.entity.settings.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+</container>

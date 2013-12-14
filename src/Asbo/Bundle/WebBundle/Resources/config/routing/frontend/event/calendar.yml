@@ -1,0 +1,42 @@
+asbo_calendar_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: asbo.controller.calendar:indexAction
+        _asbo:
+            template: AsboWebBundle:Frontend/Event/Calendar:index.html.twig
+            sortable: true
+
+asbo_calendar_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo.controller.calendar:createAction
+        _asbo:
+            template: AsboWebBundle:Frontend/Event/Calendar:create.html.twig
+            redirect: asbo_calendar_show
+
+asbo_calendar_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: asbo.controller.calendar:updateAction
+        _asbo:
+            template: AsboWebBundle:Frontend/Event/Calendar:update.html.twig
+            redirect: asbo_calendar_show
+
+asbo_calendar_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: asbo.controller.calendar:deleteAction
+        _asbo:
+            redirect: asbo_calendar_index
+
+asbo_calendar_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: asbo.controller.calendar:showAction
+        _asbo:
+            template: AsboWebBundle:Frontend/Event/Calendar:show.html.twig

@@ -1,0 +1,35 @@
+asbo_whoswho_job_list:
+    pattern: /
+    defaults:
+        _controller: asbo_whoswho.controller.job:listAction
+        _method: GET|POST
+
+asbo_whoswho_job_delete:
+    pattern: /{id}/delete
+    methods: [GET, DELETE]
+    defaults:
+        _controller: asbo_whoswho.controller.job:deleteAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_job_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.job:createAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_job_update:
+    pattern: /{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.job:updateAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }

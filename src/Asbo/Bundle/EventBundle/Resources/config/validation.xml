@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the ASBO package.
+
+ (c) De Ron Malian <deronmalian@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                                        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+
+    <class name="Asbo\Bundle\EventBundle\Model\Calendar">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">asbo.calendar.name.not_blank</option>
+                <option name="groups">asbo</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">asbo.calendar.name.min_length</option>
+                <option name="max">255</option>
+                <option name="maxMessage">asbo.calendar.name.max_length</option>
+                <option name="groups">asbo</option>
+            </constraint>
+        </property>
+        <property name="description">
+            <constraint name="NotBlank">
+                <option name="message">asbo.calendar.description.not_blank</option>
+                <option name="groups">asbo</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="minMessage">asbo.calendar.description.min_length</option>
+                <option name="groups">asbo</option>
+            </constraint>
+        </property>
+        <property name="events">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Asbo\Bundle\EventBundle\Model\Event">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">asbo.event.name.not_blank</option>
+                <option name="groups">asbo</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">asbo.event.name.min_length</option>
+                <option name="max">255</option>
+                <option name="maxMessage">asbo.event.name.max_length</option>
+                <option name="groups">asbo</option>
+            </constraint>
+        </property>
+        <property name="startsAt">
+            <constraint name="DateTime">
+                <option name="message">asbo.event.startsAt.datetime</option>
+                <option name="groups">asbo</option>
+            </constraint>
+        </property>
+        <property name="endsAt">
+            <constraint name="DateTime">
+                <option name="message">asbo.event.endsAt.datetime</option>
+                <option name="groups">asbo</option>
+            </constraint>
+        </property>
+        <property name="location">
+            <constraint name="NotBlank">
+                <option name="message">asbo.event.location.not_blank</option>
+                <option name="groups">asbo</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="minMessage">asbo.event.location.min_length</option>
+                <option name="groups">asbo</option>
+            </constraint>
+        </property>
+    </class>
+
+</constraint-mapping>

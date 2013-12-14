@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the ASBO package.
+
+ (c) De Ron Malian <deronmalian@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo.form.type.event.class">Asbo\Bundle\EventBundle\Form\Type\EventType</parameter>
+
+    </parameters>
+
+    <services>
+
+        <service id="asbo.form.type.event" class="%asbo.form.type.event.class%">
+            <argument>%asbo.model.event.class%</argument>
+            <argument>%asbo.validation_group.event%</argument>
+            <tag name="form.type" alias="asbo_event" />
+        </service>
+
+        <service id="asbo.controller.event" class="%asbo.controller.event.class%">
+            <argument>asbo</argument>
+            <argument>event</argument>
+            <argument>AsboEventBundle:Event</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+    </services>
+
+</container>

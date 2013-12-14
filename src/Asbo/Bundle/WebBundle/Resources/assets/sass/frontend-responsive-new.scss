@@ -1,0 +1,125 @@
+@import "compass/css3";
+@import "compass/utilities";
+
+/*
+ * This file is part of the ASBO package.
+ *
+ * (c) De Ron Malian <deronmalian@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+ /* Landscape phones and down */
+  @media (max-width: 480px) {
+    h1.title {
+        font-size: 20px!important;
+    }
+
+    footer[role="contentinfo"] p {
+      margin: 10px 0;
+    }
+
+    .sidebar {
+      h2 {
+        text-align: left;
+
+        a {
+          float: none;
+          padding: 0;
+          border-left: none;
+
+          &:after {
+            border: none;
+            margin: none;
+          }
+
+          &:before, &:after {
+            content: "";
+            position: relative;
+            width: 0;
+            height: 0;
+          }
+
+          &:before {
+            border: none;
+            margin: none;
+          }
+        }
+      }
+    }
+}
+
+
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 992px) {
+
+
+    .container {
+      background-image: none!important;
+    }
+
+    .date-bubble {
+        display: none;
+    }
+
+    .navigation {
+
+      border-radius: 0;
+
+      li {
+        padding-top: 5px;
+
+        &:last-child {
+          border-radius: 0;
+        }
+      }
+    }
+
+    .navigation li a {
+        h2 {
+            display: none;
+        }
+    }
+
+    h1.title {
+        font-size: 30px;
+    }
+
+    h1 {
+        text-align:center;
+    }
+
+    #blason {
+      text-align: center;
+      margin-top: 0;
+      img {
+        width: 200px;
+      }
+    }
+
+    .flash {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .sidebar ul {
+        font-size: 11px;
+    }
+  }
+
+  /* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) and (max-width: 1200px) {
+    .sidebar h2 {
+        font-size: 90%;
+    }
+}
+
+@media (min-width: 1200px) {
+}

@@ -1,0 +1,65 @@
+security:
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    firewalls:
+
+        administration:
+            switch_user: true
+            context:     user
+            pattern:     /admin/.*
+            form_login:
+                provider:     fos_userbundle
+                login_path:   /admin/login
+                check_path:   /admin/login-check
+                failure_path: /admin/login
+                default_target_path: /admin/dashboard
+                use_forward:  false
+                use_referer:  true
+            logout:
+                path:   /admin/logout
+                target: /admin/login
+            anonymous: true
+        main:
+            pattern: .*
+            switch_user:        true
+            context:            user
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:
+                handlers: ["asbo_user.logout.listener"]
+            anonymous:    true
+            oauth:
+                resource_owners:
+                    facebook:        "/login/check-facebook"
+                    google:          "/login/check-google"
+                    github:          "/login/check-github"
+                    linkedin:        "/login/check-linkedin"
+                    twitter:        "/login/check-twitter"
+                login_path:        /login
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: asbo.oauth.user_provider
+
+    access_control:
+        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    role_hierarchy:
+        ROLE_WHOSWHO_CHANCELIER: [ROLE_WHOSWHO_USER, ROLE_WHOSWHO_FRA_MANAGE]
+        ROLE_SOCIAL:             [ROLE_SOCIAL_GOOGLE, ROLE_SOCIAL_FACEBOOK, ROLE_SOCIAL_GITHUB, ROLE_SOCIAL_LINKEDIN]
+        ROLE_ADMIN:              [ROLE_USER, ROLE_SONATA_ADMIN, ROLE_SOCIAL, ROLE_WHOSWHO_CHANCELIER]
+        ROLE_SUPER_ADMIN:        [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        SONATA:
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo_whoswho.controller.address.class">Asbo\Bundle\WhosWhoBundle\Controller\ResourceController</parameter>
+        <parameter key="asbo_whoswho.form.type.address.class">Asbo\Bundle\WhosWhoBundle\Form\Type\AddressType</parameter>
+        <parameter key="asbo_whoswho.entity.address.class">Asbo\Bundle\WhosWhoBundle\Entity\Address</parameter>
+        <parameter key="asbo_whoswho.repository.address.class">Asbo\Bundle\WhosWhoBundle\Doctrine\ResourceRepository</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="asbo_whoswho.form.type.address" class="%asbo_whoswho.form.type.address.class%">
+            <argument>%asbo_whoswho.entity.address.class%</argument>
+            <argument type="service" id="event_dispatcher" />
+            <tag name="form.type" alias="asbo_whoswho_address" />
+        </service>
+
+        <service id="asbo_whoswho.controller.address" class="%asbo_whoswho.controller.address.class%">
+            <argument>asbo_whoswho</argument>
+            <argument>address</argument>
+            <argument>AsboWhosWhoBundle:Address</argument>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="asbo_whoswho.manager.address" alias="doctrine.orm.entity_manager" />
+        <service id="asbo_whoswho.repository.address" class="%asbo_whoswho.repository.address.class%">
+            <argument type="service" id="asbo_whoswho.manager.address" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo_whoswho.entity.address.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+</container>

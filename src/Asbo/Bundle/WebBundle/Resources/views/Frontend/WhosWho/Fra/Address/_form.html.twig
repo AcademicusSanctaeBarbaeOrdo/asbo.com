@@ -1,0 +1,61 @@
+
+{{ form_row(form.address) }}
+<span class="help-block">
+    <small>Format: Rue des Wallons 58, 1348 Louvain-la-Neuve, Belgique</small>
+</span>
+
+{{ form_row(form.principal, {'label': 'Faire de cette adresse votre adresse de contact ?'})}}
+
+
+
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.street) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.type) }}
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.number) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.postcode) }}
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.locality) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.country) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.state) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.district) }}
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.lng) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.lat) }}
+    </div>
+</div>
+
+{{ form_rest(form) }}
+<hr />

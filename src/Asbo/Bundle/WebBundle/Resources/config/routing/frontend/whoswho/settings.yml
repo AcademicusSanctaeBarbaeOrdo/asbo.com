@@ -1,0 +1,11 @@
+asbo_whoswho_settings_update:
+    pattern: /
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.fra:settingsAction
+        _sylius:
+            criteria: { slug: $slug }
+            template: AsboWebBundle:Frontend/WhosWho/Fra:settings.html.twig
+            redirect:
+                route: asbo_whoswho_settings_update
+                parameters: { 'slug': $slug }

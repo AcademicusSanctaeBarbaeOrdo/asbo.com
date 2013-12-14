@@ -1,0 +1,227 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{# TODO: IMPORT MACRO #}
+
+<!DOCTYPE html>
+
+{% block html_tag %}
+<html lang="fr">
+{% endblock html_tag %}
+
+{% block head %}
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title '' %} | Academicus Sanctae Barbae Ordo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--[if lt IE 9]>
+    {% javascripts '//html5shim.googlecode.com/svn/trunk/html5.js' output='assets/compiled/html5.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <![endif]-->
+
+
+    {% block head_style %}
+        {% stylesheets filter="cssrewrite" output="assets/compiled/frontend.css"
+        '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
+        '//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css'
+        '@AsboWebBundle/Resources/assets/css/chosen.css'
+        '@AsboWebBundle/Resources/assets/css/frontend-new.css'
+        '@AsboWebBundle/Resources/assets/css/frontend-responsive-new.css'
+        'http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css'
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+        {% endstylesheets %}
+    {% endblock %}
+
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/crescat-title.png') }}" />
+
+    {% block head_script '' %}
+    {% block head_bottom '' %}
+
+</head>
+{% endblock head %}
+
+{% block body_tag %}
+<body>
+{% endblock body_tag %}
+
+{% block body_start '' %}
+
+{% block body %}
+
+{% block container %}
+
+{% block container_div_start %}
+<div class="container main">
+{% endblock %}
+
+    {% block header %}
+        <nav>
+            {{ knp_menu_render('main', {'template': 'AsboWebBundle:Frontend/Menu:main.html.twig'}) }}
+        </nav>
+    {% endblock %}
+
+    {% block content_div_start %}
+    <div class="content">
+    {% endblock content_div_start %}
+
+        {% block content_row %}
+        <div class="row">
+
+            {% block content %}
+
+            {% set sidebar = knp_menu_get('sidebar.main') %}
+            {% set menu = sidebar.hasChildren %}
+
+            {% if menu %}
+                <div class="col-lg-2 col-lg-push-10 col-md-2 col-md-push-10" id="sidebar-left">
+                    <div class="sidebar-affix">
+                    {% block content_sidebar %}
+
+                    <div class="row">
+                        {% block blason %}
+                            <div id="blason" class="col-lg-12 col-md-12">
+                                <img src="{{ asset('assets/img/blason.png') }}" alt="blason" />
+                            </div>
+                        {% endblock %}
+
+                        {% block sidebar_menu_main %}
+                            <div class="col-lg-12 col-md-12 col-sm-6">
+                                {{ knp_menu_render('sidebar.main', {'currentAsLink': false, 'depth': 1,'template': 'AsboWebBundle:Frontend/Menu:sidebar.html.twig'}) }}
+                            </div>
+                        {% endblock %}
+
+                        {% block sidebar_menu_admin %}
+                            <div class="col-lg-12 col-md-12 col-sm-6">
+                                {{ knp_menu_render('sidebar.admin', {'template': 'AsboWebBundle:Frontend/Menu:sidebar.html.twig'})  }}
+                            </div>
+                        {% endblock %}
+                    </div>
+                    {% endblock content_sidebar %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="{% if menu %}col-md-9 col-lg-9 col-lg-pull-2 col-md-pull-2{% else %}col-lg-10 col-md-10{% endif %} col-lg-offset-1 col-md-offset-1">
+
+                {% block flashes %}
+                            {% for name, flashes in app.session.flashbag.all if name in ['info', 'warning', 'success', 'error',
+                            'fos_user_success'] %}
+                                {% for flash in flashes %}
+                                    <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name }}">
+                                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                                        {{ flash|trans }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                {% endblock %}
+
+                {% block page_header %}
+                <div class="page-header">
+                    <h1>{% block headline '' %}</h1>
+                </div>
+                {% endblock page_header %}
+
+
+
+                {% block content_content '' %}
+            </div>
+            {% endblock content %}
+        </div>
+        {% endblock content_row %}
+
+        <div class="push"></div>
+    {% block content_div_end %}
+    </div>
+    {% endblock content_div_end %}
+{% block container_div_end %}</div><!-- /container -->{% endblock container_div_end %}
+{% endblock container %}
+
+{% block footer_tag_start %}
+<div class="container">
+    <footer role="contentinfo">
+        {% endblock footer_tag_start %}
+        {% block footer %}
+            <p>
+                All rights reserved - Design by asbo.com <br />
+                Toute reproduction totale ou partielle est stricement interdite sans l'autorisation préalable de l'auteur ! <br />
+                Icons de Glyphicons Free, Sous Licence CC BY 3.0.
+            </p>
+        {% endblock %}
+        {% block footer_tag_end %}
+    </footer>
+</div>
+{% endblock footer_tag_end %}
+
+{% block body_end_before_js %}
+{% endblock body_end_before_js %}
+
+{% block foot_script %}
+{% block javascripts %}
+{% javascripts output='assets/compiled/frontend.js'
+'http://code.jquery.com/jquery-1.10.2.min.js'
+'http://code.jquery.com/ui/1.10.3/jquery-ui.js'
+'//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js'
+'@AsboWebBundle/Resources/assets/js/uititop.jquery.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover();
+            $().UItoTop({ easingType: 'easeOutQuart' });
+            setTimeout(function() {$(".alert.alert-success").slideUp("slow")} , 5000);
+
+                $('.sidebar-affix').add('data-spy', 'affix');
+                $( window ).resize(sidebarAffixPostion);
+
+
+                function sidebarAffixPostion() {
+
+                    var sidebar = $('.sidebar-affix');
+
+                    var sidebar_position = $("#sidebar-left").position().left;
+
+                    sidebar.css('left', function (left) {
+                        return sidebar_position + 15 + 'px';
+                    });
+
+                    if ($( window).width() > 1000) {
+
+                        sidebar.css('width', function (width) {
+                            return $("#sidebar-left").width();
+                        });
+
+                        sidebar.css('position', 'fixed');
+                    } else {
+                        sidebar.css('position', '');
+                        sidebar.css('width', '');
+                    }
+                }
+
+                sidebarAffixPostion();
+
+        });
+    </script>
+
+
+{% endblock %}
+{% endblock foot_script %}
+
+{% endblock body %}
+
+{% block body_end '' %}
+</body>
+</html>

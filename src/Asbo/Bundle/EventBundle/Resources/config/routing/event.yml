@@ -1,0 +1,33 @@
+#
+# This file is part of the ASBO package.
+#
+# (c) De Ron Malian <deronmalian@gmail.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+#
+
+asbo_event_index:
+    pattern: /
+    defaults:
+        _controller: asbo.controller.event:indexAction
+
+asbo_event_create:
+    pattern: /create
+    defaults:
+        _controller: asbo.controller.event:createAction
+
+asbo_event_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: asbo.controller.event:updateAction
+
+asbo_event_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: asbo.controller.event:deleteAction
+
+asbo_event_show:
+    pattern: /{id}/show
+    defaults:
+        _controller: asbo.controller.event:showAction

@@ -1,0 +1,24 @@
+language: php
+
+php:
+    - 5.4
+    - 5.5
+
+before_script:
+    - sudo apt-get update
+    - composer self-update
+    - composer install --prefer-source --no-interaction
+    - sudo chmod -R 777 app/cache app/logs
+    - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - cp phpspec.yml.dist phpspec.yml
+
+script:
+    - bin/phpspec run -fpretty --verbose
+
+notifications:
+    email: "deronmalian+travis@gmail.com"
+
+branches:
+    only:
+      - master
+      - develop

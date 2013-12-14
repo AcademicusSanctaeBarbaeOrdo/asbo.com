@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Événements à venir...
+    </div>
+    <div class="panel-body">
+        {% if events is not empty %}
+            {% for event in events %}
+                <a href="{{ path('asbo_event_show', {'id': event.id}) }}">{{ event }}</a>
+                <br />
+                <small>{{ event.startsAt|date('d-M-Y')|localizeddate('medium', 'none') }} @ {{ event.startsAt|date('H:i')|localizeddate('none', 'short') }} {{ event.location ? '- ' ~ event.location }}</small>
+                <span class="label pull-right">{{ event.eventHasFras.count }} vets</span><br />
+
+                {% if asbo.fra is not null %}
+                    {% set status = 'none' %}
+                    {% for eventHasFra in event.eventHasFras %}
+                        {% if eventHasFra.fra.id == asbo.fra.id %}
+                            {% set status = eventHasFra.status %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_JOIN') %}
+                        <span class="label label-success">Participer</span>
+                    {% else %}
+                        <a href="{{ path('asbo_event_subscribe_join', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                            <span class="label label-default">Participer</span>
+                        </a>
+                    {% endif %}
+
+                    {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_MAYBE') %}
+                        <span class="label label-info">Peut-être...</span>
+                    {% else %}
+                        <a href="{{ path('asbo_event_subscribe_maybe', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                            <span class="label label-default">Peut-être...</span>
+                        </a>
+                    {% endif %}
+
+                    {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_DECLINE') %}
+                        <span class="label label-danger">Décliner</span>
+                    {% else %}
+                        <a href="{{ path('asbo_event_subscribe_decline', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                            <span class="label label-default">Décliner</span>
+                        </a>
+                    {% endif %}
+
+                    {% set status = 'none' %}
+                {% endif %}
+
+
+
+                {% if not loop.last %}<hr />{% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Aucun événement à venir.</p>
+        {% endif %}
+    </div>
+</div>

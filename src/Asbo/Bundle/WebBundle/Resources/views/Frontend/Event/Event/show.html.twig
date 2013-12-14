@@ -1,0 +1,156 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/Event:layout.html.twig' %}
+
+{% block title %}
+    {{ event }} | {{ parent() }}
+{% endblock %}
+
+{% block headline %}
+    {{ event }}
+    <small>{{ event.startsAt|date('d-M-Y')|localizeddate('medium', 'none') }} @ {{ event.startsAt|date('H:i')|localizeddate('none', 'short') }} {{ event.location ? '- ' ~ event.location }}</small>
+    <br />
+    {% if asbo.fra is not null %}
+        <small>
+            {% set status = 'none' %}
+            {% for eventHasFra in event.eventHasFras %}
+                {% if eventHasFra.fra.id == asbo.fra.id %}
+                    {% set status = eventHasFra.status %}
+                {% endif %}
+            {% endfor %}
+            {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_JOIN') %}
+                <span class="label label-success">Participer</span>
+            {% else %}
+                <a href="{{ path('asbo_event_subscribe_join', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                    <span class="label label-default">Participer</span>
+                </a>
+            {% endif %}
+
+            {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_MAYBE') %}
+                <span class="label label-info">Peut-être...</span>
+            {% else %}
+                <a href="{{ path('asbo_event_subscribe_maybe', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                    <span class="label label-default">Peut-être...</span>
+                </a>
+            {% endif %}
+
+            {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_DECLINE') %}
+                <span class="label label-danger">Décliner</span>
+            {% else %}
+                <a href="{{ path('asbo_event_subscribe_decline', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                    <span class="label label-default">Décliner</span>
+                </a>
+            {% endif %}
+
+            {% set status = 'none' %}
+        </small>
+    {% endif %}
+{% endblock headline %}
+
+{% block asbo_event_content %}
+    <div class="row">
+
+        <div class="col-lg-6 col-md-6">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Fras ayant confirmés leur présence
+                        </div>
+                        <div class="panel-body">
+                            {% if event.eventHasFras is not empty %}
+                                <ul class="list-unstyled">
+                                    {% for eventHasFra in event.eventHasFras if eventHasFra.status == 'join' %}
+                                        {% set fra = eventHasFra.fra %}
+                                        <li><a href="{{ path('asbo_whoswho_fra_show', {'slug': fra.slug}) }}">{{ fra }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Aucun fras n'est présent.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Fras ne sachant pas se décider
+                        </div>
+                        <div class="panel-body">
+                            {% if event.eventHasFras is not empty %}
+                                <ul class="list-unstyled">
+                                    {% for eventHasFra in event.eventHasFras if eventHasFra.status == 'maybe' %}
+                                        {% set fra = eventHasFra.fra %}
+                                        <li><a href="{{ path('asbo_whoswho_fra_show', {'slug': fra.slug}) }}">{{ fra }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Aucun fras n'est présent.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Fras qui font leur fiotte !
+                        </div>
+                        <div class="panel-body">
+                            {% if event.eventHasFras is not empty %}
+                                <ul class="list-unstyled">
+                                    {% for eventHasFra in event.eventHasFras if eventHasFra.status == 'decline' %}
+                                        {% set fra = eventHasFra.fra %}
+                                        <li><a href="{{ path('asbo_whoswho_fra_show', {'slug': fra.slug}) }}">{{ fra }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Aucun fras n'est présent.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Eux, ils sont pas membres !
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-unstyled">
+                                        <li>Céline Bonnet (Thubaut Rouby)</li>
+                                        <li>Céline "Tryo" Moreels (Nitch)</li>
+                                        <li>Gaël Mousset (Kévin Stassen)</li>
+                                        <li>Tatiana Blattchen (Julien Mathieu)</li>
+                                        <li>Caroline Vromman (Den Den)</li>
+                                        <li>Aurélie Bertani (De Beer)</li>
+                                        <li>Sylvie (Stoupy)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

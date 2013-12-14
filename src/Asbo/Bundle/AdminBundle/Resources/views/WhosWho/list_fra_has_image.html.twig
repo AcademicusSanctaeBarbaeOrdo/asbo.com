@@ -1,0 +1,31 @@
+{#
+
+This file is part of the Asbo package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div class="pull-left">
+        {% if admin.isGranted('EDIT', object.image) and admin.hasRoute('edit') %}
+            <a href="{{ admin.generateUrl('edit', {'id' : object.image|sonata_urlsafeid }) }}" style="float: left; margin-right: 6px;">{% thumbnail object.image, 'admin' with {'width': 75, 'height': 60} %}</a>
+        {% else %}
+            {% thumbnail object.image, 'admin' with {'width': 75, 'height': 60, 'style': 'float: left; margin-right: 6px'} %}
+        {% endif %}
+        <strong>{{ object.image.name }}</strong> <br />
+
+        <ul class="unstyled">
+            <li>{{ 'label.size'|trans({}, 'SonataMediaBundle') }}: {% if object.image.width %} {{ object.image.width }}{% if object.image.height %}x{{ object.image.height }}{% endif %}px{% endif %}</li>
+            {% if object.image.length > 0 %}
+                <li>{{ 'label.length'|trans({}, 'SonataMediaBundle') }}: {{ object.image.length }}</li>
+            {% endif %}
+            <li>{{ 'label.content_type'|trans({}, 'SonataMediaBundle') }}: {{ object.image.contenttype }}</li>
+        </ul>
+    </div>
+{% endblock %}

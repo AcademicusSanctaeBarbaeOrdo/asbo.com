@@ -1,0 +1,69 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/WhosWho:layout.html.twig" %}
+
+{% block title %}{{ block('headline') }} | {{ phone.fra }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Ajouter un numéro de téléphone' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous"><a href="{{ path('asbo_whoswho_fra_show', {'slug': phone.fra.slug}) }}">&larr; Retourner au profil de {{ phone.fra }}</a></li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block asbo_whoswho_content %}
+
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6">
+                <form novalidate="novalidate" action="{{ path('asbo_whoswho_phone_create', {'slug': phone.fra.slug}) }}" {{ form_enctype(form) }} method="POST" id="add-phone">
+                    {% include 'AsboWebBundle:Frontend/WhosWho/Fra/Phone:_form.html.twig' %}
+                    <input type="submit" value="Ajouter le numéro de téléphone" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+                </form>
+            </div>
+
+
+            <div class="col-lg-6 col-md-6">
+                <div class="bs-callout-{% if phone.fra.phones is empty %}danger{% else %}info{% endif %} bs-callout">
+                    <h4>Numéro de téléphone déjà encodés</h4>
+                    {% if phone.fra.phones is not empty %}
+                        <ul class="list-unstyled">
+                            {% for other in phone.fra.phones %}
+                                <li>
+                                    {% if other is same as(phone.fra.principalPhone) %}
+                                        <a href="{{ path('asbo_whoswho_phone_update', {'slug': other.fra.slug, 'id': other.id}) }}" data-toggle="tooltip" title="Ceci est votre numéro de téléphone actuel de contact"><strong>{{ other }}</strong></a>
+                                    {% else %}
+                                        <a href="{{ path('asbo_whoswho_phone_update', {'slug': other.fra.slug, 'id': other.id}) }}">{{ other }}</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        Ceci est votre premier numéro de téléphone. La Chancellerie rappelle qu'il est important de fournir un numéro de téléphone valide afin de pouvoir vous contacter en tout temps.
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+    {% endblock %}

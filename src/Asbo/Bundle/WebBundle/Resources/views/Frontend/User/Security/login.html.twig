@@ -1,0 +1,115 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/User:layout.html.twig" %}
+
+{% block title %}Connexion | {{ parent() }}{% endblock %}
+
+{% block headline %} Connexion & Inscription {% endblock %}
+
+{% block fos_user_content %}
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error|trans({}, 'FOSUserBundle') }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <fieldset>
+                    <legend>Via votre compte sur le site</legend>
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                        <div class="row">
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="username">{{ 'security.login.email'|trans({}, 'FOSUserBundle') }}</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                                        <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" />
+                                    </div>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label for="remember_me">
+                                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                        {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                        <input type="password" class="form-control" id="password" name="_password" required="required" />
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 10px">
+                                    <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a>
+                                </div>
+                            </div>
+
+
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        </div>
+
+                        <hr />
+                        <input type="submit" id="_submit" class="btn btn-success btn-small col-lg-12 col-md-12 col-sm-12 col-xs-12" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+
+                    </form>
+                </fieldset>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <fieldset>
+                    <legend>Connectez vous avec ...</legend>
+                    <div class="list-group">
+                        <a href="{{ hwi_oauth_login_url('google') }}" class="list-group-item">
+                            <h4 class="list-group-item-heading"><i class="fa fa-google-plus-square"></i> Google</h4>
+                        </a>
+                        <a href="{{ hwi_oauth_login_url('facebook') }}" class="list-group-item">
+                            <h4 class="list-group-item-heading"><i class="fa fa-facebook-square"></i> Facebook</h4>
+                        </a>
+                        <a href="{{ hwi_oauth_login_url('github') }}" class="list-group-item">
+                            <h4 class="list-group-item-heading"><i class="fa fa-github-square"></i> GitHub</h4>
+                        </a>
+                        <a href="{{ hwi_oauth_login_url('linkedin') }}" class="list-group-item">
+                            <h4 class="list-group-item-heading"><i class="fa fa-linkedin-square"></i> Linkedin</h4>
+                        </a>
+                        <a href="{{ hwi_oauth_login_url('twitter') }}" class="list-group-item">
+                            <h4 class="list-group-item-heading"><i class="fa fa-twitter-square"></i> Twitter</h4>
+                        </a>
+                    </div>
+
+                </fieldset>
+            </div>
+
+        </div>
+
+        <fieldset style="margin-top: 30px">
+            <legend>Pas encore de compte !?</legend>
+            {% include 'AsboWebBundle:Frontend/User/Registration:register_form_login.html.twig' with {form: asbo.user.formLogin} %}
+        </fieldset>
+
+{% endblock fos_user_content %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ form_javascript(asbo.user.formLogin) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(asbo.user.formLogin) }}
+{% endblock %}

@@ -1,0 +1,5 @@
+<address>
+    {% block type %}<strong>{{ address.typeLabel }}</strong>{% endblock %}
+    <br />
+    {% block address %}{{ address |replace({',': '<br/>'})|trim('<br/>')|raw }} <br />{% endblock %}
+</address>

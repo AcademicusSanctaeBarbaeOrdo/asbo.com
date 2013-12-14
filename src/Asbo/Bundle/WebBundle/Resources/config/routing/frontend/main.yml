@@ -1,0 +1,40 @@
+asbo_static:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/static.yml
+
+asbo_events:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/event.yml
+    prefix: event
+
+asbo_whoswho:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho.yml
+    prefix: whoswho
+
+asbo_timeline:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/timeline.yml
+    prefix: timeline
+
+asbo_whoswho_comites:
+    pattern: /comites
+    defaults:
+        _controller: asbo_whoswho.controller.comite:listAction
+        _method: GET
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Comite:list.html.twig
+
+asbo_whoswho_comite_anno:
+    pattern: /comite/{anno}
+    requirements:
+        anno: \d+
+    defaults:
+        _controller: asbo_whoswho.controller.comite:annoAction
+        _method: GET
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Comite:anno.html.twig
+
+asbo_whoswho_comite_last:
+    pattern: /comite/
+    defaults:
+        _controller: asbo_whoswho.controller.comite:lastAction
+        _method: GET
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Comite:anno.html.twig

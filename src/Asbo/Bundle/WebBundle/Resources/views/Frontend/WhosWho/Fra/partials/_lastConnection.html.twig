@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-clock-o"></i> Derniers connectés</div>
+    <div class="panel-body">
+        <ul class="list-unstyled">
+            {% for fra in fras %}
+                <li><a href="{{ path('asbo_whoswho_fra_show', {'slug': fra.slug}) }}">{{ fra }}</a> ({{ time_diff(fra.owner.lastlogin) }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

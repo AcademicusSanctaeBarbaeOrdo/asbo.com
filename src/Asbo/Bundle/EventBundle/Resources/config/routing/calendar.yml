@@ -1,0 +1,33 @@
+#
+# This file is part of the ASBO package.
+#
+# (c) De Ron Malian <deronmalian@gmail.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+#
+
+asbo_calendar_list:
+    pattern: /
+    defaults:
+        _controller: asbo.controller.calendar:indexAction
+
+asbo_calendar_create:
+    pattern: /create
+    defaults:
+        _controller: asbo.controller.calendar:createAction
+
+asbo_calendar_update:
+    pattern: /{id}/update
+    defaults:
+        _controller: asbo.controller.calendar:updateAction
+
+asbo_calendar_delete:
+    pattern: /{id}/delete
+    defaults:
+        _controller: asbo.controller.calendar:deleteAction
+
+asbo_calendar_show:
+    pattern: /{id}/show
+    defaults:
+        _controller: asbo.controller.calendar:showAction

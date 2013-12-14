@@ -1,0 +1,7 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block label %}
+    {% if not item.labelAttribute('iconOnly') %}<h2>{{ item.label|trans }}</h2>{% endif %}
+    {% if item.labelAttribute('icon') %}<p><i class="{{ item.labelAttribute('icon') }}"></i></p>{% endif %}
+    {% if item.labelAttribute('data-image') %}<p><img src="{{ asset(item.labelAttribute('data-image')) }}" alt="{{ item.name }}"/></p>{% endif %}
+{% endblock %}

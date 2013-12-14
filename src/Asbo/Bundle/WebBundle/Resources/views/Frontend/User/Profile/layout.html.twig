@@ -1,0 +1,42 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/User:layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% block profile_content %}{% endblock %}
+{% endblock %}
+
+{% block title %}{{ "Profile" | trans({}, 'SonataUserBundle')}} - {{ parent() }}{% endblock %}
+
+{% block page_header %}
+<div class="media" style="margin-top: 50px">
+    <img class="media-object img-rounded pull-left" src="{{ gravatar(app.user.email, 95) }}" />
+  <div class="media-body">
+    <div class="page-header"  style="margin-top: 0px">
+    <h1 class="media-heading" style="margin-top: 0">
+        {% block page_title %}{{ "Mon espace" | trans({}, 'AsboUserBundle')}} <br /><small>Ici, c'est chez moi !</small>{% endblock %}
+    </h1>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block sidebar_bottom %}
+    <div class="sidebar">
+        <h2> &nbsp; <a href="#" title="Profil">Profil</a></h2>
+        <ul class="unstyled">
+            <li><a href="{{ path('sonata_user_profile_edit') }}" title="Mon profil">Modifier</a></li>
+            <li><a href="{{ path('sonata_user_profile_edit_authentication') }}">Paramètres</a></li>
+        </ul>
+    </div>
+{% endblock %}

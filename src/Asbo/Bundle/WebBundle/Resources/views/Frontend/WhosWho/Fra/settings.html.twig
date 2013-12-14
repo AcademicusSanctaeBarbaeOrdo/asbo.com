@@ -1,0 +1,77 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source Label.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/WhosWho:layout.html.twig' %}
+
+{% block title %}{{ block('headline') }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Paramètres' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous"><a href="{{ path('asbo_whoswho_fra_show', {'slug': fra.slug}) }}">&larr; Retourner au profil de {{ fra }}</a></li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+{% block asbo_whoswho_content %}
+    <div class="row">
+
+
+        {% if not fra.contributor %}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="alert alert-danger">
+                    <h4>Cotisation</h4>
+                    <p>Apparemment d'après notre base de donnée vous n'êtes pas cotisant ?
+                        Si tel est le cas alors vous préférences ne seront pas tenue en compte, cependant vous pouvez les définir afin d'anticiper une éventuelle reprise de votre cotisation.</p>
+                    <p><strong>Si</strong> vous êtes bien cotisant et que vous voyez ce message alors il est possible qu'il y ai une erreur. Contactez le Chancellier afin qu'il règle le problème et excusez nous pour le désagrément !</p>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="bs-callout bs-callout-warning">
+                <p>Voici la liste des préférences qui sont accessibles en tant que cotisant. Chaque case cochée fera en sorte qu'en plus de recevoir les informations par mail, tu les recevras aussi à ton adresse principale. Donc si recevoir le "Who's Who ?" chaque année ne t'intéresse pas pense à décocher les cases.</p>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="bs-callout bs-callout-info">
+                <h4><i class="fa fa-info-circle"></i> Utiles à savoir !</h4>
+                <p>Sache que le fait de diminuer le nombre d'envois de convocation ou de livret comme le "Pereat Trisita !" et le "Who's Who ?" fait chuter drastiquement les coûts de la chancellerie et économise directement de l'argent aux students !</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <fieldset>
+                <legend><i class="fa fa-cogs"></i> Mes paramètres</legend>
+
+                <form action="{{ path('asbo_whoswho_settings_update', {'slug': fra.slug}) }}" {{ form_enctype(form) }}
+                      method="POST">
+
+                    {{ form_row(form.whoswho, {'label': 'Recevoir le Who\'s Who chaque année ?'}) }}
+                    {{ form_row(form.pereat, {'label': 'Recevoir les péréats dès qu\'on arrive à en publier un ?'}) }}
+                    {{ form_row(form.convoc_ephemerides_q1, {'label': 'Recevoir les éphémérides du premier quadri ?'}) }}
+                    {{ form_row(form.convoc_ephemerides_q2, {'label': 'Recevoir les éphémérides du second quadri ?'}) }}
+                    {{ form_row(form.convoc_externe, {'label': 'Etre prévenu de la date de l\'externe ?'}) }}
+                    {{ form_row(form.convoc_we, {'label': 'Tu veux recevoir une lettre pour le we ?'}) }}
+                    {{ form_row(form.convoc_banquet, {'label': 'La lettre officielle pour le dies ?'}) }}
+                    {{ form_rest(form) }}
+                    <hr />
+                    <input type="submit" value="Editer" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12"/>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,7 @@
+asbo_event_event:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/event/event.yml
+    prefix: /
+
+asbo_event_calendar:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/event/calendar.yml
+    prefix: /calendar

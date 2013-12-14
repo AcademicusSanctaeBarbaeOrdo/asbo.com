@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo_quizz.controller.quizz.class">Asbo\Bundle\QuizzBundle\Controller\QuizzController</parameter>
+        <parameter key="asbo_quizz.entity.quizz.class">Asbo\Bundle\QuizzBundle\Entity\Quizz</parameter>
+        <parameter key="asbo_quizz.entity.quizz_anno.class">Asbo\Bundle\QuizzBundle\Entity\QuizzAnno</parameter>
+        <parameter key="asbo_quizz.entity.quizz_anno_has_fra.class">Asbo\Bundle\QuizzBundle\Entity\QuizzAnnoHasFra</parameter>
+        <parameter key="asbo_quizz.repository.quizz.class">Asbo\Bundle\QuizzBundle\Doctrine\EntityRepository</parameter>
+        <parameter key="asbo_quizz.repository.quizz_anno.class">Asbo\Bundle\QuizzBundle\Doctrine\QuizzAnnoRepository</parameter>
+        <parameter key="asbo_quizz.repository.quizz_anno_has_fra.class">Asbo\Bundle\QuizzBundle\Doctrine\QuizzAnnoHasFraRepository</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="asbo_quizz.controller.quizz" class="%asbo_quizz.controller.quizz.class%">
+            <argument>asbo_quizz</argument>
+            <argument>quizz</argument>
+            <argument>AsboQuizzBundle:Quizz</argument>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="asbo_quizz.manager.quizz" alias="doctrine.orm.entity_manager" />
+        <service id="asbo_quizz.repository.quizz" class="%asbo_quizz.repository.quizz.class%">
+            <argument type="service" id="asbo_quizz.manager.quizz" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo_quizz.entity.quizz.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="asbo_quizz.manager.quizz_anno" alias="doctrine.orm.entity_manager" />
+        <service id="asbo_quizz.repository.quizz_anno" class="%asbo_quizz.repository.quizz_anno.class%">
+            <argument type="service" id="asbo_quizz.manager.quizz_anno" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo_quizz.entity.quizz_anno.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+        <service id="asbo_quizz.manager.quizz_anno_has_fra" alias="doctrine.orm.entity_manager" />
+        <service id="asbo_quizz.repository.quizz_anno_has_fra" class="%asbo_quizz.repository.quizz_anno_has_fra.class%">
+            <argument type="service" id="asbo_quizz.manager.quizz_anno_has_fra" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo_quizz.entity.quizz_anno_has_fra.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,25 @@
+{% if events is not empty %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-group"></i>
+        Fras à la prochaine activité <i>{{ event ? '- ' ~ event }}</i>
+        <span class="badge pull-right">{{ event.eventHasFras.count }} vets</span>
+    </div>
+    <div class="panel-body">
+        {% if event.eventHasFras is not empty %}
+            <ul class="list-unstyled">
+                {% for eventHasFra in event.eventHasFras.slice(0, 10) %}
+                    {% set fra = eventHasFra.fra %}
+                    <li><a href="{{ path('asbo_whoswho_fra_show', {'slug': fra.slug}) }}">{{ fra }}</a></li>
+                {% endfor %}
+                {% if event.eventHasFras.count > 10 %}
+                <li><a href="{{ path('asbo_event_show', {'id': event.id}) }}">...</a></li>
+                {% endif %}
+            </ul>
+        {% else %}
+            <p>Aucun fras n'est présent.</p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

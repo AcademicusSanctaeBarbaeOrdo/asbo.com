@@ -1,0 +1,20 @@
+suites:
+  event:
+    namespace: \Asbo\Bundle\EventBundle
+    src_path: src
+    spec_path: src/Asbo/Bundle/EventBundle/
+
+  whoswho:
+    namespace: \Asbo\Bundle\WhosWhoBundle
+    src_path: src
+    spec_path: src/Asbo/Bundle/WhosWhoBundle/
+
+  quizz:
+    namespace: \Asbo\Bundle\QuizzBundle
+    src_path: src
+    spec_path: src/Asbo/Bundle/QuizzBundle/
+
+  contact:
+    namespace: \Asbo\Bundle\ContactBundle
+    src_path: src
+    spec_path: src/Asbo/Bundle/ContactBundle/

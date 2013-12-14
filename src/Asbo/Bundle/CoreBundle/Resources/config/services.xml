@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo_user.google_provider.class">Asbo\Bundle\CoreBundle\Security\User\Provider\GoogleProvider</parameter>
+        <parameter key="asbo_user.form.registration.type.class">Asbo\Bundle\CoreBundle\Form\Type\RegistrationFormType</parameter>
+        <parameter key="asbo_user.listerner.user.logout.class">Asbo\Bundle\CoreBundle\EventListener\LogoutListener</parameter>
+        <parameter key="asbo_user.listener.user.login.class">Asbo\Bundle\CoreBundle\EventListener\LoginListener</parameter>
+        <parameter key="asbo.oauth.user_provider.class">Asbo\Bundle\CoreBundle\OAuth\UserProvider</parameter>
+    </parameters>
+
+    <services>
+        <service id="asbo_user.registration.form.type" class="%asbo_user.form.registration.type.class%">
+            <tag name="form.type" alias="asbo_user_registration" />
+            <argument>%fos_user.model.user.class%</argument>
+        </service>
+
+        <service id="asbo_user.login.listener" class="%asbo_user.listener.user.login.class%">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="session" />
+            <argument type="service" id="security.context" />
+            <tag name="kernel.event_listener" event="security.interactive_login" method="onLogin" />
+        </service>
+
+        <service id="asbo_user.logout.listener" class="%asbo_user.listerner.user.logout.class%">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="session" />
+            <argument type="service" id="security.context" />
+        </service>
+
+        <service id="asbo.oauth.user_provider" class="%asbo.oauth.user_provider.class%">
+            <argument type="service" id="fos_user.user_manager" />
+            <argument type="collection">
+                <argument key="facebook">facebookUid</argument>
+                <argument key="github">githubId</argument>
+                <argument key="google">gplusUid</argument>
+                <argument key="linkedin">linkedinId</argument>
+                <argument key="twitter">twitterUid</argument>
+            </argument>
+        </service>
+
+        <service id="asbo_core.controller.post" class="Asbo\Bundle\CoreBundle\Controller\PostController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="asbo.manager.event_has_fra" alias="doctrine.orm.entity_manager" />
+        <service id="asbo.repository.event_has_fra" class="Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository">
+            <argument type="service" id="asbo.manager.event_has_fra" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>Asbo\Bundle\CoreBundle\Entity\EventHasFra</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+</container>

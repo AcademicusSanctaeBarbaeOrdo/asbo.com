@@ -1,0 +1,152 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/WhosWho:layout.html.twig' %}
+
+{% block title %}
+    {{ block('headline') }} | {{ parent() }}
+{% endblock %}
+
+{% block headline %}
+    Recherche Avancée
+{% endblock %}
+
+{% block asbo_whoswho_content %}
+
+<form class="form-filtre filter-box" action="{{ path('asbo_whoswho_fra_search') }}#resultats">
+        <div class="row">
+            <div class="col-lg-4">
+                <fieldset>
+                    <legend>Concernant les fras ...</legend>
+                <div class="form-group">
+                    {{ form_label(form.firstname) }}
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control input-small'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.lastname) }}
+                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control input-small'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.nickname) }}
+                    {{ form_widget(form.nickname, {'attr': {'class': 'form-control input-small'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.gender) }}
+                    {{ form_widget(form.gender, {'attr': {'class': 'form-control input-small'}}) }}
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-small col-lg-6 col-md-6 col-sx-12 col-sm-6" name="submit-filter">Filtrer <i class="fa fa-filter fa fa-white"></i></button>
+                    <button type="submit" class="btn btn-danger btn-small col-lg-6 col-md-6 col-sx-12 col-sm-6">Reset <i class="fa fa-off fa fa-white"></i></button>
+                </div>
+                </fieldset>
+            </div>
+
+            <div class="col-lg-8">
+                <fieldset>
+                    <legend>À propros de l'ASBO ?</legend>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            {{ form_label(form.type) }}
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control input-small'}}) }}
+                        </div>
+                        <div class="form-group col-lg-6">
+                            {{ form_label(form.status) }}
+                            {{ form_widget(form.status, {'attr': {'class': 'form-control input-small'}}) }}
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            {{ form_label(form.anno) }}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ form_widget(form.anno.condition_operator, {'attr': {'class': 'form-control input-small col-lg-2'}}) }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ form_widget(form.anno.text, {'attr': {'class': 'form-control input-small'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            {{ form_label(form.fraHasPosts.post) }}
+                            {{ form_widget(form.fraHasPosts.post, {'attr': {'class': 'form-control input-small'}}) }}
+                        </div>
+                        <div class="form-group col-lg-12">
+                            {{ form_label(form.fraHasPosts.anno) }}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ form_widget(form.fraHasPosts.anno.condition_operator, {'attr': {'class': 'form-control input-small col-lg-2'}}) }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ form_widget(form.fraHasPosts.anno.text, {'attr': {'class': 'form-control input-small'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            {{ form_rest(form) }}
+        </div>
+</form>
+
+{% if search %}
+
+    <h3 id="resultats">
+        {% set count = fras|length %}
+        {% transchoice count %}
+        {0} Aucun fra n'a été trouvé :'(|{1} Un fra a été trouvé !|]1,Inf] %count% fras ont été trouvés !
+        {% endtranschoice %}
+    </h3>
+
+    {% if count > 0 %}
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Surnom</th>
+            </tr>
+            {% for fra  in fras  %}
+                <tr>
+                    <td>
+                        <a href="{{ path('asbo_whoswho_fra_show', { 'slug': fra.slug } ) }}">{{ fra.lastname }}</a>
+                    </td>
+                    <td>
+                        {{ fra.firstname }}
+                    </td>
+                    <td>
+                        {{ fra.nickname }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endif %}
+
+{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+
+        {% javascripts output='assets/compiled/chosen.js'
+        '@AsboWebBundle/Resources/assets/js/chosen.jquery.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        <script type="text/javascript">
+
+            $('select[multiple="multiple"]').attr('data-placeholder', 'Plusieurs choix sont possibles !');
+            $('select[multiple="multiple"]').chosen();
+
+        </script>
+    {% endblock %}

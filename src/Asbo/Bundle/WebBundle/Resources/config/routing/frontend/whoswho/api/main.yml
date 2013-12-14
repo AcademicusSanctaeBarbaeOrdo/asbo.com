@@ -1,0 +1,3 @@
+sylius_api_product:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/api/email.yml
+    prefix: /emails

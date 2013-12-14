@@ -1,0 +1,73 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/WhosWho:layout.html.twig' %}
+
+{% block title %}
+    {{ block('headline') }} | Who's Who | {{ parent() }}
+{% endblock %}
+
+{% block headline %}
+    Comités
+{% endblock %}
+
+{% block content_content %}
+
+    {% for year, postsByYear in posts %}
+    <div class="row">
+        <h3 style="text-align: center; border-bottom: 2px solid #CCC">{{ year }}</h3>
+        <div class="col-lg-12">
+            <div class="row">
+            {% for post in postsByYear %}
+
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="image-wrapper">
+
+                        <div class="image-title">
+                            <p class="image-title-content">
+                                {{ post }}
+                            </p>
+                        </div>
+                        {% if post.fra.principalImage is not empty %}
+                            {% thumbnail post.fra.principalImage.image, 'small' %}
+                        {% else %}
+                            {% if post.fra.gender == 'f' %}
+                                <img src="{{ asset('assets/img/avatar_female.png')}}" />
+                            {% else %}
+                                <img src="{{ asset('assets/img/avatar_male.png')}}" />
+                            {% endif %}
+                        {% endif %}
+
+                        <div class="image-description">
+                            <p class="image-description-content">
+                                {% if is_granted('ROLE_WHOSWHO_USER') %}
+                                    <a href="{{ path('asbo_whoswho_fra_show', {'slug': post.fra.slug}) }}" title="Voir la fiche du fra">{{ post.fra }}</a>
+                                {% else %}
+                                    {{ post.fra }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {% if loop.index is divisibleby(4) %}
+            </div>
+            <hr />
+            <div class="row">
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+{% endblock %}

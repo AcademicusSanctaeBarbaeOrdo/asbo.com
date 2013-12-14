@@ -1,0 +1,95 @@
+asbo_whoswho_fra_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: asbo_whoswho.controller.fra:indexAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra:index.html.twig
+            paginate: false
+            limit: null
+            method: createFilterPaginator
+            arguments: [$criteria, $sorting]
+
+asbo_whoswho_fra_show:
+    pattern: /fra/{slug}
+    defaults:
+        _controller: asbo_whoswho.controller.fra:showAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra:show.html.twig
+            criteria: { slug: $slug }
+
+asbo_whoswho_fra_deniers:
+    pattern: /fra/{slug}/deniers
+    defaults:
+        _controller: asbo_whoswho.controller.fra:showAction
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra:deniers.html.twig
+            criteria: { slug: $slug }
+
+asbo_whoswho_fra_update:
+    pattern: /fra/{slug}/edit
+    defaults:
+        _controller: asbo_whoswho.controller.fra:updateAction
+        _method: GET|POST
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra:update.html.twig
+            criteria: { slug: $slug }
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_fra_search:
+    pattern: /search
+    defaults:
+        _controller: asbo_whoswho.controller.fra:searchAction
+        _method: GET|POST
+        _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra:search.html.twig
+
+asbo_whoswho_list:
+    pattern: /
+    defaults:
+        _controller: asbo_whoswho.controller.fra:listAction
+        _method: GET|POST
+        _asbo:
+            template: AsboWebBundle:Frontend/WhosWho/Fra:list.html.twig
+
+asbo_whoswho_address:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/address.yml
+    prefix: /fra/{slug}/address/
+
+asbo_whoswho_phone:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/phone.yml
+    prefix: /fra/{slug}/phone/
+
+asbo_whoswho_frahaspost:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/fraHasPost.yml
+    prefix: /fra/{slug}/post/
+
+asbo_whoswho_diploma:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/diploma.yml
+    prefix: /fra/{slug}/diploma/
+
+asbo_whoswho_email:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/email.yml
+    prefix: /fra/{slug}/email/
+
+asbo_whoswho_rank:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/rank.yml
+    prefix: /fra/{slug}/rank/
+
+asbo_whoswho_job:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/job.yml
+    prefix: /fra/{slug}/job/
+
+asbo_whoswho_external:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/externalPost.yml
+    prefix: /fra/{slug}/external/
+
+asbo_whoswho_settings:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/settings.yml
+    prefix: /fra/{slug}/settings/
+
+asbo_whoswho_api:
+    resource: @AsboWebBundle/Resources/config/routing/frontend/whoswho/api/main.yml
+    prefix: /api/fra/{slug}/

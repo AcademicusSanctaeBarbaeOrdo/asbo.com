@@ -1,0 +1,63 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+
+{% block headline %}
+    {{ thread.subject }}
+{% endblock %}
+
+
+{% block fos_message_content %}
+
+    {% for message in thread.messages %}
+        <div id="messages" style="margin-bottom: 20px">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="{{ gravatar(message.sender.email, 45) }}">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading" id="message_{{ message.id }}" >
+                        {{ message.sender|e }} <small>({{ message.createdAt|format_datetime }})</small>
+                    </h4>
+                    {{ message.body }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
+        {{ form_errors(form) }}
+        <fieldset>
+            {% set thisUser = ', '~app.user.username %}
+            <legend>Répondre à
+            <small>
+                {% for user in thread.allParticipantsWithoutUser(app.user) %}
+                    {{ user }}
+                    {% if loop.last - 1 %}
+                        et
+                    {% elseif loop.last %}
+
+                    {% else %}
+                        ,
+                    {% endif %}
+                {% endfor %}
+            </small></legend>
+        </fieldset>
+
+        {{ form_widget(form.body, {'attr': {'class': 'input-block-level'}}) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" class="btn btn-success col-lg-12" value="Envoyer" />
+    </form>
+
+{% endblock %}

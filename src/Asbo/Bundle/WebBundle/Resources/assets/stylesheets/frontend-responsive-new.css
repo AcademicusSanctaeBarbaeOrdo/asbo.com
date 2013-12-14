@@ -1,0 +1,110 @@
+/*
+ * This file is part of the ASBO package.
+ *
+ * (c) De Ron Malian <deronmalian@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  h1.title {
+    font-size: 20px!important;
+  }
+
+  footer[role="contentinfo"] p {
+    margin: 10px 0;
+  }
+
+  .sidebar h2 {
+    text-align: left;
+  }
+  .sidebar h2 a {
+    float: none;
+    padding: 0;
+    border-left: none;
+  }
+  .sidebar h2 a:after {
+    border: none;
+    margin: none;
+  }
+  .sidebar h2 a:before, .sidebar h2 a:after {
+    content: "";
+    position: relative;
+    width: 0;
+    height: 0;
+  }
+  .sidebar h2 a:before {
+    border: none;
+    margin: none;
+  }
+}
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  body {
+    background: none;
+  }
+
+  .body-content {
+    padding: 0 25px 0 30px;
+  }
+
+  .container {
+    background-image: none;
+  }
+
+  .date-bubble {
+    display: none;
+  }
+
+  .navigation {
+    border-radius: 0;
+  }
+  .navigation li {
+    padding-top: 5px;
+  }
+  .navigation li:last-child {
+    border-radius: 0;
+  }
+
+  .navigation li a h2 {
+    display: none;
+  }
+
+  h1.title {
+    font-size: 30px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  #blason {
+    text-align: center;
+    margin-top: 0;
+  }
+  #blason img {
+    width: 200px;
+  }
+
+  .flash {
+    margin: 0;
+  }
+}
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+  #blason {
+    display: none;
+  }
+}
+@media (min-width: 980px) and (max-width: 1199px) {
+  .main-title h1 {
+    font-size: 30px;
+  }
+}
+@media (max-width: 1199px) {
+  .sidebar ul {
+    font-size: 11px;
+  }
+}
+/* Large desktop */

@@ -1,0 +1,42 @@
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        google:
+            type:                google
+            client_id:           %google_client_id%
+            client_secret:       %google_client_secret%
+            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+        facebook:
+            type:                facebook
+            client_id:           %facebook_client_id%
+            client_secret:       %facebook_client_secret%
+            scope:               "email,user_birthday,user_location,publish_stream"
+        github:
+            type:                github
+            client_id:           %github_client_id%
+            client_secret:       %github_client_secret%
+            scope: user
+
+        linkedin:
+            type:                linkedin
+            client_id:           %linkedin_client_id%
+            client_secret:       %linkedin_client_secret%
+            scope:               "r_basicprofile r_emailaddress"
+
+        twitter:
+            type:                twitter
+            client_id:           %twitter_client_id%
+            client_secret:       %twitter_client_secret%
+
+    fosub:
+        username_iterations: 10
+        properties:
+            github:   githubId
+            google:   gplusUid
+            facebook: facebookUid
+            linkedin: linkedinId
+            twitter:  twitterUid
+
+    connect:
+        confirmation: true

@@ -1,0 +1,35 @@
+asbo_whoswho_externalpost_list:
+    pattern: /
+    defaults:
+        _controller: asbo_whoswho.controller.externalpost:listAction
+        _method: GET|POST
+
+asbo_whoswho_externalpost_delete:
+    pattern: /{id}/delete
+    methods: [GET, DELETE]
+    defaults:
+        _controller: asbo_whoswho.controller.externalpost:deleteAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_externalpost_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.externalpost:createAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }
+
+asbo_whoswho_externalpost_update:
+    pattern: /{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: asbo_whoswho.controller.externalpost:updateAction
+        _sylius:
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug': $slug }

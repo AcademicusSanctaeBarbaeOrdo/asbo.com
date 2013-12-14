@@ -1,0 +1,74 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/WhosWho:layout.html.twig" %}
+
+{% block title %}{{ block('headline') }} | {{ email.fra }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Modifier une adresse email' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous"><a href="{{ path('asbo_whoswho_fra_show', {'slug': email.fra.slug}) }}">&larr; Retourner au profil de {{ email.fra }}</a></li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block asbo_whoswho_content %}
+
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6">
+                <form novalidate="novalidate" action="{{ path('asbo_whoswho_email_create', {'slug': email.fra.slug}) }}" {{ form_enctype(form) }} method="POST" id="add-email">
+                    {% if not app.request.isxmlhttprequest %}
+                        {% include 'AsboWebBundle:Frontend/WhosWho/Fra/Email:_form.html.twig' %}
+                        <input type="submit" value="Ajouter une adresse" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+                    {% else %}
+                        {% include 'AsboWebBundle:Frontend/WhosWho/Fra/Email:_ajax_form.html.twig' %}
+                    {% endif %}
+                </form>
+            </div>
+
+
+            <div class="col-lg-6 col-md-6">
+                <div class="bs-callout-{% if email.fra.emails is empty %}danger{% else %}info{% endif %} bs-callout">
+                    <h4>Adresses emails déjà encodées</h4>
+                    {% if email.fra.emails is not empty %}
+                        <ul class="list-unstyled">
+                            {% for other in email.fra.emails %}
+                                <li>
+
+                                    {% if other is same as(email.fra.principalEmail) %}
+                                        <a href="{{ path('asbo_whoswho_email_update', {'slug': other.fra.slug, 'id': other.id}) }}" data-toggle="tooltip" title="Ceci est votre adresse actuel de contact"><strong>{{ other }}</strong></a>
+                                    {% else %}
+                                        <a href="{{ path('asbo_whoswho_email_update', {'slug': other.fra.slug, 'id': other.id}) }}">{{ other }}</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        Ceci est votre premier email. La Chancellerie rappelle qu'il est important de fournir une adresse email valide afin de pouvoir vous contacter en tout temps.
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+    {% endblock %}

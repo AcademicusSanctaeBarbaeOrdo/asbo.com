@@ -1,0 +1,19 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block headline %}
+    S'enregistrer
+{% endblock %}
+
+{% block fos_user_content %}
+    {% include "AsboWebBundle:Frontend/User/Registration:register_content.html.twig" %}
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ form_javascript(asbo.user.formLogin) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(asbo.user.formLogin) }}
+{% endblock %}

@@ -1,0 +1,543 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source Label.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/WhosWho:layout.html.twig' %}
+
+{% set allowed_to_edit_fra = is_expr_granted("canEditFra(object)", fra) %}
+
+{% block title %}{{ fra.fullname }} | {{ parent() }} {% endblock %}
+
+{% block headline %}
+    Fiche personnelle de:
+{% endblock headline %}
+
+{% block asbo_whoswho_content %}
+
+    {# BEGIN OF PERSONAL CARD #}
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {{ fra.fullname }}
+                {% if allowed_to_edit_fra %}
+                    <span class="pull-right">
+                        <a href="{{ path('asbo_whoswho_fra_update', {'slug': fra.slug}) }}"  data-toggle="tooltip" data-placement="left" title="Editer ses données personnelles">
+                            <i class="fa fa-pencil-square"></i>
+                        </a>
+                        <a href="{{ path('asbo_whoswho_settings_update', {'slug': fra.slug}) }}" data-toggle="tooltip" data-placement="top" title="Modifier ses préférences">
+                            <i class="fa fa-cogs"></i>
+                        </a>
+                        <a href="{{ path('asbo_whoswho_fra_deniers', {'slug': fra.slug}) }}" data-toggle="tooltip" data-placement="bottom" title="Combien de denier je dois payer ?">
+                            <i class="fa fa-money"></i>
+                        </a>
+                    </span>
+                {% endif %}
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    {% if fra.principalImage is not empty %}
+                        {% thumbnail fra.principalImage.image, 'small' with {'class': 'media-object img-thumbnail'} %}
+                    {% else %}
+                        {% if fra.gender == 'f'%}
+                            <img class="media-object img-thumbnail" src="{{ asset('assets/img/avatar_female.png')}}" />
+                        {% else %}
+                            <img class="media-object img-thumbnail" src="{{ asset('assets/img/avatar_male.png')}}" />
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-user"></i> {{ fra.statusLabel }}, anno {{ fra.anno }}</li>
+
+                        {% if fra.birthday is not null %}
+                            <li>
+                                <i class="fa fa-calendar"></i>
+                                Né le {{ fra.birthday|format_date(null, 'fr', 'Europe/Paris', constant('IntlDateFormatter::LONG')) }}
+
+                                {% if fra.deathday is empty %}
+                                    ({{ fra.age }} ans)
+                                {% endif %}
+
+                                {% if fra.birthplace is not empty %}
+                                    @ {{ fra.birthplace }}
+                                {% endif %}
+                            </li>
+                        {% endif %}
+
+                        {% if fra.deathday is not null %}
+                            <li>
+                                <i class="icon"> ✞ </i>
+                                Décédé le {{ fra.deathday|format_date(null, 'fr', 'Europe/Paris', constant('IntlDateFormatter::LONG')) }}
+
+                                {% if fra.deathday is not empty %}
+                                    ({{ fra.age }} ans)
+                                {% endif %}
+
+                                {% if fra.deathplace is not empty %}
+                                    @ {{ fra.deathplace }}
+                                {% endif %}
+                            </li>
+                        {% endif %}
+
+                        {% if fra.principalPhone is not empty %}
+                            <li><i class="fa fa-phone"></i> {{ fra.principalPhone }}</li>
+                        {% endif %}
+
+                        {% if fra.principalEmail is not empty %}
+                            <li><i class="fa fa-envelope"></i> {{ fra.principalEmail }}</li>
+                        {% endif %}
+
+                        {% if fra.principalAddress is not empty %}
+                            <li>&nbsp;</li>
+                            <li>
+                                <address>
+                                    <i class="fa fa-home"></i>
+                                    <strong>{{ fra.principalAddress.typeLabel }}</strong>
+                                    <br />
+                                    {{ fra.principalAddress.street }} {{ fra.principalAddress.number }}<br />
+                                    {{ fra.principalAddress.postcode }} {{ fra.principalAddress.locality }}<br />
+                                    {{ fra.principalAddress.country|country }}
+                                </address>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% block panel_footer %}
+            {% if allowed_to_edit_fra %}
+                <div class="panel-footer">
+                    <a href="#" id="edit-mode">Edit mode ?</a>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+    {# END OF PERSONAL CARD #}
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    </div>
+
+    {# BEGIN OF PERSONAL INFORMATIONS #}
+    <div class="row">
+
+    {# BEGIN OF LEFT PANEL #}
+    <div class="col-lg-6 col-md-6">
+        <div class="row">
+
+            {% if fra.emails is not empty and fra.emails.count != 1 or allowed_to_edit_fra %}
+
+                <div class="col-lg-12">
+                    <div class="panel{% if fra.emails is empty or fra.principalEmail is empty %} panel-danger{% else %} panel-default{% endif %}">
+
+                        <div class="panel-heading">
+                            <strong>Emails</strong>
+                            {% if allowed_to_edit_fra %}
+                                <a data-toggle="modal" class="pull-right edit-mode" href="{{ path('asbo_whoswho_email_create', {'slug': fra.slug}) }}">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="panel-body">
+                        <div class="row">
+                            {% for email in fra.emails %}
+                                {% if email != fra.principalEmail or allowed_to_edit_fra %}
+                                    <div class="col-lg-12">
+                                        {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_email.html.twig', {'email': email}, with_context = false) }}
+                                        {% if allowed_to_edit_fra %}
+                                            <span class="edit-mode">
+                                                <a href="{{ path('asbo_whoswho_email_update', {'slug': fra.slug, 'id': email.id}) }}"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ path('asbo_whoswho_email_delete', {'slug': fra.slug, 'id': email.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                                <a href="{{ path('asbo_whoswho_email_set_principal', {'slug': fra.slug, 'id': email.id, 'token': csrf_token('email_' ~ email.id)}) }}"><i class="fa fa-envelope"></i></a>
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% if allowed_to_edit_fra %}
+                                    <div class="col-lg-12">
+                                        Vous n'avez pas encore d'adresse email ? <br />
+                                        Pensez à en <a href="{{ path('asbo_whoswho_email_create', {'slug': fra.slug}) }}">ajouter</a> une de telle manière que la chancellerie puisse vous contactez rapidement !
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                            </div>
+                    </div>
+                </div>
+
+            {% endif %}
+
+            {% if fra.phones is not empty and fra.phones.count != 1  or allowed_to_edit_fra%}
+                <div class="col-lg-12">
+                    <div class="panel{% if fra.phones is empty or fra.principalPhone is empty %} panel-danger{% else %} panel-default{% endif %}">
+
+                        <div class="panel-heading">
+                            <strong>Téléphones</strong>
+                            {% if allowed_to_edit_fra %}
+                                <a class="pull-right edit-mode" href="{{ path('asbo_whoswho_phone_create', {'slug': fra.slug}) }}">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="panel-body">
+                        <div class="row">
+
+                            {% for phone in fra.phones %}
+                                {% if phone != fra.principalPhone or allowed_to_edit_fra %}
+                                    <div class="col-lg-6">
+                                        {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_phone.html.twig', {'phone': phone}, with_context = false) }}
+                                        {% if allowed_to_edit_fra %}
+                                            <span class="edit-mode">
+                                                <a href="{{ path('asbo_whoswho_phone_update', {'slug': fra.slug, 'id': phone.id}) }}"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ path('asbo_whoswho_phone_delete', {'slug': fra.slug, 'id': phone.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                                <a href="{{ path('asbo_whoswho_phone_set_principal', {'slug': fra.slug, 'id': phone.id, 'token': csrf_token('phone_' ~ phone.id)}) }}"><i class="fa fa-phone"></i></a>
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% if allowed_to_edit_fra %}
+                                    <div class="col-lg-12">
+                                        Vous n'avez pas encore de numéro de téléphone ? <br />
+                                        Pensez à en <a href="{{ path('asbo_whoswho_phone_create', {'slug': fra.slug}) }}">ajouter</a> un de telle manière qu'on puisse vous contacter !
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                            </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if fra.addresses is not empty and fra.addresses.count != 1 or allowed_to_edit_fra %}
+                <div class="col-lg-12">
+                    <div class="panel{% if fra.addresses is empty or fra.principalAddress is empty %} panel-danger{% else %} panel-default{% endif %}">
+                        <div class="panel-heading">
+                            <strong>Adresses</strong>
+                            {% if allowed_to_edit_fra %}
+                                <a class="pull-right edit-mode" href="{{ path('asbo_whoswho_address_create', {'slug': fra.slug}) }}">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="panel-body">
+                        <div class="row">
+                            {% for address in fra.addresses %}
+
+                                {% if address != fra.principalAddress or allowed_to_edit_fra %}
+                                    <div class="col-lg-6">
+                                        {% embed "AsboWebBundle:Frontend/WhosWho/Fra/Partials:_address.html.twig" with { 'address': address, 'allowed_to_edit_fra': allowed_to_edit_fra, 'fra': fra } only %}
+
+                                            {% block address %}
+                                                {{ address.street }} {{ address.number }}<br />
+                                                {{ address.postcode }} {{ address.locality }}<br />
+                                                {{ address.country|country }}
+                                            {% endblock %}
+
+                                            {% block type %}
+                                                {{ parent() }}
+                                                {% if allowed_to_edit_fra %}
+                                                    <span class="edit-mode">
+                                                        <a href="{{ path('asbo_whoswho_address_update', {'slug': fra.slug, 'id': address.id}) }}"><i class="fa fa-edit"></i></a>
+                                                        <a href="{{ path('asbo_whoswho_address_delete', {'slug': fra.slug, 'id': address.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                                        <a href="{{ path('asbo_whoswho_address_set_principal',
+                                                        {'slug': fra.slug,
+                                                        'id': address.id,
+                                                        'token': csrf_token('address_' ~ address.id)}) }}"><i
+                                                                    class="fa fa-home"></i></a>
+                                                    </span>
+                                                {% endif %}
+                                            {% endblock %}
+
+                                        {% endembed %}
+
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% if allowed_to_edit_fra %}
+                                    <div class="col-lg-12">
+                                        Vous n'avez pas encore d'adresse ? <br />
+                                        Pensez à en <a href="{{ path('asbo_whoswho_address_create', {'slug': fra.slug}) }}">ajouter</a> une pour que nos courriers arrivent à destination !
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                            </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if fra.diplomas is not empty or allowed_to_edit_fra %}
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>Diplômes</strong>
+                            {% if allowed_to_edit_fra %}
+                                <a class="pull-right edit-mode" href="{{ path('asbo_whoswho_diploma_create', {'slug': fra.slug}) }}">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="panel-body">
+                        <div class="row">
+                            {% for diploma in fra.diplomas %}
+                                <div class="col-lg-12">
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_diploma.html.twig', {'diploma': diploma}, with_context = false) }}
+                                    {% if allowed_to_edit_fra %}
+                                        <span class="edit-mode">
+                                                <a href="{{ path('asbo_whoswho_diploma_update', {'slug': fra.slug, 'id': diploma.id}) }}"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ path('asbo_whoswho_diploma_delete', {'slug': fra.slug, 'id': diploma.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                            </span>
+                                    {% endif %}
+                                    {% if not loop.last %}
+                                    <hr />
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                {% if allowed_to_edit_fra %}
+                                    <div class="col-lg-12">
+                                        Vous n'avez pas encore de diplôme ? <br />
+                                        Si !? <a href="{{ path('asbo_whoswho_diploma_create', {'slug': fra.slug}) }}">Ajoutez</a> le dès maintenant !
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                            </div>
+                    </div>
+                </div>
+
+            {% endif %}
+
+            {% if fra.jobs is not empty or allowed_to_edit_fra %}
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>Jobs</strong>
+                            {% if allowed_to_edit_fra %}
+                                <a class="pull-right edit-mode" href="{{ path('asbo_whoswho_job_create', {'slug': fra.slug}) }}">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {% for job in fra.jobs  %}
+                                    {% embed "AsboWebBundle:Frontend/WhosWho/Fra/Partials:_job.html.twig" with { 'fra': fra, 'job': job, 'allowed_to_edit_fra': allowed_to_edit_fra } only %}
+
+                                        {% block company %}
+                                            {{ parent() }}
+                                            {% if allowed_to_edit_fra %}
+                                                <span class="edit-mode">
+                                                    <a href="{{ path('asbo_whoswho_job_update', {'slug': fra.slug, 'id': job.id}) }}"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{ path('asbo_whoswho_job_delete', {'slug': fra.slug, 'id': job.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                                </span>
+                                            {% endif %}
+                                            <br />
+                                        {% endblock %}
+
+                                    {% endembed %}
+                                    {% if loop.last == false %}
+                                        <hr />
+                                    {% endif %}
+                                {% else %}
+                                        Vous n'avez pas encore de boulot à votre actif ? <br />
+                                        Si ?! <a href="{{ path('asbo_whoswho_job_create', {'slug': fra.slug}) }}">Ajoutez</a> le dès maintenant !
+                                {% endfor %}
+                            </div>
+                        </div>
+                            </div>
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+    {# END OF LEFT PANEL #}
+
+    {# BEGIN OF RIGHT PANEL #}
+    <div class="col-lg-6 col-md-6">
+        <div class="row">
+
+            {% if fra.fraHasPosts is not empty or allowed_to_edit_fra %}
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>Postes ASBO</strong>
+                            {% if allowed_to_edit_fra %}
+                                <a class="pull-right edit-mode" href="{{ path('asbo_whoswho_frahaspost_create', {'slug': fra.slug}) }}">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="panel-body">
+                        <div class="row">
+                            {% set post_asbo = [] %}
+                            {% set post_civil = [] %}
+
+                            {% for post in fra.fraHasPosts %}
+                                {% if post.civilyear is not null %}
+                                    {% set post_civil = post_civil|merge([post]) %}
+                                {% else %}
+                                    {% set post_asbo = post_asbo|merge([post]) %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for post in post_asbo %}
+                                <div class="col-lg-12">
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_post.html.twig', {'post': post}, with_context = false) }}
+                                    {% if allowed_to_edit_fra %}
+                                        <span class="edit-mode">
+                                                <a href="{{ path('asbo_whoswho_frahaspost_update', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ path('asbo_whoswho_frahaspost_delete', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                            </span>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                            {% if post_asbo is not empty and post_civil is not empty %}
+                                <hr />
+                            {% endif %}
+
+                            {% for post in post_civil %}
+                                <div class="col-lg-12">
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_post.html.twig', {'post': post}, with_context = false) }}
+                                    {% if allowed_to_edit_fra %}
+                                        <span class="edit-mode">
+                                                <a href="{{ path('asbo_whoswho_frahaspost_update', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ path('asbo_whoswho_frahaspost_delete', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                            </span>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                                {% if allowed_to_edit_fra and fra.fraHasPosts is empty %}
+                                    <div class="col-lg-12">
+                                        Vous n'avez pas encore de poste à l'ASBO ? <br />
+                                        <a href="{{ path('asbo_whoswho_frahaspost_create', {'slug': fra.slug}) }}">Ajoutez</a> en si tel n'est pas le cas ! N'oublie pas que nos tyros doivent te connaitre de A à Z !
+                                    </div>
+                                {% endif %}
+                        </div>
+                            </div>
+                    </div>
+                </div>
+
+            {% endif %}
+
+            {% if fra.externalPosts is not empty or allowed_to_edit_fra %}
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>Postes extérieurs</strong>
+                            {% if allowed_to_edit_fra %}
+                                <a class="pull-right edit-mode" href="{{ path('asbo_whoswho_externalpost_create', {'slug': fra.slug}) }}">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="panel-body">
+                        <div class="row">
+                            {% for post in fra.externalPosts %}
+                                <div class="col-lg-12">
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_external.html.twig', {'post': post}, with_context = false) }}
+                                    {% if allowed_to_edit_fra %}
+                                        <span class="edit-mode">
+                                                <a href="{{ path('asbo_whoswho_externalpost_update', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ path('asbo_whoswho_externalpost_delete', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                            </span>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                {% if allowed_to_edit_fra %}
+                                    <div class="col-lg-12">
+                                        Vous ne vous êtes investi dans rien d'autre ? <br />
+                                        Si ?! <a href="{{ path('asbo_whoswho_phone_create', {'slug': fra.slug}) }}">Ajoutez</a> vos postes qu'ils soient d'une régionnal, d'un kap ou d'un cercle !
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                            </div>
+                    </div>
+                </div>
+
+            {% endif %}
+
+            {% if fra.ranks is not empty or allowed_to_edit_fra %}
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>Titre de guindaille (Prestige !)</strong>
+                            {% if allowed_to_edit_fra %}
+                                <a class="pull-right edit-mode" href="{{ path('asbo_whoswho_rank_create', {'slug': fra.slug}) }}">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="panel-body">
+                        <div class="row">
+                            {% for rank in fra.ranks %}
+                                <div class="col-lg-12">
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_rank.html.twig', {'rank': rank}, with_context = false) }}
+                                    {% if allowed_to_edit_fra %}
+                                        <span class="edit-mode">
+                                            <a href="{{ path('asbo_whoswho_rank_update', {'slug': fra.slug, 'id': rank.id}) }}"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ path('asbo_whoswho_rank_delete', {'slug': fra.slug, 'id': rank.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                {% if allowed_to_edit_fra %}
+                                    <div class="col-lg-12">
+                                        Vous n'avez pas encore de numéro de tire de guindaille ? <br />
+                                        Si ?! <a href="{{ path('asbo_whoswho_phone_create', {'slug': fra.slug}) }}">Ajoutez</a> vos prestigieux titres rapidement !
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                            </div>
+                    </div>
+                </div>
+
+            {% endif %}
+
+            {{ render(controller('asbo_quizz.controller.quizz:getQuizzesByFraAction', {'fra': fra, '_sylius': {'template': 'AsboWebBundle:Frontend/Quizz:list.html.twig'}})) }}
+
+        </div>
+    </div>
+    {# END OF RIGHT PANEL #}
+    </div>
+    {# END OF PERSONAL INFORMATIONS #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#edit-mode').click(function () {
+            $('.edit-mode').toggle('fast');
+        });
+    </script>
+{% endblock %}

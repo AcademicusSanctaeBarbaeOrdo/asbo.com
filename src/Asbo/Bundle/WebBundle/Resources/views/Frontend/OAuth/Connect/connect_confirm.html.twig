@@ -1,0 +1,25 @@
+{% extends 'HWIOAuthBundle::layout.html.twig' %}
+
+{% block hwi_oauth_content %}
+
+
+    {% if userInformation.profilePicture is defined and userInformation.profilePicture is not empty %}
+        <img class="profile-img img-circle" src="{{ userInformation.profilePicture }}" />
+    {% else %}
+        <i class="text-center profile-img fa fa-{{ service }}-square fa-4x"></i>
+    {% endif %}
+
+    <h1 class="text-center login-title">{{ 'header.connecting' | trans({}, 'HWIOAuthBundle')}}</h1>
+
+    <form action="{{ path('hwi_oauth_connect_service', {'service': service, 'key': key}) }}" {{ form_enctype(form) }} method="POST" class="form-signin">
+        <p class="text-center">
+            {{ 'connect.confirm.text' | trans({'%service%': service | trans({}, 'HWIOAuthBundle'), '%name%': userInformation.realName}, 'HWIOAuthBundle') }}
+        </p>
+        {{ form_widget(form) }}
+        <div>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'connect.confirm.submit' | trans({}, 'HWIOAuthBundle') }}</button>
+            <a class="btn btn-lg btn-danger btn-block" href="{{ path('fos_user_security_login') }}">{{ 'connect.confirm.cancel' | trans({}, 'HWIOAuthBundle') }}</a>
+        </div>
+    </form>
+{% endblock hwi_oauth_content %}

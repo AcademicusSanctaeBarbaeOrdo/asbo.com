@@ -1,0 +1,27 @@
+{#
+
+This file is part of the Asbo package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+
+    <div class="text-center" style="text-align: center">
+    {% if object.fra.principalImage %}
+        {% thumbnail object.fra.principalImage.image, 'admin' with {'width': 75, 'height': 60, 'style': ''} %}
+    {% else %}
+        {% if object.fra.gender == 'f' %}
+            <img src="{{ asset('assets/img/avatar_female.png')}}" width="75" height="60" />
+        {% else %}
+            <img src="{{ asset('assets/img/avatar_male.png')}}" width="75" height="60" />
+        {% endif %}
+    {% endif %}
+    </div>
+{% endblock %}

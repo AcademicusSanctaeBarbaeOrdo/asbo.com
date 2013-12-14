@@ -1,0 +1,7 @@
+{% extends 'HWIOAuthBundle::layout.html.twig' %}
+
+{% block hwi_oauth_content %}
+    <img class="profile-img" src="{{ asset('assets/img/blason.png') }}" alt="">
+    <h3 class="text-center">{{ 'header.success' | trans({'%name%': userInformation.realName}, 'HWIOAuthBundle') }}</h3>
+    <a href="{{ path('sonata_user_profile_show') }}" class="btn btn-block btn-success">Retourner à mon profil</a>
+{% endblock hwi_oauth_content %}

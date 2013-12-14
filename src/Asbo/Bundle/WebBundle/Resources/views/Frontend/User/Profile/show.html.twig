@@ -1,0 +1,62 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/User/Profile:layout.html.twig" %}
+
+
+{% block profile_content %}
+    <div class="well well-large">
+        <fieldset>
+            <legend>Comptes liés à votre compte sur le site</legend>
+            <ul class="list-unstyled">
+                <li>
+                    {% if user.gplusUid %}
+                        <strong>Google ID</strong>: {{ user.gplusUid }}
+                    {% else %}
+                        <a href="{{ hwi_oauth_login_url('google') }}">Lié ce compte à votre compte Google.</a>
+                    {% endif %}
+                </li>
+
+                <li>
+                    {% if user.facebookUid %}
+                    <strong>Facebook ID</strong>: {{ user.facebookUid }}
+                    {% else %}
+                        <a href="{{ hwi_oauth_login_url('facebook') }}">Lié ce compte à votre compte Facebook.</a>
+                    {% endif %}
+                </li>
+
+                <li>
+                    {% if user.githubId %}
+                    <strong>Github ID</strong>: {{ user.githubId }}
+                    {% else %}
+                        <a href="{{ hwi_oauth_login_url('github') }}">Lié ce compte à votre compte Github.</a>
+                    {% endif %}
+                </li>
+
+                <li>
+                    {% if user.linkedinId %}
+                        <strong>Linkedin ID</strong>: {{ user.linkedinId }}
+                    {% else %}
+                        <a href="{{ hwi_oauth_login_url('linkedin') }}">Lié ce compte à votre compte Linkedin.</a>
+                    {% endif %}
+                </li>
+
+                <li>
+                    {% if user.twitterUid %}
+                        <strong>Twitter ID</strong>: {{ user.twitterUid }}
+                    {% else %}
+                        <a href="{{ hwi_oauth_login_url('twitter') }}">Lié ce compte à votre compte Twitter.</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </fieldset>
+    </div>
+{% endblock %}

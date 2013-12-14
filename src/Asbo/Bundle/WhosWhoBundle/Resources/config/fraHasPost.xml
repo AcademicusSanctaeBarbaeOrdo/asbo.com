@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo_whoswho.controller.frahaspost.class">Asbo\Bundle\WhosWhoBundle\Controller\ResourceController</parameter>
+        <parameter key="asbo_whoswho.form.type.frahaspost.class">Asbo\Bundle\WhosWhoBundle\Form\Type\FraHasPostType</parameter>
+        <parameter key="asbo_whoswho.entity.frahaspost.class">Asbo\Bundle\WhosWhoBundle\Entity\FraHasPost</parameter>
+        <parameter key="asbo_whoswho.repository.frahaspost.class">Asbo\Bundle\WhosWhoBundle\Doctrine\FraHasPostRepository</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="asbo_whoswho.form.type.frahaspost" class="%asbo_whoswho.form.type.frahaspost.class%">
+            <argument>%asbo_whoswho.entity.frahaspost.class%</argument>
+            <tag name="form.type" alias="asbo_whoswho_frahaspost" />
+        </service>
+
+        <service id="asbo_whoswho.controller.frahaspost" class="%asbo_whoswho.controller.frahaspost.class%">
+            <argument>asbo_whoswho</argument>
+            <argument>frahaspost</argument>
+            <argument>AsboWhosWhoBundle:FraHasPost</argument>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="asbo_whoswho.manager.frahaspost" alias="doctrine.orm.entity_manager" />
+        <service id="asbo_whoswho.repository.frahaspost" class="%asbo_whoswho.repository.frahaspost.class%">
+            <argument type="service" id="asbo_whoswho.manager.frahaspost" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo_whoswho.entity.frahaspost.class%</argument>
+                </service>
+            </argument>
+        </service>
+
+    </services>
+</container>

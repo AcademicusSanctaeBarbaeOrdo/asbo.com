@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Événements passés...
+    </div>
+    <div class="panel-body">
+        {% if events is not empty %}
+            <ul class="list-unstyled">
+                {% for event in events %}
+                    <li>
+                        <a href="{{ path('asbo_event_show', {'id': event.id}) }}">{{ event }}</a>
+                        <br />
+                        <small>{{ event.startsAt|date('d-M-Y')|localizeddate('medium', 'none') }} @ {{ event.startsAt|date('H:i')|localizeddate('none', 'short') }} {{ event.location ? '- ' ~ event.location }}</small>
+                        <span class="badge pull-right">{{ event.eventHasFras.count }} vets</span>
+                        {% if asbo.fra is not null %}
+                            <br />
+                            {% set status = 'none' %}
+                            {% for eventHasFra in event.eventHasFras %}
+                                {% if eventHasFra.fra.id == asbo.fra.id %}
+                                    {% set status = eventHasFra.status %}
+                                {% endif %}
+                            {% endfor %}
+
+                                {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_JOIN') %}
+                                    <span class="label {{ status == 'none' ? 'label-success' : 'label-default' }}">Participer</span>
+                                {% endif %}
+
+                                {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_MAYBE') %}
+                                    <span class="label {{ status == 'none' ? 'label-success' : 'label-info' }}">Peut-être...</span>
+                                {% endif %}
+
+                                {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_DECLINE') %}
+                                    <span class="label {{ status == 'none' ? 'label-danger' : 'label-default' }}">Décliner</span>
+                                {% endif %}
+
+
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun événement passé.</p>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="asbo_whoswho.security.owner_voter.class">Asbo\Bundle\WhosWhoBundle\Security\OwnerVoter</parameter>
+        <parameter key="asbo_whoswho.twig.class">Asbo\Bundle\WhosWhoBundle\Twig\AsboWhosWhoExtension</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="asbo_whoswho.security.owner_voter" class="%asbo_whoswho.security.owner_voter.class%" public="false">
+            <tag name="security.voter" />
+        </service>
+
+        <service id="asbo_whoswho.twig" class="%asbo_whoswho.twig.class%">
+            <tag name="twig.extension" />
+        </service>
+
+    </services>
+</container>

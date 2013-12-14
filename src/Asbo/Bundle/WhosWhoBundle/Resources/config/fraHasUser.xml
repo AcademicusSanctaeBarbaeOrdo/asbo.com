@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asbo_whoswho.entity.frahasuser.class">Asbo\Bundle\WhosWhoBundle\Entity\FraHasUser</parameter>
+        <parameter key="asbo_whoswho.repository.frahasuser.class">Asbo\Bundle\WhosWhoBundle\Doctrine\EntityRepository</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="asbo_whoswho.manager.frahasuser" alias="doctrine.orm.entity_manager" />
+        <service id="asbo_whoswho.repository.frahasuser" class="%asbo_whoswho.repository.frahasuser.class%">
+            <argument type="service" id="asbo_whoswho.manager.frahasuser" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>%asbo_whoswho.entity.frahasuser.class%</argument>
+                </service>
+            </argument>
+        </service>
+    </services>
+</container>

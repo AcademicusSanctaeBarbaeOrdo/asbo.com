@@ -1,0 +1,29 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/Event:layout.html.twig' %}
+
+{% block title %}
+    Créer un événement | {{ parent() }}
+{% endblock %}
+
+{% block headline %}
+    Créer un événement
+{% endblock headline %}
+
+{% block asbo_event_content %}
+    {{ form_errors(form) }}
+
+    <form action="{{ path('asbo_event_create') }}" method="post" novalidate="true">
+        {{ form_rest(form) }}
+        <input type="submit" class="btn btn-success" value="Ajouter" />
+    </form>
+{% endblock %}

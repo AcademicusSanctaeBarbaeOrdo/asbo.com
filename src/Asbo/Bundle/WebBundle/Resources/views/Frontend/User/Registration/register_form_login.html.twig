@@ -1,0 +1,39 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" role="form">
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            {{ form_row(form.email) }}
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+
+            {{ form_row(form.plainPassword.first) }}
+            {{ form_row(form.plainPassword.second) }}
+        </div>
+
+        <div class="col-lg-4 col-md-6" style="margin-top: 10px">
+            {{ form_widget(form.captcha) }}
+        </div>
+
+        <div class="col-lg-8 col-md-6">
+            {{ form_widget(form.condition, {'label': "J'ai lu et j'accepte les conditions d'utilisation"}) }}
+        </div>
+        {{ form_rest(form) }}
+
+        <div class="col-lg-8 col-md-6">
+            <hr />
+            <input type="submit" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-small" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" formnovalidate="formnovalidate"/>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,26 @@
+sonata_news:
+    title:        %asbo_frontend_title%
+    link:         %asbo_frontend_domain%
+    description:  %asbo_frontend_description%
+    salt:         %secret%
+    permalink_generator: sonata.news.permalink.date # sonata.news.permalink.category
+
+    comment:
+        notification:
+            emails:   %asbo_emails_notification%
+            from:     %asbo_email_reply%
+
+    class:
+        post:       Asbo\Bundle\CoreBundle\Entity\Post
+        comment:    Asbo\Bundle\CoreBundle\Entity\Comment
+        user:       Asbo\Bundle\CoreBundle\Entity\User
+        tag:        Asbo\Bundle\CoreBundle\Entity\Tag
+        collection: Asbo\Bundle\CoreBundle\Entity\Collection
+        media:      Asbo\Bundle\CoreBundle\Entity\Media
+
+sonata_classification:
+    class:
+        tag:        Asbo\Bundle\CoreBundle\Entity\Tag
+        media:      Asbo\Bundle\CoreBundle\Entity\Media
+        category:   Asbo\Bundle\CoreBundle\Entity\Category
+        collection: Asbo\Bundle\CoreBundle\Entity\Collection

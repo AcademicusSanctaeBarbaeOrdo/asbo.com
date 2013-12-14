@@ -1,0 +1,99 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend/WhosWho:layout.html.twig' %}
+
+{% block title %} {{ block('headline') }}| {{ address.fra }} | {{ parent() }} {% endblock %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous"><a href="{{ path('asbo_whoswho_fra_show', {'slug': address.fra.slug}) }}">&larr; Retourner au profil de {{ address.fra }}</a></li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+{% block headline 'Modifier une adresse' %}
+
+{% block asbo_whoswho_content %}
+
+{% if form.vars.errors is not empty%}
+    <div class="alert alert-error">
+        {{ form_errors(form) }}
+    </div>
+{% endif %}
+    <div class="col-lg-6">
+        <form novalidate action="{{ path('asbo_whoswho_address_update', {'slug': address.fra.slug, 'id': address.id}) }}" {{ form_enctype(form) }} method="POST">
+            {% include 'AsboWebBundle:Frontend/WhosWho/Fra/Address:_form.html.twig' %}
+            <input type="submit" value="Modifier une adresse" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+        </form>
+    </div>
+    <div class="col-lg-6">
+        <div id="asbo_whoswho_address_map" class="google-map-canvas"></div>
+    </div>
+
+{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+        {% javascripts output='assets/compiled/jquery.ui.addresspicker.js'
+        '@AsboWebBundle/Resources/assets/js/jquery.ui.addresspicker.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        <script>
+            $(function() {
+                var addresspickerMap = $( "#asbo_whoswho_address_address" ).addresspicker({
+                    regionBias: "BE",
+                    updateCallback: function (geocodeResult, parseGeocodeResult) {
+
+                        var children = $('#{{ form.vars.id }} input[type="text"]');
+                        for (var i = 0; i < children.length; i++) {
+                            var child = children[i];
+                            if (child.value == 'false') {
+                                child.value = null;
+                            }
+                        }
+                        return false;
+
+                    },
+                    mapOptions: {
+                        zoom: 20,
+                        center: new google.maps.LatLng(50.66814620218402, 4.617603509400965),
+                        mapTypeId: google.maps.MapTypeId.HYBRID
+                    },
+                    autocomplete: 'bootstrap',
+                    elements: {
+                        map:      "#{{ form.vars.id }}_map",
+                        lat:      "#{{ form.lat.vars.id }}",
+                        lng:      "#{{ form.lng.vars.id }}",
+                        street_number: '#{{ form.number.vars.id }}',
+                        route: '#{{ form.street.vars.id }}',
+                        locality: '#{{ form.locality.vars.id }}',
+                        administrative_area_level_2: '#{{ form.state.vars.id }}',
+                        administrative_area_level_1: '#{{ form.district.vars.id }}',
+                        country:  '#{{ form.country.vars.id }}',
+                        postal_code: '#{{ form.postcode.vars.id }}'
+                    }
+                });
+
+                var gmarker = addresspickerMap.addresspicker( "marker");
+                gmarker.setVisible(true);
+                addresspickerMap.addresspicker( "updatePosition");
+
+            });
+        </script>
+    {% endblock %}

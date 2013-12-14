@@ -1,0 +1,71 @@
+asbo_event_upcoming:
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    AsboWebBundle:Frontend/Event/Event:dashboard.html.twig
+        private:     false
+
+asbo_event_subscribe_join:
+    pattern: /{id}/subscribe/{token}/join
+    methods: [GET, PUT]
+    requirements:
+        id: \d+
+    defaults:
+        status: join
+        _controller: asbo.controller.event:subscribeAction
+        _sylius:
+            redirect: asbo_event_show
+
+asbo_event_subscribe_maybe:
+    pattern: /{id}/subscribe/{token}/maybe
+    methods: [GET, PUT]
+    requirements:
+        id: \d+
+    defaults:
+        status: maybe
+        _controller: asbo.controller.event:subscribeAction
+        _sylius:
+            redirect: asbo_event_show
+
+asbo_event_subscribe_decline:
+    pattern: /{id}/subscribe/{token}/decline
+    methods: [GET, PUT]
+    requirements:
+        id: \d+
+    defaults:
+        status: decline
+        _controller: asbo.controller.event:subscribeAction
+        _sylius:
+            redirect: asbo_event_show
+
+asbo_event_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    requirements:
+        id: \d+
+    defaults:
+        _controller: asbo.controller.event:deleteAction
+        _sylius:
+            redirect: asbo_event_index
+
+asbo_event_show:
+    requirements:
+        id: \d+
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: asbo.controller.event:showAction
+        _sylius:
+            template: AsboWebBundle:Frontend/Event/Event:show.html.twig
+
+asbo_event_fullcalendar:
+    pattern: /fullcalendar.{_format}
+    methods: [GET]
+    defaults:
+        _controller: asbo.controller.event:indexAction
+        _format: xml
+        _sylius:
+            paginate: false
+            limit: null
+            criteria:
+                active: true

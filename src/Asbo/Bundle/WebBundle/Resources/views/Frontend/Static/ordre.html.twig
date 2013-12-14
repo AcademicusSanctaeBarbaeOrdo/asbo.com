@@ -1,0 +1,51 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AsboWebBundle:Frontend:layout.html.twig' %}
+
+{% block title 'L\'ordre' %}
+
+{% block headline "L'Ordre Académique de Sainte-Barbe" %}
+
+{% set menu = menu|default(false) %}
+
+{% block content_content %}
+
+    <p>L’Academicus Sanctae Barbae Ordo, Ordre Académique de Sainte Barbe, est une corporation d’étudiants et d’anciens étudiants d’ingénieurs civils de l’Université Catholique de Louvain.</p>
+    <p>Un Ordre est une association estudiantine dont les principes en vigueur sont notamment : l’appartenance à vie, l’amitié et l’esprit de corps, des critères d’admission stricts, la pratique et la défense d’un folklore et l’organisation structurée par un règlement appelé Codex.<br />
+    L’intitulé Académique signifie que les membres de l’Ordre sont des étudiants ou anciens étudiant de l’UCL.</p>
+    <p>Sainte-Barbe, fêtée le 4 décembre, est la sainte patronne des ingénieurs civils.</p>
+
+    <h2>Historique</h2>
+    <p>
+        L’ASBO fut fondé le 15 avril 1987 par Roald Sieberath, Philippe Schiltz et Stéphane Sohier à Bruxelles.<br/>
+        L’ASBO a également contribué à réinstauré les corona.
+    </p>
+
+    <h2>Objectifs</h2>
+    <p>
+        Les buts de l’Ordre sont notamment :
+        <ul class="list-unstyled">
+            <li>Garantir la pérennité d’un folklore par delà les générations, les déviations, les concessions</li>
+            <li>Veiller à la formation humaine et générale de ses membres, afin qu’un passage à l’Université soit réellement quelque chose de plus universel qu’un simple assimilation de cours techniques</li>
+            <li>Tisser des liens de connaissance, d’amitié, de solidarité et d’entraide entre les membres, que ceux-ci soient étudiants ou anciens</li>
+            <li>Promouvoir un but social et philanthropique, impliquant le service désintéressé des membres.</li>
+        </ul>
+        <p>En suivant ces objectifs, l’ASBO a réalisé notamment le Bitu Magnifique, petit chansonnier comprenant la majorité des chants estudiantins. L’ASBO organise chaque quadrimestre une journée appelée ASBOeuvre dans la salle d’animation Cercle Industriel. Là-bas une vente de petite restauration et de boissons diverses est organisée et tous les bénéfices de cette journée sont versés à une œuvre caritative.</p>
+
+    <h2>Particularités</h2>
+    <p>Les couleurs de l’ASBO sont le bleu, le noir et l’argent que l’on peut retrouver sur le blason de l’Ordre.</p>
+    <p>Article 9 du Codex Constituens: Le blason de l’ordre est un écu écartelé au premier quadrant de l’emblème de l’Ordre, au deuxième quadrant du monogramme de l’Ordre, sur le troisième quadrant se trouve le symbole inversé de la Bibliothèque des Sciences et des Technologies et au quatrième quadrant la tour de St Barbe y est représentée.</p>
+
+
+    <p>L’emblème de l’Ordre estun compas entrecroisé avec un marteau et un fourquet,<br />
+    Le monograme de l’ASBO entrelace les lettres S.V.C.F.S.B. acronyme de Ut Semper Vivat, Crescat et Floreat Academicus Sanctae Barbae Ordo.</p>
+{% endblock %}

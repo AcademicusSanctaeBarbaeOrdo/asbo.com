@@ -1,0 +1,7 @@
+security:
+    login:
+        email: Adresse e-mail:
+
+form:
+    email_confirmation: Confirmation de l'adresse e-mail:
+    password_confirmation: Confirmation du mot de passe:
