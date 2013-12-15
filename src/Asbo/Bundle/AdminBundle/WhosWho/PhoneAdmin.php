@@ -18,13 +18,12 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Asbo\Bundle\WhosWhoBundle\Model\Types\PhoneTypes;
 
 /**
- * Phone admin for SonataAdminBundle
+ * Phone admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
 class PhoneAdmin extends Admin
 {
-
     /**
      * {@inheritdoc}
      */

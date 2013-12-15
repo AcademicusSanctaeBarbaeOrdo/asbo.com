@@ -19,7 +19,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Asbo\Bundle\WhosWhoBundle\Model\Types\AddressTypes;
 
 /**
- * Address admin for SonataAdminBundle
+ * Address admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */

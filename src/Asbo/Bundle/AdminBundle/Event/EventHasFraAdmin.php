@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**
- * EventHasFra admin for SonataAdminBundle
+ * EventHasFra admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */

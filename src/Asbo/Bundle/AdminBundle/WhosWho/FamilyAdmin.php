@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Asbo\Bundle\WhosWhoBundle\Entity\Family;
 
 /**
- * Family admin for SonataAdminBundle
+ * Family admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */

@@ -17,7 +17,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**
- * Quizz admin for SonataAdminBundle
+ * Quizz admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */

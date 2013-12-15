@@ -16,9 +16,13 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
+/**
+ * FraHasUser admin for SonataAdminBundle.
+ *
+ * @author De Ron Malian <deronmalian@gmail.com>
+ */
 class FraHasUserAdmin extends Admin
 {
-
     /**
      * {@inheritdoc}
      */

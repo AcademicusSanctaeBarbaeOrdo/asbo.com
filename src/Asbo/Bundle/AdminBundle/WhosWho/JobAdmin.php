@@ -17,13 +17,12 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**
- * Job admin for SonataAdminBundle
+ * Job admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
 class JobAdmin extends Admin
 {
-
     /**
      * {@inheritdoc}
      */

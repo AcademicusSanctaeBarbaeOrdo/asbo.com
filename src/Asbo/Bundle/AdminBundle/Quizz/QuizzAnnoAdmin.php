@@ -17,7 +17,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**
- * Quizz admin for SonataAdminBundle
+ * QuizzAnno admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
@@ -31,25 +31,25 @@ class QuizzAnnoAdmin extends Admin
         $weighting = range(10, 100, 10);
 
         $formMapper
-                ->add('quizz', 'sonata_type_model_list')
-                ->add('anno', 'asbo_whoswho_anno')
-                ->add('weighting', 'choice',
-                    [
-                        'choices' => array_combine($weighting, $weighting),
-                    ]
-                )
-                ->add('date', 'date')
-                ->add('quizzAnnoHasFras', 'sonata_type_collection',
-                        [
-                            'cascade_validation' => true,
-                            'by_reference' => false,
-                        ],
-                        [
-                            'edit' => 'inline',
-                            'inline' => 'table',
-                            'admin_code' => 'asbo.quizz.admin.quizz_anno_has_fra',
-                        ]
-                )
+            ->add('quizz', 'sonata_type_model_list')
+            ->add('anno', 'asbo_whoswho_anno')
+            ->add('weighting', 'choice',
+                [
+                    'choices' => array_combine($weighting, $weighting),
+                ]
+            )
+            ->add('date', 'date')
+            ->add('quizzAnnoHasFras', 'sonata_type_collection',
+                [
+                    'cascade_validation' => true,
+                    'by_reference' => false,
+                ],
+                [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'admin_code' => 'asbo.quizz.admin.quizz_anno_has_fra',
+                ]
+            )
         ;
     }
 
@@ -100,5 +100,4 @@ class QuizzAnnoAdmin extends Admin
     {
         $object->setQuizzAnnoHasFras($object->getQuizzAnnoHasFras());
     }
-
 }
