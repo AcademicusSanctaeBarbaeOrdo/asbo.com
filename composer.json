@@ -49,7 +49,7 @@
         "sonata-project/classification-bundle": "@dev",
 
         "sylius/resource-bundle": "*",
-        "knplabs/knp-time-bundle": "1.*@dev",
+        "knplabs/knp-time-bundle": "1.*",
         "mopa/bootstrap-bundle": "dev-master",
         "stephpy/TimelineBundle": "dev-master@dev",
         "stephpy/timeline": "dev-master@dev"

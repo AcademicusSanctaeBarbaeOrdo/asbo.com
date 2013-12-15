@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "1bf52a77b9c44b81d8eb0508de01bac6",
+    "hash": "f922d65dcb692f51bf60d7ae28fa43d9",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -5670,7 +5670,6 @@
         "sonata-project/formatter-bundle": 20,
         "sonata-project/news-bundle": 20,
         "sonata-project/classification-bundle": 20,
-        "knplabs/knp-time-bundle": 20,
         "mopa/bootstrap-bundle": 20,
         "stephpy/timelinebundle": 20,
         "stephpy/timeline": 20,
