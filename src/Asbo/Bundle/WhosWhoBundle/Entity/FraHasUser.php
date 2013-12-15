@@ -228,7 +228,7 @@ class FraHasUser implements FraResourceInterface
     /**
      * Method called when a entity is persist.
      *
-     * @ORM\prePersist
+     * @ORM\PrePersist
      */
     public function prePersist()
     {
@@ -239,7 +239,7 @@ class FraHasUser implements FraResourceInterface
     /**
      * Method called when a entity is updated.
      *
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function preUpdate()
     {
