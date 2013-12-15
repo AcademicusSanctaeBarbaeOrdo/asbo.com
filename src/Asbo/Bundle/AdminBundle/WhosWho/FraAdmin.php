@@ -334,6 +334,7 @@ class FraAdmin extends Admin
      */
     public function getNewInstance()
     {
+        /** @var Fra $fra */
         $fra = parent::getNewInstance()
             ->setAnno(AnnoManipulator::getCurrentAnno())
         ;
