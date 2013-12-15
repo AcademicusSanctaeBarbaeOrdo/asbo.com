@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
     <mapped-superclass name="Asbo\Bundle\EventBundle\Model\Calendar" table="asbo_event_calendar">
-        <id name="id" type="integer">
+        <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
 

@@ -15,7 +15,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Asbo\Bundle\EventBundle\Model\Event" table="asbo__event_event">
-        <id name="id" type="integer">
+        <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
 
