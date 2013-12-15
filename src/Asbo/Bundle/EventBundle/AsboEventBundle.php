@@ -52,7 +52,7 @@ class AsboEventBundle extends Bundle
         );
 
         $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Asbo\Bundle\EventBundle\Model',
+            sprintf('%s/Resources/config/doctrine/model', $this->getPath()) => 'Asbo\Bundle\EventBundle\Model',
         );
 
         $container->addCompilerPass(
