@@ -27,6 +27,15 @@ use Asbo\Bundle\EventBundle\Model\EventInterface;
 class Event extends BaseEvent implements EventInterface
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
      * EventHasFras.
      *
      * @var EventHasFra[]
