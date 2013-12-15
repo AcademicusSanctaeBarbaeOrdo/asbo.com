@@ -15,6 +15,11 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\UserBundle\Admin\Entity\UserAdmin as BaseUserAdmin;
 
+/**
+ * User admin for SonataAdminBundle.
+ *
+ * @author De Ron Malian <deronmalian@gmail.com>
+ */
 class UserAdmin extends BaseUserAdmin
 {
     /**
@@ -72,5 +77,4 @@ class UserAdmin extends BaseUserAdmin
             ->end()
         ;
     }
-
 }

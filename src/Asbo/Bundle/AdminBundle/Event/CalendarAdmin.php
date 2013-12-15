@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
 /**
- * Calendar admin for SonataAdminBundle
+ * Calendar admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
@@ -56,21 +56,16 @@ class CalendarAdmin extends Admin
         }
 
         $admin = $this->isChild() ? $this->getParent() : $this;
-
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
             'Éditer',
-            [
-                'uri' => $admin->generateUrl('edit', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         $menu->addChild(
             'Événements',
-            [
-                'uri' => $admin->generateUrl('asbo.event.admin.event.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.event.admin.event.list', ['id' => $id])]
         );
     }
 }

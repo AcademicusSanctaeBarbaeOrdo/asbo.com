@@ -24,7 +24,7 @@ use Asbo\Bundle\WhosWhoBundle\Util\AnnoManipulator;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
 /**
- * Fra admin for SonataAdminBundle
+ * Fra admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
@@ -103,9 +103,7 @@ class FraAdmin extends Admin
                     ]
                 )
             ->end()
-
         ;
-
     }
 
     /**
@@ -239,97 +237,75 @@ class FraAdmin extends Admin
         }
 
         $admin = $this->isChild() ? $this->getParent() : $this;
-
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
             'Voir/Editer',
-            [
-                'uri' => $admin->generateUrl('edit', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         $menu->addChild(
             'Utilisateurs liés',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.fra_has_user.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.fra_has_user.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Emails',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.email.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.email.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Téléphones',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.phone.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.phone.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Postes ASBO',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.fra_has_post.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.fra_has_post.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Adresses',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.address.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.address.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Diplomes & Etudes',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.diploma.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.diploma.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Jobs',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.job.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.job.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Famille',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.family.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.family.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Titre de guindaille',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.rank.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.rank.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Postes Extérieurs',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.externalpost.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.externalpost.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Photos',
-            [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.fra_has_image.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.whoswho.admin.fra_has_image.list', ['id' => $id])]
         );
 
         $menu->addChild(
             'Paramètres',
             [
-                'uri' => $admin->generateUrl('asbo.whoswho.admin.settings.edit', ['id' => $id, 'childId' => $admin->getSubject()->getSettings()->getId()])
+                'uri' => $admin->generateUrl(
+                        'asbo.whoswho.admin.settings.edit',
+                        ['id' => $id, 'childId' => $admin->getSubject()->getSettings()->getId()]
+                    )
             ]
         );
     }
@@ -354,20 +330,6 @@ class FraAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function preUpdate($entity)
-    {
-        // Si l'entité n'est pas déclarée comme un enfant direct
-        // il faut décomenter cette ligne pour autoriser la liaison
-        // @see bug in SonataMediaBundle\Admin\GalleryAdmin.php
-
-        // $entity->setFraHasUsers($entity->getFraHasUsers());
-        foreach ($entity->getFraHasUsers() as $relation) {
-            $relation->preUpdate();
-        }
-    }
-    /**
      * {@inheritdoc}
      */
     public function getNewInstance()
@@ -378,5 +340,4 @@ class FraAdmin extends Admin
 
         return $fra;
     }
-
 }

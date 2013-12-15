@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Asbo\Bundle\WhosWhoBundle\Model\Types\PostTypes;
 
 /**
- * Post admin for SonataAdminBundle
+ * Post admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */

@@ -20,7 +20,7 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- * Calendar admin for SonataAdminBundle
+ * Event admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
@@ -134,28 +134,21 @@ class EventAdmin extends Admin
         }
 
         $admin = $this->isChild() ? $this->getParent() : $this;
-
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
             'Voir',
-            [
-                'uri' => $admin->generateUrl('show', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('show', ['id' => $id])]
         );
 
         $menu->addChild(
             'Éditer',
-            [
-                'uri' => $admin->generateUrl('edit', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         $menu->addChild(
             'Fras',
-            [
-                'uri' => $admin->generateUrl('asbo.event.admin.event_has_fra.list', ['id' => $id])
-            ]
+            ['uri' => $admin->generateUrl('asbo.event.admin.event_has_fra.list', ['id' => $id])]
         );
     }
 
@@ -182,6 +175,7 @@ class EventAdmin extends Admin
      */
     private function updateEventHasFras($object)
     {
+        // @see bug in SonataMediaBundle\Admin\GalleryAdmin.php
         $object->setEventHasFras(iterator_to_array($object->getEventHasFras()->getIterator()));
     }
 }

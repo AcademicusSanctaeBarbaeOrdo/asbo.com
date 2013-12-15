@@ -17,13 +17,12 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**
- * Rank admin for SonataAdminBundle
+ * Rank admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
 class RankAdmin extends Admin
 {
-
     /**
      * {@inheritdoc}
      */

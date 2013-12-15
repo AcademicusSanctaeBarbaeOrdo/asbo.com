@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Asbo\Bundle\WhosWhoBundle\Model\Types\EmailTypes;
 
 /**
- * Email admin for SonataAdminBundle
+ * Email admin for SonataAdminBundle.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
@@ -84,6 +84,5 @@ class EmailAdmin extends Admin
         if (!$this->isChild()) {
             $listMapper->add('fra', 'sonata_type_model_list');
         }
-
     }
 }
