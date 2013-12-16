@@ -18,6 +18,7 @@ use FOS\MessageBundle\Entity\Thread as BaseThread;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\MessageBundle\Model\MessageInterface;
 use FOS\MessageBundle\Model\ThreadMetadata as ModelThreadMetadata;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Represent a Thread entity
@@ -88,7 +89,7 @@ class Thread extends BaseThread
         return $participants;
     }
 
-    public function getAllParticipantsWithoutUser($user)
+    public function getAllParticipantsWithoutUser(UserInterface $user)
     {
         $participants = $this->getAllParticipants();
 
