@@ -21,7 +21,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
- * @method \Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface findOr404
+ * @method \Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface findOr404()
+ * @method \Sylius\Bundle\ResourceBundle\Event\ResourceEvent delete()
  */
 class ResourceController extends Controller
 {
@@ -49,13 +50,12 @@ class ResourceController extends Controller
     }
 
     /**
-     * We overide the parent fonction to add one step to delete the resource.
-     *
      * {@inheritdoc}
      */
     public function deleteAction(Request $request)
     {
         $resource = $this->findOr404();
+        $configuration = $this->getConfiguration();
 
         if (!$this->getFraAclManager()->canEdit($resource->getFra())) {
             throw new AccessDeniedException(
@@ -78,20 +78,18 @@ class ResourceController extends Controller
 
             $this->setFlash('success', 'delete');
 
-            $config = $this->getConfiguration();
-
             return $this->redirectToRoute(
-                $config->getRedirectRoute('index'),
-                $config->getRedirectParameters()
+                $configuration->getRedirectRoute('index'),
+                $configuration->getRedirectParameters()
             );
         }
 
         $view = $this
             ->view()
-            ->setTemplate($this->getConfiguration()->getTemplate('delete.html'))
+            ->setTemplate($configuration->getTemplate('delete.html'))
             ->setData(
                 [
-                    $this->getConfiguration()->getResourceName() => $resource,
+                    $configuration->getResourceName() => $resource,
                     'form' => $form->createView()
                 ]
             )

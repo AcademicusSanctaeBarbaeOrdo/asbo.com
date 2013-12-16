@@ -12,6 +12,7 @@
 namespace Asbo\Bundle\WhosWhoBundle\Controller;
 
 use Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface;
+use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController as BaseResourceController;
@@ -20,6 +21,8 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController as BaseResourceCo
  * Base controller for whoswho system controllers.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
+ *
+ * @method \Sylius\Bundle\ResourceBundle\Event\ResourceEvent update()
  */
 abstract class Controller extends BaseResourceController
 {
@@ -30,7 +33,7 @@ abstract class Controller extends BaseResourceController
     {
         if (!$this->getFraAclManager()->canList()) {
             throw new AccessDeniedException(
-                sprintf('You cannot show a list of %s', $this->getConfiguration()->getPluralResourceName())
+                sprintf('You cannot show a list of %s.', $this->getConfiguration()->getPluralResourceName())
             );
         }
 
@@ -43,24 +46,21 @@ abstract class Controller extends BaseResourceController
     public function updateAction(Request $request)
     {
         $config = $this->getConfiguration();
-
         $resource = $this->findOr404();
-        $fra = $resource;
 
-        if ($resource instanceof FraResourceInterface) {
-            $fra = $resource->getFra();
-        }
-
-        if (!$this->getFraAclManager()->canEdit($fra)) {
+        if (!$this->getFraAclManager()->canEdit(
+            $resource instanceof FraResourceInterface ? $resource->getFra() : $resource
+        )) {
             throw new AccessDeniedException(
-                sprintf('You cannot update %s "#%d"', $this->getConfiguration()->getResourceName(), $resource->getId())
+                sprintf('You cannot update %s "#%d".', $this->getConfiguration()->getResourceName(), $resource->getId())
             );
         }
 
         $form = $this->getForm($resource);
 
-        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->bind($request)->isValid()) {
+        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->submit($request)->isValid()) {
             $event = $this->update($resource);
+
             if (!$event->isStopped()) {
                 $this->setFlash('success', 'update');
 

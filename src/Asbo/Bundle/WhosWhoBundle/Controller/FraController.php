@@ -23,6 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author De Ron Malian <deronmalian@gmail.com>
  *
  * @method \Asbo\Bundle\WhosWhoBundle\Doctrine\FraRepository getRepository()
+ * @method \Asbo\Bundle\WhosWhoBundle\Entity\Fra findOr404()
  */
 class FraController extends Controller
 {
