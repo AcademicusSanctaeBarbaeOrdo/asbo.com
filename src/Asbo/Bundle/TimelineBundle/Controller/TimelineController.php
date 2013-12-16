@@ -21,32 +21,26 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class TimelineController extends FOSRestController
 {
+    /**
+     * Return a timeline of current Fra.
+     */
     public function timelineAction(Request $request)
     {
-        $slug = $request->get('subject');
-
         $fra = $this
             ->getFraController()
-            ->getRepository()
-            ->findOneBy(['slug' => $slug]);
+            ->findOr404()
+        ;
 
-        if (!$fra) {
-            return $this->createNotFoundException(
-                sprintf('The fra with "%s" slug was not found.', $slug)
-            );
-        }
-
-        $actionManager   = $this->get('spy_timeline.action_manager');
-        $timelineManager = $this->get('spy_timeline.timeline_manager');
-        $subject         = $actionManager->findOrCreateComponent($fra);
-        $timeline        = $timelineManager->getTimeline($subject);
+        $subject = $this->getActionManager()->findOrCreateComponent($fra);
+        $timeline = $this->getTimelineManager()->getTimeline($subject);
+        $config = $this->getFraController()->getConfiguration();
 
         $view = $this
             ->view()
-            ->setTemplate($this->getFraController()->getConfiguration()->getTemplate('timeline.html'))
+            ->setTemplate($config->getTemplate('timeline.html'))
             ->setData(
                 [
-                    $this->getFraController()->getConfiguration()->getResourceName() => $fra,
+                    $config->getResourceName() => $fra,
                     'timeline' => $timeline
                 ]
             )
@@ -58,8 +52,24 @@ class TimelineController extends FOSRestController
     /**
      * @return \Asbo\Bundle\WhosWhoBundle\Controller\FraController
      */
-    public function getFraController()
+    protected function getFraController()
     {
         return $this->get('asbo_whoswho.controller.fra');
+    }
+
+    /**
+     * @return \Spy\Timeline\Driver\ActionManagerInterface
+     */
+    protected function getActionManager()
+    {
+        return $this->get('spy_timeline.action_manager');
+    }
+
+    /**
+     * @return \Spy\Timeline\Driver\TimelineManagerInterface
+     */
+    protected function getTimelineManager()
+    {
+        return $this->get('spy_timeline.timeline_manager');
     }
 }
