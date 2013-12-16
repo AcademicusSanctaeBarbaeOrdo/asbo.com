@@ -11,41 +11,32 @@
 
 namespace Asbo\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Bundle\DoctrineBundle\Registry as Doctrine;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
- * Logout listener
+ * Logout listener.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  */
 class LogoutListener implements LogoutHandlerInterface
 {
     /**
-     * @var \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
-     */
-    protected $doctrine;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session $session
+     * @var Session
      */
     protected $session;
 
     /**
-     * @var \Symfony\Component\Security\Core\SecurityContext $context
+     * Constructor.
+     *
+     * @param Session $session
      */
-    protected $context;
-
-    public function __construct(Doctrine $doctrine, Session $session, SecurityContext $context)
+    public function __construct(Session $session)
     {
-        $this->doctrine  = $doctrine;
-        $this->session   = $session;
-        $this->context   = $context;
+        $this->session = $session;
     }
 
     /**
@@ -53,6 +44,18 @@ class LogoutListener implements LogoutHandlerInterface
      */
     public function logout(Request $request, Response $response, TokenInterface $token)
     {
-        $this->session->getFlashBag()->add('success', 'Vous êtes bien déconnecté ! Au revoir !');
+        $this->session->getFlashBag()->add('success', $this->getFlashMessage($token));
+    }
+
+    /**
+     * Return the formated flash message.
+     *
+     * @param TokenInterface $token
+     *
+     * @return string
+     */
+    protected function getFlashMessage(TokenInterface $token)
+    {
+        return sprintf('Au revoir %s !', $token->getUser()->getFullname());
     }
 }
