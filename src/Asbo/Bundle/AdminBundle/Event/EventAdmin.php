@@ -169,13 +169,12 @@ class EventAdmin extends Admin
     }
 
     /**
-     * @param mixed $object
+     * @see bug in SonataMediaBundle\Admin\GalleryAdmin.php
      *
-     * @return mixed
+     * @param Event $object
      */
     private function updateEventHasFras(Event $object)
     {
-        // @see bug in SonataMediaBundle\Admin\GalleryAdmin.php
         $object->setEventHasFras(iterator_to_array($object->getEventHasFras()->getIterator()));
     }
 }

@@ -11,6 +11,7 @@
 
 namespace Asbo\Bundle\AdminBundle\Quizz;
 
+use Asbo\Bundle\QuizzBundle\Entity\QuizzAnno;
 use Asbo\Bundle\WhosWhoBundle\Util\AnnoManipulator;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -90,13 +91,23 @@ class QuizzAnnoAdmin extends Admin
      */
     public function preUpdate($object)
     {
-        $object->setQuizzAnnoHasFras($object->getQuizzAnnoHasFras());
+        $this->updateQuizzAnnoHasFras($object);
     }
 
     /**
      * {@inheritdoc}
      */
     public function prePersist($object)
+    {
+        $this->updateQuizzAnnoHasFras($object);
+    }
+
+    /**
+     * @see bug in SonataMediaBundle\Admin\GalleryAdmin.php
+     *
+     * @param QuizzAnno $object
+     */
+    private function updateQuizzAnnoHasFras(QuizzAnno $object)
     {
         $object->setQuizzAnnoHasFras($object->getQuizzAnnoHasFras());
     }
