@@ -51,16 +51,12 @@
 
         "sylius/resource-bundle": "*",
         "knplabs/knp-time-bundle": "1.*",
-        "mopa/bootstrap-bundle": "dev-master",
-        "stephpy/TimelineBundle": "dev-master@dev",
-        "stephpy/timeline": "dev-master@dev"
+        "stephpy/timeline": "dev-master@dev",
+        "stephpy/TimelineBundle": "dev-master@dev"
     },
     "require-dev": {
         "elao/web-profiler-extra-bundle": "dev-master",
-        "nelmio/alice": "dev-master",
-        "fzaninotto/faker": "dev-master",
         "phpspec/phpspec": "2.0.*@dev",
-        "cordoval/phpspec-stubs": "dev-master",
         "henrikbjorn/phpspec-code-coverage": "1.0.*@dev"
     },
     "scripts": {

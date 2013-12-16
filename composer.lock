@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f922d65dcb692f51bf60d7ae28fa43d9",
+    "hash": "e35c152edaf6aca39b5902dc1b101372",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -1902,16 +1902,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "0.13.0",
+            "version": "0.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "9e0fcd00a374e9ad484687628c6c25ab1083ea5a"
+                "reference": "22daa254e54f4b69292bd8679d7a6f3a78dc85d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/9e0fcd00a374e9ad484687628c6c25ab1083ea5a",
-                "reference": "9e0fcd00a374e9ad484687628c6c25ab1083ea5a",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/22daa254e54f4b69292bd8679d7a6f3a78dc85d4",
+                "reference": "22daa254e54f4b69292bd8679d7a6f3a78dc85d4",
                 "shasum": ""
             },
             "require": {
@@ -1923,6 +1923,9 @@
             },
             "require-dev": {
                 "doctrine/orm": ">=2.1,<2.4-dev",
+                "doctrine/phpcr-odm": "~1.0.1",
+                "jackalope/jackalope-doctrine-dbal": "1.0.*",
+                "propel/propel1": "~1.7",
                 "symfony/filesystem": "2.*",
                 "symfony/form": ">=2.1,<2.2-dev",
                 "symfony/translation": ">=2.0,<2.2-dev",
@@ -1936,7 +1939,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.13-dev"
+                    "dev-master": "0.14-dev"
                 }
             },
             "autoload": {
@@ -1965,7 +1968,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2013-07-29 13:39:49"
+            "time": "2013-12-04 16:46:05"
         },
         {
             "name": "jms/serializer-bundle",
@@ -2588,123 +2591,6 @@
             "time": "2013-11-14 19:48:31"
         },
         {
-            "name": "mopa/bootstrap-bundle",
-            "version": "dev-master",
-            "target-dir": "Mopa/Bundle/BootstrapBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "dd4a824e643e0af1e49674baa34fe6e016695255"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/dd4a824e643e0af1e49674baa34fe6e016695255",
-                "reference": "dd4a824e643e0af1e49674baa34fe6e016695255",
-                "shasum": ""
-            },
-            "require": {
-                "mopa/composer-bridge": "~1.3",
-                "symfony/console": "~2.3",
-                "symfony/form": "~2.3",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/twig-bundle": "~2.3"
-            },
-            "suggest": {
-                "craue/formflow-bundle": "~2.0",
-                "jlong/sass-twitter-bootstrap": "dev-master",
-                "knplabs/knp-menu-bundle": "~2.0@dev",
-                "knplabs/knp-paginator-bundle": "~2.3",
-                "mopa/bootstrap-sandbox-bundle": "~2.3",
-                "twbs/bootstrap": ">2.0,<4.0-dev"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Mopa\\Bundle\\BootstrapBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Philipp A. Mohrenweiser",
-                    "email": "phiamo@googlemail.com",
-                    "homepage": "http://bootstrap.mohrenweiserpartner.de"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/phiamo/MopaBootstrapBundle/contributors"
-                }
-            ],
-            "description": "Easy integration of twitters bootstrap into symfony2",
-            "keywords": [
-                "bootstrap",
-                "bootstrap form",
-                "extra form",
-                "form",
-                "template"
-            ],
-            "time": "2013-12-07 18:42:01"
-        },
-        {
-            "name": "mopa/composer-bridge",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phiamo/MopaComposerBridge.git",
-                "reference": "4ce791bfeabc5261da11cf4a949745d60dae711f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaComposerBridge/zipball/4ce791bfeabc5261da11cf4a949745d60dae711f",
-                "reference": "4ce791bfeabc5261da11cf4a949745d60dae711f",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/console": "2.*"
-            },
-            "type": "symfony-bridge",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Mopa\\Bridge\\Composer": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Philipp A. Mohrenweiser",
-                    "email": "phiamo@googlemail.com",
-                    "homepage": "http://bootstrap.mohrenweiserpartner.de"
-                },
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/phiamo/MopaComposerBridge/contributors"
-                }
-            ],
-            "description": "Symfony2 Composer Bridge",
-            "homepage": "http://bootstrap.mohrenweiserpartner.de",
-            "keywords": [
-                "Symfony2",
-                "composer"
-            ],
-            "time": "2013-09-10 10:06:34"
-        },
-        {
             "name": "ornicar/gravatar-bundle",
             "version": "1.0.0",
             "target-dir": "Ornicar/GravatarBundle",
@@ -3248,12 +3134,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCacheBundle.git",
-                "reference": "e622dd44a3148f439640220fe3dd6f825127eecb"
+                "reference": "997540492d7955659ad1768daba1089906871511"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCacheBundle/zipball/e622dd44a3148f439640220fe3dd6f825127eecb",
-                "reference": "e622dd44a3148f439640220fe3dd6f825127eecb",
+                "url": "https://api.github.com/repos/sonata-project/SonataCacheBundle/zipball/997540492d7955659ad1768daba1089906871511",
+                "reference": "997540492d7955659ad1768daba1089906871511",
                 "shasum": ""
             },
             "require": {
@@ -3304,7 +3190,7 @@
             "keywords": [
                 "cache block"
             ],
-            "time": "2013-12-14 15:18:17"
+            "time": "2013-12-16 12:46:22"
         },
         {
             "name": "sonata-project/classification-bundle",
@@ -3365,20 +3251,21 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "target-dir": "Sonata/CoreBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "5abe23b21fae787b1f29f3951ceb94dbf43dab06"
+                "reference": "accd2c305d2636b3cb20e3a0eb12501911a5dac6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/5abe23b21fae787b1f29f3951ceb94dbf43dab06",
-                "reference": "5abe23b21fae787b1f29f3951ceb94dbf43dab06",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/accd2c305d2636b3cb20e3a0eb12501911a5dac6",
+                "reference": "accd2c305d2636b3cb20e3a0eb12501911a5dac6",
                 "shasum": ""
             },
             "require": {
+                "symfony/config": "~2.0",
                 "symfony/form": "~2.2",
                 "symfony/http-foundation": "~2.2",
                 "symfony/translation": "~2.2",
@@ -3418,7 +3305,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2013-12-12 09:47:30"
+            "time": "2013-12-16 10:13:27"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -4280,12 +4167,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stephpy/timeline.git",
-                "reference": "63b9fe2fca4c5d87b9a0a73ca00995a328cd761f"
+                "reference": "b24dc45b2f39e9d935012b96bad253e580110df2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stephpy/timeline/zipball/63b9fe2fca4c5d87b9a0a73ca00995a328cd761f",
-                "reference": "63b9fe2fca4c5d87b9a0a73ca00995a328cd761f",
+                "url": "https://api.github.com/repos/stephpy/timeline/zipball/b24dc45b2f39e9d935012b96bad253e580110df2",
+                "reference": "b24dc45b2f39e9d935012b96bad253e580110df2",
                 "shasum": ""
             },
             "require": {
@@ -4331,7 +4218,7 @@
                 "standalone",
                 "timeline"
             ],
-            "time": "2013-12-11 08:53:07"
+            "time": "2013-12-15 15:51:27"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -5060,51 +4947,6 @@
     ],
     "packages-dev": [
         {
-            "name": "cordoval/phpspec-stubs",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cordoval/phpspec-stubs.git",
-                "reference": "c53e2f9e04d20c9e7e002df653e5b9b667b8419c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cordoval/phpspec-stubs/zipball/c53e2f9e04d20c9e7e002df653e5b9b667b8419c",
-                "reference": "c53e2f9e04d20c9e7e002df653e5b9b667b8419c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5",
-                "phpspec/phpspec": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Cordoval\\PhpSpec": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Luis Cordova",
-                    "email": "cordoval@gmail.com",
-                    "homepage": "http://github.com/cordoval/fazer"
-                }
-            ],
-            "description": "PhpSpec stubs for IDE.",
-            "homepage": "https://github.com/cordoval/phpspec-stubs",
-            "keywords": [
-                "BDD",
-                "ide",
-                "phpspec",
-                "phpstorm"
-            ],
-            "time": "2013-08-24 05:30:15"
-        },
-        {
             "name": "elao/web-profiler-extra-bundle",
             "version": "dev-master",
             "target-dir": "Elao/WebProfilerExtraBundle",
@@ -5160,52 +5002,6 @@
             "time": "2013-11-06 19:40:03"
         },
         {
-            "name": "fzaninotto/faker",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "ca91fd3cce983578a7acceb8dec7131c3ba63a67"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/ca91fd3cce983578a7acceb8dec7131c3ba63a67",
-                "reference": "ca91fd3cce983578a7acceb8dec7131c3ba63a67",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Faker": "src/",
-                    "Faker\\PHPUnit": "test/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "time": "2013-12-06 12:38:25"
-        },
-        {
             "name": "henrikbjorn/phpspec-code-coverage",
             "version": "dev-master",
             "source": {
@@ -5241,60 +5037,6 @@
             ],
             "description": "Integrates CodeCoverage with PhpSpec",
             "time": "2013-11-12 10:32:24"
-        },
-        {
-            "name": "nelmio/alice",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nelmio/alice.git",
-                "reference": "dc5c9f99b043f2dddfbb69fa94b1ceadbd29da00"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/alice/zipball/dc5c9f99b043f2dddfbb69fa94b1ceadbd29da00",
-                "reference": "dc5c9f99b043f2dddfbb69fa94b1ceadbd29da00",
-                "shasum": ""
-            },
-            "require": {
-                "fzaninotto/faker": "~1.0",
-                "php": ">=5.3",
-                "symfony/yaml": "~2.0"
-            },
-            "require-dev": {
-                "doctrine/common": "~2.3",
-                "phpunit/phpunit": "3.7.*",
-                "symfony/property-access": "~2.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Nelmio\\Alice\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nelmio",
-                    "homepage": "http://nelm.io"
-                }
-            ],
-            "description": "Expressive fixtures generator",
-            "keywords": [
-                "Fixture",
-                "data",
-                "orm",
-                "test"
-            ],
-            "time": "2013-12-06 20:39:18"
         },
         {
             "name": "phpspec/php-diff",
@@ -5670,14 +5412,10 @@
         "sonata-project/formatter-bundle": 20,
         "sonata-project/news-bundle": 20,
         "sonata-project/classification-bundle": 20,
-        "mopa/bootstrap-bundle": 20,
-        "stephpy/timelinebundle": 20,
         "stephpy/timeline": 20,
+        "stephpy/timelinebundle": 20,
         "elao/web-profiler-extra-bundle": 20,
-        "nelmio/alice": 20,
-        "fzaninotto/faker": 20,
         "phpspec/phpspec": 20,
-        "cordoval/phpspec-stubs": 20,
         "henrikbjorn/phpspec-code-coverage": 20
     },
     "platform": {

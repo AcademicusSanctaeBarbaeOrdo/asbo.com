@@ -78,7 +78,6 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
-            //new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Spy\TimelineBundle\SpyTimelineBundle(),
 
             // Asbo Bundles.
