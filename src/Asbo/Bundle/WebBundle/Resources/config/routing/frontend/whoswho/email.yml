@@ -46,3 +46,6 @@ asbo_whoswho_email_set_principal:
         _sylius:
             criteria:
                 slug: $slug
+            redirect:
+                route: asbo_whoswho_fra_show
+                parameters: { 'slug' : $slug }

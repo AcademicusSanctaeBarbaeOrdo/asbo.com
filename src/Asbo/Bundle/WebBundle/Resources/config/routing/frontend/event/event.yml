@@ -5,36 +5,36 @@ asbo_event_upcoming:
         template:    AsboWebBundle:Frontend/Event/Event:dashboard.html.twig
         private:     false
 
-asbo_event_subscribe_join:
-    pattern: /{id}/subscribe/{token}/join
+asbo_event_register_join:
+    pattern: /{id}/register/{token}/join
     methods: [GET, PUT]
     requirements:
         id: \d+
     defaults:
         status: join
-        _controller: asbo.controller.event:subscribeAction
+        _controller: asbo.controller.event:registerAction
         _sylius:
             redirect: asbo_event_show
 
-asbo_event_subscribe_maybe:
-    pattern: /{id}/subscribe/{token}/maybe
+asbo_event_register_maybe:
+    pattern: /{id}/register/{token}/maybe
     methods: [GET, PUT]
     requirements:
         id: \d+
     defaults:
         status: maybe
-        _controller: asbo.controller.event:subscribeAction
+        _controller: asbo.controller.event:registerAction
         _sylius:
             redirect: asbo_event_show
 
-asbo_event_subscribe_decline:
-    pattern: /{id}/subscribe/{token}/decline
+asbo_event_register_decline:
+    pattern: /{id}/register/{token}/decline
     methods: [GET, PUT]
     requirements:
         id: \d+
     defaults:
         status: decline
-        _controller: asbo.controller.event:subscribeAction
+        _controller: asbo.controller.event:registerAction
         _sylius:
             redirect: asbo_event_show
 

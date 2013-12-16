@@ -13,6 +13,7 @@ namespace Asbo\Bundle\WhosWhoBundle\Controller;
 
 use Asbo\Bundle\WhosWhoBundle\Form\Filter\FraFilterType;
 use Asbo\Bundle\WhosWhoBundle\Form\Type\SettingsType;
+use Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -23,6 +24,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author De Ron Malian <deronmalian@gmail.com>
  *
  * @method \Asbo\Bundle\WhosWhoBundle\Doctrine\FraRepository getRepository()
+ * @method \Asbo\Bundle\WhosWhoBundle\Entity\Fra findOr404()
  */
 class FraController extends Controller
 {
@@ -85,7 +87,7 @@ class FraController extends Controller
     }
 
     /**
-     * Settings
+     * Settings.
      */
     public function settingsAction(Request $request)
     {
@@ -165,10 +167,7 @@ class FraController extends Controller
         /** @var \Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface $resource */
         $resource = $controller->findOr404(['fra' => $fra, 'id' => $id]);
 
-        $csrfProvider = $this->getCsrfProvider();
-        $expectedToken = sprintf('%s_%s', $namespace, $resource->getId());
-
-        if (!$csrfProvider->isCsrfTokenValid($expectedToken, $token)) {
+        if (!$this->isValidCsrf($namespace, $token, $resource)) {
             throw new RuntimeException('CSRF attack detected.');
         }
 
@@ -178,13 +177,9 @@ class FraController extends Controller
             );
         }
 
-        $method = ucfirst($namespace);
-        $getMethod = sprintf('getPrincipal%s', $method);
-        $setMethod = sprintf('setPrincipal%s', $method);
+        list($getMethod, $setMethod) = $this->getGetterAndSetter($namespace);
 
         if ($fra->{$getMethod}() == $resource) {
-            $this->setFlash('warning', sprintf('same_%s', $namespace));
-
             return $this->redirectTo($fra);
         }
 
@@ -192,15 +187,53 @@ class FraController extends Controller
 
         $this->dispatchEvent(sprintf('pre_update_principal_%s', $namespace), $fra);
         $this->persistAndFlush($fra, sprintf('update_principal_%s', $namespace));
+
         $this->setFlash('success', sprintf('set_principal_%s', $namespace));
 
         return $this->redirectTo($fra);
     }
 
     /**
+     * Valid the csrf token or not.
+     *
+     * @param $namespace
+     * @param $token
+     * @param FraResourceInterface $resource
+     *
+     * @throws \RuntimeException
+     * @return bool
+     */
+    protected function isValidCsrf($namespace, $token, FraResourceInterface $resource)
+    {
+        $expectedToken = sprintf('%s_%s', $namespace, $resource->getId());
+
+        return $this->getCsrfProvider()->isCsrfTokenValid($expectedToken, $token);
+    }
+
+    /**
+     * Returns array of getter and setter depending on namespace.
+     *
+     * @param string $namespace
+     *
+     * @return array
+     */
+    protected function getGetterAndSetter($namespace)
+    {
+        $method = ucfirst($namespace);
+        $getMethod = sprintf('getPrincipal%s', $method);
+        $setMethod = sprintf('setPrincipal%s', $method);
+
+        return [
+            $getMethod,
+            $setMethod
+        ];
+    }
+
+    /**
      * Get the controller of a sub resource of fra.
      *
-     * @param  string                                           $resource
+     * @param string $resource
+     *
      * @return \Asbo\Bundle\WhosWhoBundle\Controller\Controller
      */
     protected function getSubResourceController($resource)
@@ -209,8 +242,6 @@ class FraController extends Controller
     }
 
     /**
-     * Get the CSRF provider.
-     *
      * @return \Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider
      */
     protected function getCsrfProvider()

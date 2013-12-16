@@ -20,7 +20,7 @@
                     {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_JOIN') %}
                         <span class="label label-success">Participer</span>
                     {% else %}
-                        <a href="{{ path('asbo_event_subscribe_join', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                        <a href="{{ path('asbo_event_register_join', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
                             <span class="label label-default">Participer</span>
                         </a>
                     {% endif %}
@@ -28,7 +28,7 @@
                     {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_MAYBE') %}
                         <span class="label label-info">Peut-être...</span>
                     {% else %}
-                        <a href="{{ path('asbo_event_subscribe_maybe', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                        <a href="{{ path('asbo_event_register_maybe', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
                             <span class="label label-default">Peut-être...</span>
                         </a>
                     {% endif %}
@@ -36,7 +36,7 @@
                     {% if status == constant('Asbo\\Bundle\\CoreBundle\\Entity\\EventHasFra::STATUS_DECLINE') %}
                         <span class="label label-danger">Décliner</span>
                     {% else %}
-                        <a href="{{ path('asbo_event_subscribe_decline', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
+                        <a href="{{ path('asbo_event_register_decline', {'id': event.id, 'token': csrf_token('event_' ~ event.id)}) }}">
                             <span class="label label-default">Décliner</span>
                         </a>
                     {% endif %}
