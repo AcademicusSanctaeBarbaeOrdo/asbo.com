@@ -11,36 +11,32 @@
 
 namespace Asbo\Bundle\CoreBundle\Controller;
 
+use Asbo\Bundle\CoreBundle\Entity\Event;
 use Asbo\Bundle\CoreBundle\Entity\EventHasFra;
 use Asbo\Bundle\EventBundle\Controller\EventController as BaseEventController;
-use RuntimeException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Controller of event page
+ * Controller of event page.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
+ *
+ * @method \Asbo\Bundle\CoreBundle\Entity\Event findOr404()
  */
 class EventController extends BaseEventController
 {
-    public function subscribeAction(Request $request, $token, $status)
+    /**
+     * Register for an event.
+     */
+    public function registerAction($token, $status)
     {
-        if (null === $this->getUser()) {
-            throw new AccessDeniedException('You aren\'t connected.');
-        }
-
-        /** @var \Asbo\Bundle\CoreBundle\Entity\Event $event */
         $event = $this->findOr404();
-
-        $csrfProvider = $this->getCsrfProvider();
-        $expectedToken = sprintf('event_%s', $event->getId());
-
-        if (!$csrfProvider->isCsrfTokenValid($expectedToken, $token)) {
-            throw new RuntimeException('CSRF attack detected.');
-        }
-
         $fra = $this->findFraOr404();
+
+        if (!$this->isCsrfValid($event, $token)) {
+            throw new \RuntimeException('The given token is invalid. (CSRF attack !?)');
+        }
 
         if (!$this->getFraAclManager()->canEdit($fra)) {
             throw new AccessDeniedException(
@@ -48,30 +44,21 @@ class EventController extends BaseEventController
             );
         }
 
-        /** @var \Asbo\Bundle\CoreBundle\Entity\EventHasFra $eventHasFra */
         $repository = $this->getEventHasFraRepository();
         $exists = $repository->findOneBy(['event' => $event, 'fra' => $fra]);
 
-        if (null !== $exists && $exists instanceof EventHasFra) {
+        if ($exists instanceof EventHasFra) {
 
-            if ($status === $exists->getStatus()) {
-                $this->setFlash('info', 'subscribe_yet');
+            $this->update($exists->setStatus($status));
 
-                return $this->redirectTo($event);
-            }
-
-            $exists->setStatus($status);
-            $this->setFlash('info', 'subscribe_change');
-
-            $this->get('asbo.manager.event_has_fra')->persist($exists);
-            $this->get('asbo.manager.event_has_fra')->flush();
+            $this->setFlash('info', sprintf('register_status_%s', $status));
 
             return $this->redirectTo($event);
         }
 
+        /** @var \Asbo\Bundle\CoreBundle\Entity\EventHasFra $eventHasFra */
         $eventHasFra = $repository->createNew();
-        $eventHasFra->setFra($fra);
-        $eventHasFra->setStatus($status);
+        $eventHasFra->setFra($fra)->setStatus($status);
 
         $event->addEventHasFra($eventHasFra);
         $this->create($event);
@@ -80,28 +67,50 @@ class EventController extends BaseEventController
     }
 
     /**
-     * Get the CSRF provider.
+     * Find current fra.
      *
-     * @return \Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider
-     */
-    protected function getCsrfProvider()
-    {
-        return $this->get('form.csrf_provider');
-    }
-
-    /**
-     * @return mixed
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Asbo\Bundle\WhosWhoBundle\Entity\Fra
      */
     protected function findFraOr404()
     {
-        $fraHasUser = $this->getFraHasUserRepository()->findOneBy(['user' => $this->getUser(), 'owner' => true]);
+        $fraHasUser = $this->getFraHasUserRepository()->findOneBy(['user' => $this->getUserOr403(), 'owner' => true]);
 
         if (null === $fraHasUser) {
             throw $this->createNotFoundException('You haven\'t a fra associated to your account.');
         }
 
         return $fraHasUser->getFra();
+    }
+
+    /**
+     * Returns the user or throw an access denied exception.
+     *
+     * @throws AccessDeniedException
+     * @return UserInterface
+     */
+    protected function getUserOr403()
+    {
+        if (null === $this->getUser()) {
+            throw new AccessDeniedException('You aren\'t connected.');
+        }
+
+        return $this->getUser();
+    }
+
+    /**
+     * Check if the CSRF token is valid or not.
+     *
+     * @param Event  $event
+     * @param string $token
+     *
+     * @return boolean
+     */
+    protected function isCsrfValid(Event $event, $token)
+    {
+        $expectedToken = sprintf('event_%s', $event->getId());
+
+        return $this->getCsrfProvider()->isCsrfTokenValid($expectedToken, $token);
     }
 
     /**
@@ -126,5 +135,13 @@ class EventController extends BaseEventController
     protected function getFraAclManager()
     {
         return $this->get('asbo_whoswho.security.acl.role_fra_acl');
+    }
+
+    /**
+     * @return \Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider
+     */
+    protected function getCsrfProvider()
+    {
+        return $this->get('form.csrf_provider');
     }
 }
