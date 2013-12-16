@@ -85,7 +85,7 @@ file that was distributed with this source code.
             </div>
             {% if asbo.fra %}
                 <div class="row">
-                    {{ render(controller('AsboTimelineBundle:Timeline:timeline', {'subject': asbo.fra.slug, '_sylius': {'template': 'AsboWebBundle:Frontend/Timeline:timeline.html.twig'}})) }}
+                    {{ render(controller('AsboTimelineBundle:Timeline:timeline', {'_sylius': {'criteria': {'slug': asbo.fra.slug},'template': 'AsboWebBundle:Frontend/Timeline:timeline.html.twig'}})) }}
                 </div>
             {% endif %}
         {% endif %}
