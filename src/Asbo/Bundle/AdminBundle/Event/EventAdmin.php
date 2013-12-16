@@ -11,7 +11,7 @@
 
 namespace Asbo\Bundle\AdminBundle\Event;
 
-use Asbo\Bundle\EventBundle\Model\Event;
+use Asbo\Bundle\CoreBundle\Entity\Event;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -173,7 +173,7 @@ class EventAdmin extends Admin
      *
      * @return mixed
      */
-    private function updateEventHasFras($object)
+    private function updateEventHasFras(Event $object)
     {
         // @see bug in SonataMediaBundle\Admin\GalleryAdmin.php
         $object->setEventHasFras(iterator_to_array($object->getEventHasFras()->getIterator()));

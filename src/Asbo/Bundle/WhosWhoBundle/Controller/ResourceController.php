@@ -11,6 +11,7 @@
 
 namespace Asbo\Bundle\WhosWhoBundle\Controller;
 
+use Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -119,11 +120,11 @@ class ResourceController extends Controller
     /**
      * Creates a form to delete a resource entity by id.
      *
-     * @param \Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface $resource
+     * @param FraResourceInterface $resource
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    protected function createDeleteForm($resource)
+    protected function createDeleteForm(FraResourceInterface $resource)
     {
         $routeParam = [
             'id' => $resource->getId(),
