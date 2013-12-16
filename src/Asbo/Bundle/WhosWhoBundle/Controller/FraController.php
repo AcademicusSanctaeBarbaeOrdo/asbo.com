@@ -53,16 +53,16 @@ class FraController extends Controller
     /**
      * Search in fras.
      */
-    public function searchAction()
+    public function searchAction(Request $request)
     {
         /** @var \Symfony\Component\Form\Form $form */
         $form = $this->get('form.factory')->create(new FraFilterType());
         $fras = [];
         $search = false;
 
-        if ($this->get('request')->query->has('submit-filter')) {
+        if ($request->query->has('submit-filter')) {
 
-            $form->submit($this->getRequest());
+            $form->submit($request);
 
             $filterBuilder = $this->getRepository()->createQueryBuilder('e');
 
@@ -86,13 +86,13 @@ class FraController extends Controller
     /**
      * Settings
      */
-    public function settingsAction()
+    public function settingsAction(Request $request)
     {
         $fra  = $this->findOr404();
         $form = $this->get('form.factory')->create(new SettingsType(), $fra->getSettings());
 
         /** @var \Symfony\Component\Form\FormInterface $form */
-        $form->handleRequest($this->getRequest());
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
 

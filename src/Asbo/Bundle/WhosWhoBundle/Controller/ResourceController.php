@@ -38,7 +38,7 @@ class ResourceController extends Controller
 
         if (!$this->getFraAclManager()->canEdit($fra)) {
             throw new AccessDeniedException(
-                sprintf('You cannot create %s! to fra "%d"', $this->getConfiguration>getResourceName(), $fra->getId())
+                sprintf('You cannot create %s! to fra "%d"', $this->getConfiguration()->getResourceName(), $fra->getId())
             );
         }
 
