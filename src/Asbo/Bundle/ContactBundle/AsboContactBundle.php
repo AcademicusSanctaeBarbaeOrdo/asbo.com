@@ -11,9 +11,13 @@
 
 namespace Asbo\Bundle\ContactBundle;
 
-use Asbo\Bundle\ContactBundle\DependencyInjection\AsboContactExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * Asbo Contact Bundle.
+ *
+ * @author De Ron Malian <deronmalian@gmail.com>
+ */
 class AsboContactBundle extends Bundle
 {
     /**
@@ -21,6 +25,6 @@ class AsboContactBundle extends Bundle
      */
     public function getContainerExtension()
     {
-        return new AsboContactExtension();
+        return false;
     }
 }
