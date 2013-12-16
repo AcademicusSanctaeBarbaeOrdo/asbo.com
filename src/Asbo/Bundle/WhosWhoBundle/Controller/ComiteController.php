@@ -15,6 +15,7 @@ use Asbo\Bundle\WhosWhoBundle\Util\AnnoManipulator;
 use Asbo\Bundle\WhosWhoBundle\Validator\Anno;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Asbo\Bundle\WhosWhoBundle\Model\Types\PostTypes;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Controller of comite page
@@ -51,23 +52,23 @@ class ComiteController extends Controller
      *
      * @Secure(roles="ROLE_WHOSWHO_USER")
      */
-    public function annoAction($anno)
+    public function annoAction(Request $request, $anno)
     {
-        return $this->getByAnnoAndTypes($anno);
+        return $this->getByAnnoAndTypes($request, $anno);
     }
 
     /**
      * Displays current comite.
      */
-    public function lastAction()
+    public function lastAction(Request $request)
     {
-        return $this->getByAnnoAndTypes(AnnoManipulator::getCurrentAnno());
+        return $this->getByAnnoAndTypes($request, AnnoManipulator::getCurrentAnno());
     }
 
     /**
      * Displays a specific comite by anno.
      */
-    protected function getByAnnoAndTypes($anno, array $types = [PostTypes::COMITE, PostTypes::CONSEIL])
+    protected function getByAnnoAndTypes(Request $request, $anno, array $types = [PostTypes::COMITE, PostTypes::CONSEIL])
     {
         $anno = $this->getValidAnnoOr404($anno);
         $posts = $this->getRepository()->findByTypesAndAnno($types, $anno);
@@ -80,7 +81,7 @@ class ComiteController extends Controller
             --$anno;
 
             // Dans ce cas, on fait appel au controller depuis "lastAction"
-            if (null === $this->getRequest()->attributes->get('anno')) {
+            if (null === $request->attributes->get('anno')) {
                 return $this->getByAnnoAndTypes($anno, $types);
             }
 
