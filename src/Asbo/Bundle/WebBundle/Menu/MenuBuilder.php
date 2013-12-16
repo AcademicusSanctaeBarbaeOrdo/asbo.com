@@ -149,7 +149,7 @@ class MenuBuilder
             $menu->addChild('message', array(
                     'route' => 'fos_message_inbox',
                     'linkAttributes' => array('title' => $this->trans('asbo.frontend.menu.sidebar.main.message')),
-                ))->setLabel($this->trans('asbo.frontend.menu.sidebar.main.message').' ('.$this->asbo->getUnreadMessage().')');
+                ))->setLabel($this->trans('asbo.frontend.menu.sidebar.main.message').' ('.$this->asbo->getUser()->getUnreadMessages().')');
 
             $menu->addChild('events', array(
                     'route' => 'asbo_event_upcoming',

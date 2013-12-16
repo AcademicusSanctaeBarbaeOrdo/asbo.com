@@ -11,8 +11,10 @@
 
 namespace Asbo\Bundle\CoreBundle\Twig;
 
+use Asbo\Bundle\WhosWhoBundle\Doctrine\EntityRepository;
+use Asbo\Bundle\WhosWhoBundle\Entity\Fra;
 use Doctrine\ORM\NonUniqueResultException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Global variables.
@@ -22,65 +24,71 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class GlobalVariables
 {
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * @var /Asbo/Bundle/WhosWhoBundle/Entity/Fra $fra
-     */
-    protected $fra;
-
-    /**
-     * @param ContainerInterface $container
-     */
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
-    /**
-     * Return the global Who's Who variable
+     * The security context.
      *
-     * @return Asbo\Bundle\WhosWhoBundle\Twig\GlobalVariables
+     * @var SecurityContextInterface
      */
-    public function getWhosWho()
-    {
-        if ($this->container->has('asbo.whoswho.twig.global')) {
-            return $this->container->get('asbo.whoswho.twig.global');
-        } else {
-            throw new \Exception('Le bundle Who\'s Who ? ne semble pas être installé.');
-        }
-    }
+    protected $securityContext;
 
-    public function getUnreadMessage()
+    /**
+     * The user variables.
+     *
+     * @var UserVariables
+     */
+    protected $userGlobal;
+
+    /**
+     * The fraHasUser repository.
+     *
+     * @var EntityRepository
+     */
+    protected $fraHasUserRepository;
+
+    /**
+     * @var Fra|string|null $fra
+     */
+    private $fra;
+
+    /**
+     * Constructor.
+     *
+     * @param SecurityContextInterface $securityContext
+     * @param EntityRepository         $fraHasUserRepository
+     * @param UserVariables            $userGlobal
+     */
+    public function __construct(SecurityContextInterface $securityContext, EntityRepository $fraHasUserRepository, UserVariables $userGlobal = null)
     {
-        return $this->container->get('fos_message.provider')->getNbUnreadMessages();
+        $this->securityContext = $securityContext;
+        $this->userGlobal = $userGlobal;
+        $this->fraHasUserRepository = $fraHasUserRepository;
     }
 
     /**
-     * Return the global UserAsbo variable
+     * Return the global user variable and usefull methods.
      *
-     * @return Asbo\Bundle\WhosWhoBundle\Twig\GlobalVariables
+     * @throws \Exception
+     * @return UserVariables
      */
     public function getUser()
     {
-        if ($this->container->has('asbo.user.twig.global')) {
-            return $this->container->get('asbo.user.twig.global');
-        } else {
+        if (null === $this->userGlobal) {
             throw new \Exception('Le bundle AsboUser ne semble pas être installé.');
         }
+
+        return $this->userGlobal;
     }
 
     /**
-     * @todo c'est super moche !
-     * @return null
+     * Get the current fra.
+     *
+     * @TODO Refactoring it's necessary!
+     * @return Fra|null
      */
     public function getFra()
     {
         if (null === $this->fra) {
 
-            if (null === $token = $this->container->get('security.context')->getToken()) {
+            if (null === $token = $this->securityContext->getToken()) {
 
                 $this->fra = 'none';
 
@@ -94,10 +102,8 @@ class GlobalVariables
                 return null;
             }
 
-            $repository = $this->container->get('asbo_whoswho.repository.fra_has_user');
-
             try {
-                $fraHasUser = $repository->findOneBy(['user' => $user, 'owner' => true]);
+                $fraHasUser = $this->fraHasUserRepository->findOneBy(['user' => $user, 'owner' => true]);
             } catch (NonUniqueResultException $e) {
 
                 $this->fra = 'none';
@@ -121,6 +127,5 @@ class GlobalVariables
         }
 
         return $this->fra;
-
     }
 }
