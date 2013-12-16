@@ -12,7 +12,6 @@
 namespace Asbo\Bundle\WhosWhoBundle\Controller;
 
 use Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController as BaseResourceController;
