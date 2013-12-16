@@ -11,7 +11,6 @@
 
 namespace Asbo\Bundle\WhosWhoBundle\Controller;
 
-use Asbo\Bundle\WhosWhoBundle\Entity\Fra;
 use Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

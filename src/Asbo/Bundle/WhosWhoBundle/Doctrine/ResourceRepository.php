@@ -12,7 +12,6 @@
 namespace Asbo\Bundle\WhosWhoBundle\Doctrine;
 
 use Doctrine\Common\Inflector\Inflector;
-use Doctrine\ORM\QueryBuilder;
 
 /**
  * Entity Repository

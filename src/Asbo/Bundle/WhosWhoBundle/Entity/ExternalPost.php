@@ -14,7 +14,6 @@ namespace Asbo\Bundle\WhosWhoBundle\Entity;
 use Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use DateTime;
 
 /**
  * Represent an ExternalPost entity.
