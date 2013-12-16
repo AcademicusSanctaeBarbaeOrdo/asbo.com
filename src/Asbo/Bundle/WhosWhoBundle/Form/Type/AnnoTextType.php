@@ -30,7 +30,6 @@ class AnnoTextType extends AbstractType
         $builder
             ->add('type', 'choice',
                 [
-                    // @todo: Choisir des clés plus parlantes
                     'choices' => [
                         'Anno',
                         'Année Civil',

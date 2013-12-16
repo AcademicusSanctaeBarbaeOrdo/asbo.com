@@ -76,7 +76,6 @@ class StatusTypeValidator
      * @param  Fra                       $fra
      * @param  ExecutionContextInterface $context
      * @return bool
-     * @todo: Je trouve ça pas très propre.
      */
     public static function isValid(Fra $fra, ExecutionContextInterface $context)
     {

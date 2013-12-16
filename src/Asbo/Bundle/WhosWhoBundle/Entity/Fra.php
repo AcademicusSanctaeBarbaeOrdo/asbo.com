@@ -125,8 +125,6 @@ class Fra
      *
      * @ORM\Column(name="anno", type="integer")
      * @Validator\Anno()
-     *
-     * todo: Le membre In Spe n'a pas d'anno !
      */
     private $anno;
 
@@ -292,16 +290,12 @@ class Fra
         $this->externalPosts = new ArrayCollection();
 
         $this->pontif = false;
-
-        // @todo : Je ne suis pas convaincu que ce soit la meilleur solution.
-        $this->settings      = new Settings();
+        $this->settings = new Settings();
 
         // Quand on rajoute un fra il y a de forte chance pour qu'il soit
         // Tyro et que ce soit un garçon
         $this->type = fraTypes::IMPETRANT;
         $this->status = fraStatus::TYRO;
-
-        // @todo: Externaliser ça dans des constantes.
         $this->gender = 'm';
     }
 
