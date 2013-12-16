@@ -11,7 +11,9 @@
     <services>
 
         <service id="asbo.core.twig.global" class="Asbo\Bundle\CoreBundle\Twig\GlobalVariables" >
-            <argument type="service" id="service_container" />
+            <argument type="service" id="security.context" />
+            <argument type="service" id="asbo_whoswho.repository.fraHasUser" />
+            <argument type="service" id="asbo.user.twig.global" on-invalid="ignore" />
         </service>
 
         <service id="asbo.twig.anno_extension" class="Asbo\Bundle\CoreBundle\Twig\AnnoExtension">
@@ -19,7 +21,8 @@
         </service>
 
         <service id="asbo.user.twig.global" class="Asbo\Bundle\CoreBundle\Twig\UserVariables" >
-            <argument type="service" id="service_container" />
+            <argument type="service" id="fos_message.provider" on-invalid="ignore" />
+            <argument type="service" id="fos_user.registration.form" on-invalid="ignore" />
         </service>
 
         <service id="twig.extension.debug" class="Twig_Extensions_Extension_Debug">

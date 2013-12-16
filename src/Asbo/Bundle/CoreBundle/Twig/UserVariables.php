@@ -11,7 +11,9 @@
 
 namespace Asbo\Bundle\CoreBundle\Twig;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use FOS\MessageBundle\Provider\ProviderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * User variables.
@@ -20,41 +22,59 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class UserVariables
 {
-    protected $container;
+    /**
+     * The message provider.
+     *
+     * @var ProviderInterface
+     */
+    protected $provider;
 
     /**
-     * @param ContainerInterface $container
+     * The user form.
+     *
+     * @var FormInterface
      */
-    public function __construct(ContainerInterface $container)
+    protected $userForm;
+
+    /**
+     * Constructor.
+     *
+     * @param ProviderInterface $provider
+     * @param FormInterface     $userForm
+     */
+    public function __construct(ProviderInterface $provider = null, FormInterface $userForm)
     {
-        $this->container = $container;
+        $this->provider = $provider;
+        $this->userForm = $userForm;
     }
 
     /**
-     * Get the  asbo.whoswho.form service
+     * Get the user registration form service.
      *
-     * @return form
+     * @throws \Exception
+     * @return FormView
      */
     public function getFormLogin()
     {
-        // FOSUserBundle 2.0
-        if ($this->container->has('fos_user.registration.form.factory')) {
-            return $this->container->get('fos_user.registration.form.factory')->createForm()->createView();
-        } elseif ($this->container->has('fos_user.registration.form')) {
-            // FOSUserBundle 1.3
-            return $this->container->get('fos_user.registration.form')->createView();
-        } else {
+        if (null === $this->userForm) {
             throw new \Exception('Le bundle FOSUserBundle ne semble pas être installé !');
         }
+
+        return $this->userForm->createView();
     }
 
+    /**
+     * Returns the number of unread messages.
+     *
+     * @throws \Exception
+     * @return int
+     */
     public function getUnreadMessages()
     {
-
-        if ($this->container->has('fos_message.provider')) {
-            return $this->container->get('fos_message.provider')->getNbUnreadMessages();
-        } else {
+        if (null === $this->provider) {
             throw new \Exception('Le bundle FOSMessageBundle ne semble pas être installé !');
         }
+
+        return $this->provider->getNbUnreadMessages();
     }
 }
