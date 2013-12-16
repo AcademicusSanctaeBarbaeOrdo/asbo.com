@@ -24,7 +24,7 @@ class TimelineController extends FOSRestController
     /**
      * Return a timeline of current Fra.
      */
-    public function timelineAction(Request $request)
+    public function timelineAction()
     {
         $fra = $this
             ->getFraController()
