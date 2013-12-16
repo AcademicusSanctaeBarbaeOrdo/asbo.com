@@ -35,7 +35,6 @@ class AsboWhosWhoExtension extends Extension
         $loader->load('services.xml');
         $loader->load('form.xml');
         $loader->load('validators.xml');
-        //$loader->load('redirect.xml');
         $loader->load('comite.xml');
         $loader->load('roles.xml');
 
