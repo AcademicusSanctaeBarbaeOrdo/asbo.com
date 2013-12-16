@@ -12,7 +12,6 @@
 namespace Asbo\Bundle\TimelineBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Timeline controller.
