@@ -173,7 +173,6 @@ class Phone implements FraResourceInterface
      * @param null|string $locale
      *
      * @return string
-     * @todo: Je suis pas fan de cette manière de faire. Dans la vue ?
      */
     public function getCountryCode($locale = null)
     {

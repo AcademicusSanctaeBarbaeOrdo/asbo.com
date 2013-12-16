@@ -81,7 +81,6 @@ class GlobalVariables
     /**
      * Get the current fra.
      *
-     * @TODO Refactoring it's necessary!
      * @return Fra|null
      */
     public function getFra()

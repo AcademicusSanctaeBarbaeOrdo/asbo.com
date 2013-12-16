@@ -66,18 +66,10 @@ class ComiteController extends Controller
 
     /**
      * Displays a specific comite by anno.
-     * @todo: Revoir la validation de l'anno et des types
      */
     protected function getByAnnoAndTypes($anno, array $types = [PostTypes::COMITE, PostTypes::CONSEIL])
     {
-        $error = $this->getValidator()->validateValue($anno, new Anno());
-
-        if ($error->count() != 0) {
-            throw $this->createNotFoundException(
-                $error->get(0)->getMessage()
-            );
-        }
-
+        $anno = $this->getValidAnnoOr404($anno);
         $posts = $this->getRepository()->findByTypesAndAnno($types, $anno);
 
         // Lors de la phase de transition avec le synode il n'y a pas encore de comité
@@ -131,5 +123,26 @@ class ComiteController extends Controller
     protected function getValidator()
     {
         return $this->get('validator');
+    }
+
+    /**
+     * Valid anno or raise a not found exception.
+     *
+     * @param int|string $anno
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return int
+     */
+    protected function getValidAnnoOr404($anno)
+    {
+        $error = $this->getValidator()->validateValue($anno, new Anno());
+
+        if ($error->count() != 0) {
+            throw $this->createNotFoundException(
+                sprintf('The anno "%" doesn\'t exist.!', $anno)
+            );
+        }
+
+        return (int) $anno;
     }
 }

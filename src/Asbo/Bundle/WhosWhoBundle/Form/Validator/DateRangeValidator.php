@@ -66,7 +66,6 @@ class DateRangeValidator implements EventSubscriberInterface
      * Validate the data.
      *
      * @param FormEvent $event
-     * @todo: Refaire les conditions
      */
     public function onPreSubmit(FormEvent $event)
     {
