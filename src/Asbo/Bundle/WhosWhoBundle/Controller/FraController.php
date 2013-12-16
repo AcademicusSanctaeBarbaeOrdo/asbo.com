@@ -14,8 +14,6 @@ namespace Asbo\Bundle\WhosWhoBundle\Controller;
 use Asbo\Bundle\WhosWhoBundle\Form\Filter\FraFilterType;
 use Asbo\Bundle\WhosWhoBundle\Form\Type\SettingsType;
 use RuntimeException;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**

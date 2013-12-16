@@ -13,7 +13,6 @@ namespace Asbo\Bundle\EventBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Event system extension.
