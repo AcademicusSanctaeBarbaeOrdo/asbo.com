@@ -3,11 +3,10 @@
 namespace spec\Asbo\Bundle\WhosWhoBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class DiplomaSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Asbo\Bundle\WhosWhoBundle\Entity\Diploma');
     }
@@ -73,6 +72,23 @@ class DiplomaSpec extends ObjectBehavior
     {
         $this->setFra($fra);
         $this->getFra()->shouldReturn($fra);
+    }
+
+    public function it_is_current_diploma_if_graduated_date_is_null()
+    {
+        $this->shouldBeCurrent();
+
+        $this->setGraduatedAt(new \DateTime());
+
+        $this->shouldNotBeCurrent();
+    }
+
+    public function it_is_convertable_to_string_and_returns_its_name_and_institution()
+    {
+        $this->setName('Ingénieur Civil');
+        $this->setInstitution('UCL');
+
+        $this->__toString()->shouldReturn('Ingénieur Civil @ UCL');
     }
 
     /**
