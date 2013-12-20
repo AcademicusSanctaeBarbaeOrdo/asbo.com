@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c057976ba03a9c92a64c5cc59eb3c1b7",
+    "hash": "b6619f29a2cbaaca02fb39d01c4cc34b",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -3204,12 +3204,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataClassificationBundle.git",
-                "reference": "77124751bf16bb1e96553254f50db20e93febfc5"
+                "reference": "77124751bf"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/77124751bf16bb1e96553254f50db20e93febfc5",
-                "reference": "77124751bf16bb1e96553254f50db20e93febfc5",
+                "reference": "77124751bf",
                 "shasum": ""
             },
             "require": {
@@ -4103,12 +4103,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stephpy/TimelineBundle.git",
-                "reference": "b25601473a9087eb18f15ec9a11abf05094a77f6"
+                "reference": "b25601473a"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/stephpy/TimelineBundle/zipball/b25601473a9087eb18f15ec9a11abf05094a77f6",
-                "reference": "b25601473a9087eb18f15ec9a11abf05094a77f6",
+                "reference": "b25601473a",
                 "shasum": ""
             },
             "require": {
@@ -4172,12 +4172,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stephpy/timeline.git",
-                "reference": "b24dc45b2f39e9d935012b96bad253e580110df2"
+                "reference": "b24dc45b2f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/stephpy/timeline/zipball/b24dc45b2f39e9d935012b96bad253e580110df2",
-                "reference": "b24dc45b2f39e9d935012b96bad253e580110df2",
+                "reference": "b24dc45b2f",
                 "shasum": ""
             },
             "require": {

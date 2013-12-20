@@ -47,12 +47,12 @@
         "sonata-project/media-bundle": "2.2.*@dev",
         "sonata-project/formatter-bundle": "2.3.*@dev",
         "sonata-project/news-bundle": "2.3.*@dev",
-        "sonata-project/classification-bundle": "@dev",
+        "sonata-project/classification-bundle": "dev-master#77124751bf",
 
         "sylius/resource-bundle": "0.6.*",
         "knplabs/knp-time-bundle": "1.*",
-        "stephpy/timeline": "dev-master@dev",
-        "stephpy/TimelineBundle": "dev-master@dev"
+        "stephpy/timeline": "dev-master#b24dc45b2f",
+        "stephpy/TimelineBundle": "dev-master#b25601473a"
     },
     "require-dev": {
         "elao/web-profiler-extra-bundle": "dev-master",
