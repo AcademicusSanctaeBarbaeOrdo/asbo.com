@@ -3,6 +3,12 @@ extensions:
 
 code_coverage:
     format: clover
+    whitelist:
+        - src/Asbo/Bundle/EventBundle
+        - src/Asbo/Bundle/WhosWhoBundle
+        - src/Asbo/Bundle/QuizzBundle
+        - src/Asbo/Bundle/ContactBundle
+        - src/Asbo/Bundle/CoreBundle
 
 suites:
   event:
@@ -24,3 +30,8 @@ suites:
     namespace: \Asbo\Bundle\ContactBundle
     src_path: src
     spec_path: src/Asbo/Bundle/ContactBundle/
+
+  core:
+    namespace: \Asbo\Bundle\CoreBundle
+    src_path: src
+    spec_path: src/Asbo/Bundle/CoreBundle/
