@@ -12,10 +12,8 @@
 namespace Asbo\Bundle\WhosWhoBundle\Entity;
 
 use Asbo\Bundle\WhosWhoBundle\Model\Types\PhoneTypes;
-use Locale;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Intl\Intl;
 use Asbo\Bundle\WhosWhoBundle\Entity\Fra;
 use Asbo\Bundle\WhosWhoBundle\Model\FraResourceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -132,18 +130,6 @@ class Phone implements FraResourceInterface
     }
 
     /**
-     * Get type label.
-     *
-     * @return string
-     */
-    public function getTypeLabel()
-    {
-        $type = PhoneTypes::getChoices();
-
-        return array_key_exists($this->getType(), $type) ? $type[$this->getType()] : $type[PhoneTypes::UNKNOWN];
-    }
-
-    /**
      * Set country.
      *
      * @param string $country
@@ -165,24 +151,6 @@ class Phone implements FraResourceInterface
     public function getCountry()
     {
         return $this->country;
-    }
-
-    /**
-     * Get country code.
-     *
-     * @param null|string $locale
-     *
-     * @return string
-     */
-    public function getCountryCode($locale = null)
-    {
-        if ($locale === null) {
-            $locale = Locale::getDefault();
-        }
-
-        $countries = Intl::getRegionBundle()->getCountryNames($locale);
-
-        return $countries[$this->getCountry()];
     }
 
     /**
