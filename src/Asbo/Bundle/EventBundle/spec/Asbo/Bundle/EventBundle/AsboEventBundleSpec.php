@@ -3,7 +3,6 @@
 namespace spec\Asbo\Bundle\EventBundle;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class AsboEventBundleSpec extends ObjectBehavior
 {

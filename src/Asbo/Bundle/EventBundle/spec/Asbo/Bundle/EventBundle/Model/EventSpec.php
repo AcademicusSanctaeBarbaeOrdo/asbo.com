@@ -90,7 +90,6 @@ class EventSpec extends ObjectBehavior
         $this->shouldThrow(new \InvalidArgumentException('Wrong event status supplied: "'.$id.'" given.'))->duringSetStatus($id);
     }
 
-
     public function its_status_should_be_muttable()
     {
         $this->setStatus('confirmed');

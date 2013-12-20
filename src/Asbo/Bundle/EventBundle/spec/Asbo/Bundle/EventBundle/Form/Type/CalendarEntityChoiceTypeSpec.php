@@ -3,8 +3,6 @@
 namespace spec\Asbo\Bundle\EventBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CalendarEntityChoiceTypeSpec extends ObjectBehavior
