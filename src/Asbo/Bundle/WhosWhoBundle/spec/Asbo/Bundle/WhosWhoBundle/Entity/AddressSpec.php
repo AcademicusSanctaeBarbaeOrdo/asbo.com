@@ -40,20 +40,6 @@ class AddressSpec extends ObjectBehavior
         $this->getType()->shouldReturn('kot');
     }
 
-    public function its_can_get_label_of_type()
-    {
-        $this->setType(AddressTypes::BOULOT);
-
-        $this->getTypeLabel()->shouldReturn(AddressTypes::getChoices()[AddressTypes::BOULOT]);
-    }
-
-    public function its_get_unknow_if_label_does_not_exists()
-    {
-        $this->setType(uniqid());
-
-        $this->getTypeLabel()->shouldReturn(AddressTypes::getChoices()[AddressTypes::UNKNOWN]);
-    }
-
     public function it_has_no_locality_by_default()
     {
         $this->getLocality()->shouldReturn(null);
@@ -170,12 +156,6 @@ class AddressSpec extends ObjectBehavior
         $this->getFra()->shouldReturn(null);
     }
 
-    public function it_can_return_a_string_representation()
-    {
-        $this->__toString()->shouldReturn('');
-        $this->setAddress('Rue des Wallons 58, 1348 LLN');
-        $this->__toString()->shouldReturn('Rue des Wallons 58, 1348 LLN');
-    }
     /**
      * @param \Asbo\Bundle\WhosWhoBundle\Entity\Fra $fra
      */
@@ -183,6 +163,13 @@ class AddressSpec extends ObjectBehavior
     {
         $this->setFra($fra);
         $this->getFra()->shouldReturn($fra);
+    }
+
+    public function it_can_return_a_string_representation()
+    {
+        $this->__toString()->shouldReturn('');
+        $this->setAddress('Rue des Wallons 58, 1348 LLN');
+        $this->__toString()->shouldReturn('Rue des Wallons 58, 1348 LLN');
     }
 
     /**

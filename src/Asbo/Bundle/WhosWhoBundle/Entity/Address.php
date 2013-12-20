@@ -165,18 +165,6 @@ class Address implements FraResourceInterface
     }
 
     /**
-     * Get Type Label.
-     *
-     * @return string
-     */
-    public function getTypeLabel()
-    {
-        $type = AddressTypes::getChoices();
-
-        return array_key_exists($this->getType(), $type) ? $type[$this->getType()] : $type[AddressTypes::UNKNOWN];
-    }
-
-    /**
      * Sets the address.
      *
      * @param string $address
