@@ -784,4 +784,35 @@ class FraSpec extends ObjectBehavior
         $this->getSlug()->shouldReturn($slug);
     }
 
+    /**
+     * @param \Asbo\Bundle\WhosWhoBundle\Entity\FraHasPost $fraHasPost1
+     * @param \Asbo\Bundle\WhosWhoBundle\Entity\FraHasPost $fraHasPost2
+     *
+     * @param \Asbo\Bundle\WhosWhoBundle\Entity\Post $post1
+     * @param \Asbo\Bundle\WhosWhoBundle\Entity\Post $post2
+     *
+     */
+    public function its_calculates_correct_total_deniers($fraHasPost1, $fraHasPost2, $post1, $post2)
+    {
+        $fraHasPost1->getPost()->shouldBeCalled();
+        $fraHasPost2->getPost()->shouldBeCalled();
+
+        $fraHasPost1->getPost()->willReturn($post1);
+        $fraHasPost2->getPost()->willReturn($post2);
+
+        $post1->getDenier()->shouldBeCalled();
+        $post2->getDenier()->shouldBeCalled();
+
+        $post1->getDenier()->willReturn(4);
+        $post2->getDenier()->willReturn(3);
+
+        $fraHasPost1->setFra($this)->shouldBeCalled();
+        $fraHasPost2->setFra($this)->shouldBeCalled();
+
+        $this->addFraHaspost($fraHasPost1);
+        $this->addFraHaspost($fraHasPost2);
+
+        $this->getTotalDenier()->shouldReturn(7);
+    }
+
 }

@@ -1311,6 +1311,22 @@ class Fra
     }
 
     /**
+     * Get total denier based on the posts.
+     *
+     * @return integer
+     */
+    public function getTotalDenier()
+    {
+        $derniers = 0;
+
+        foreach ($this->fraHasPosts as $fraHasPost) {
+            $derniers += $fraHasPost->getPost()->getDenier();
+        }
+
+        return $derniers;
+    }
+
+    /**
      * Auto-render on toString.
      *
      * @return string
