@@ -3,11 +3,10 @@
 namespace spec\Asbo\Bundle\WhosWhoBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class RankSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Asbo\Bundle\WhosWhoBundle\Entity\Rank');
     }
@@ -17,12 +16,12 @@ class RankSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
+    public function it_has_no_name_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('Roi des Bleus');
         $this->getName('Roi des Bleus');

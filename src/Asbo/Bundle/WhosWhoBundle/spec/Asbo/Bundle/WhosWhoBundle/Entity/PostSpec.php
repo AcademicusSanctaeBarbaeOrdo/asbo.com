@@ -4,11 +4,10 @@ namespace spec\Asbo\Bundle\WhosWhoBundle\Entity;
 
 use Asbo\Bundle\WhosWhoBundle\Model\Types\PostTypes;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class PostSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Asbo\Bundle\WhosWhoBundle\Entity\Post');
     }
@@ -34,29 +33,29 @@ class PostSpec extends ObjectBehavior
         $this->getMonogramme()->shouldReturn(null);
     }
 
-    function its_monogramme_is_mutable()
+    public function its_monogramme_is_mutable()
     {
         $this->setMonogramme('TM');
         $this->getMonogramme()->shouldReturn('TM');
     }
 
-    function it_has_no_denier_by_default()
+    public function it_has_no_denier_by_default()
     {
         $this->getDenier()->shouldReturn(null);
     }
 
-    function its_denier_is_mutable()
+    public function its_denier_is_mutable()
     {
         $this->setDenier(3);
         $this->getDenier()->shouldReturn(3);
     }
 
-    function it_has_conseil_type_by_default()
+    public function it_has_conseil_type_by_default()
     {
         $this->getType()->shouldReturn(PostTypes::CONSEIL);
     }
 
-    function its_type_is_mutable()
+    public function its_type_is_mutable()
     {
         $this->setType(PostTypes::COMISSION);
         $this->getType()->shouldReturn(PostTypes::COMISSION);

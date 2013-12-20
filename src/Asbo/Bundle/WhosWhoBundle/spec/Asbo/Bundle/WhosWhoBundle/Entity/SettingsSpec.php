@@ -3,16 +3,15 @@
 namespace spec\Asbo\Bundle\WhosWhoBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class SettingsSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Asbo\Bundle\WhosWhoBundle\Entity\Settings');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
@@ -28,7 +27,7 @@ class SettingsSpec extends ObjectBehavior
         $this->getConvocEphemeridesQ2()->shouldReturn(false);
     }
 
-    function it_settings_is_mutable()
+    public function it_settings_is_mutable()
     {
         $this->setWhosWho(true);
         $this->setPereat(true);
@@ -37,7 +36,6 @@ class SettingsSpec extends ObjectBehavior
         $this->setConvocWe(true);
         $this->setConvocEphemeridesQ1(true);
         $this->setConvocEphemeridesQ2(true);
-
 
         $this->getWhosWho()->shouldReturn(true);
         $this->getPereat()->shouldReturn(true);
@@ -48,7 +46,7 @@ class SettingsSpec extends ObjectBehavior
         $this->getConvocEphemeridesQ2()->shouldReturn(true);
     }
 
-    function it_is_convertable_to_string_and_return_empty_string()
+    public function it_is_convertable_to_string_and_return_empty_string()
     {
         $this->__toString()->shouldReturn('');
     }
