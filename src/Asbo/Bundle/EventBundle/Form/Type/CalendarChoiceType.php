@@ -45,8 +45,9 @@ abstract class CalendarChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                    'class' => $this->className
-                ))
+                    'data_class' => $this->className
+                )
+            )
         ;
     }
 
