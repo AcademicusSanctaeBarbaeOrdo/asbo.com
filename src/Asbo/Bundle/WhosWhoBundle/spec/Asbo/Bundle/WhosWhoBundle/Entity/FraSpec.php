@@ -178,15 +178,6 @@ class FraSpec extends ObjectBehavior
         $this->shouldThrow(new \InvalidArgumentException('Wrong type, "'.$id.'" given.'))->duringSetType($id);
     }
 
-    public function its_type_can_be_convert_to_label_value()
-    {
-        $key = array_rand(FraTypes::getChoices());
-        $value = FraTypes::getChoices()[$key];
-
-        $this->setType($key);
-        $this->getTypeLabel()->shouldReturn($value);
-    }
-
     public function it_has_status_tyro_by_default()
     {
         $this->getStatus()->shouldReturn(FraStatus::TYRO);

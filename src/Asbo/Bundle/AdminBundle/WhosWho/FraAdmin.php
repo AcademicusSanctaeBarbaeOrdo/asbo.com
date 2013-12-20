@@ -178,18 +178,8 @@ class FraAdmin extends Admin
                     'template' => 'AsboAdminBundle:WhosWho:list_anno.html.twig',
                 ]
             )
-            ->add('getTypeLabel', 'text',
-                [
-                    'sortable' => 'type',
-                    'label' => 'Type',
-                ]
-            )
-            ->add('getStatusLabel', 'text',
-                [
-                    'sortable' => 'type',
-                    'label' => 'Status',
-                ]
-            )
+            ->add('type')
+            ->add('status')
             ->add('pontif', 'boolean',
                 [
                     'editable' => true,
