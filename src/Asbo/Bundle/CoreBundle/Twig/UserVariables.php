@@ -42,7 +42,7 @@ class UserVariables
      * @param ProviderInterface $provider
      * @param FormInterface     $userForm
      */
-    public function __construct(ProviderInterface $provider = null, FormInterface $userForm)
+    public function __construct(ProviderInterface $provider = null, FormInterface $userForm = null)
     {
         $this->provider = $provider;
         $this->userForm = $userForm;
