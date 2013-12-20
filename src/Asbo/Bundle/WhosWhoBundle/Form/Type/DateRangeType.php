@@ -99,18 +99,10 @@ class DateRangeType extends AbstractType
                     return (int) $value;
                 },
                 'transformer' => function (Options $options, $value) {
-                    if (!$value) {
-                        $value = new DateRangeViewTransformer(new OptionsResolver());
-                    }
-
-                    return $value;
+                    return $value ?: new DateRangeViewTransformer(new OptionsResolver());
                 },
                 'validator' => function (Options $options, $value) {
-                    if (!$value) {
-                        $value = new DateRangeValidator(new OptionsResolver());
-                    }
-
-                    return $value;
+                    return $value ?: new DateRangeValidator(new OptionsResolver());
                 }
             ]
         );
