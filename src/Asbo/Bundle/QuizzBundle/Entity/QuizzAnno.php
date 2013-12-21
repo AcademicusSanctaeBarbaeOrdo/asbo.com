@@ -225,6 +225,8 @@ class QuizzAnno
     public function setQuizz($quizz)
     {
         $this->quizz = $quizz;
+
+        return $this;
     }
 
     /**
@@ -235,19 +237,20 @@ class QuizzAnno
      */
     public function getAverageOfWeighting($weighting = null)
     {
-        $total = 0;
         $count = count($this->getQuizzAnnoHasFras());
-        $weighting = ($weighting) ?: $this->getWeighting();
-
-        foreach ($this->getQuizzAnnoHasFras() as $quizz) {
-            $total += $quizz->getPoints();
-        }
 
         if (0 === $count) {
             return null;
         }
 
-        return round($total/($count*$this->getWeighting())*$weighting, 2);
+        $total = 0;
+        $weighting = ($weighting) ?: $this->weighting;
+
+        foreach ($this->quizzAnnoHasFras as $quizz) {
+            $total += $quizz->getPoints();
+        }
+
+        return round($total/($count*$this->weighting)*$weighting, 2);
     }
 
     /**
