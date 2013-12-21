@@ -10,4 +10,12 @@ class AsboWhosWhoBundleSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Symfony\Component\HttpKernel\Bundle\Bundle');
     }
+
+    public function it_should_return_correct_extension()
+    {
+        $this
+            ->getContainerExtension()
+            ->shouldHaveType('Asbo\Bundle\WhosWhoBundle\DependencyInjection\AsboWhosWhoExtension')
+        ;
+    }
 }
