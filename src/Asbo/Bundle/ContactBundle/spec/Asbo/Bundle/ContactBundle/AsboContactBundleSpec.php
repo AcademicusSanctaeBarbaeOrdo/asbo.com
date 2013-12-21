@@ -15,4 +15,9 @@ class AsboContactBundleSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Symfony\Component\HttpKernel\Bundle\Bundle');
     }
+
+    public function it_has_no_container_extension()
+    {
+        $this->getContainerExtension()->shouldReturn(false);
+    }
 }
