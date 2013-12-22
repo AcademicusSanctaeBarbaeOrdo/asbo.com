@@ -14,8 +14,6 @@ namespace Asbo\Bundle\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use FOS\MessageBundle\Entity\ThreadMetadata as BaseThreadMetadata;
-use FOS\MessageBundle\Model\ThreadInterface;
-use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
  * Represent a ThreadMetadata entity
@@ -43,16 +41,4 @@ class ThreadMetadata extends BaseThreadMetadata
      * @ORM\ManyToOne(targetEntity="Asbo\Bundle\CoreBundle\Entity\User")
      */
     protected $participant;
-
-    public function setThread(ThreadInterface $thread)
-    {
-        $this->thread = $thread;
-    }
-
-    public function setParticipant(ParticipantInterface $participant)
-    {
-        $this->participant = $participant;
-
-        return $this;
-    }
 }

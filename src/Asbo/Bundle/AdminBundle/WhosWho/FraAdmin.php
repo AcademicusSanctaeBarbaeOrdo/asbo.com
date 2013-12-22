@@ -211,7 +211,7 @@ class FraAdmin extends Admin
             ->add('anno')
             ->add('getAnnoToDates')
             ->add('getTypeLabel')
-            ->add('getStatusLabel')
+            ->add('status')
             ->add('pontif')
             ->add('contributor')
         ;

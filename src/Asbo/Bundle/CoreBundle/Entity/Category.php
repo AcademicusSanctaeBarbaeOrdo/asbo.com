@@ -15,7 +15,7 @@ use Sonata\ClassificationBundle\Entity\BaseCategory as BaseCategory;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a Category entity
+ * Represent a Category entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -34,7 +34,7 @@ class Category extends BaseCategory
     protected $id;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */

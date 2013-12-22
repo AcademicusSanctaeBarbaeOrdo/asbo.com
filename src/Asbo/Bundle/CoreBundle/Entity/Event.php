@@ -120,6 +120,8 @@ class Event extends BaseEvent implements EventInterface
      */
     public function removeEventHasFra(EventHasFra $eventHasFra)
     {
-        $this->eventHasFras->remove($eventHasFra);
+        $this->eventHasFras->removeElement($eventHasFra);
+
+        return $this;
     }
 }

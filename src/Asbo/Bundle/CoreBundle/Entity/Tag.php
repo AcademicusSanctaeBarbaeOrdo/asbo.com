@@ -15,7 +15,7 @@ use Sonata\ClassificationBundle\Entity\BaseTag as BaseTag;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a Tag entity
+ * Represent a Tag entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -34,7 +34,7 @@ class Tag extends BaseTag
     protected $id;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */

@@ -15,7 +15,7 @@ use Sonata\ClassificationBundle\Entity\BaseCollection as BaseCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a Collection entity
+ * Represent a Collection entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -34,7 +34,7 @@ class Collection extends BaseCollection
     protected $id;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */

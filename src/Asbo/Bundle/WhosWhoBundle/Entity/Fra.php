@@ -592,18 +592,6 @@ class Fra
     }
 
     /**
-     * Get type label.
-     *
-     * @return string
-     */
-    public function getStatusLabel()
-    {
-        $type = FraStatus::getChoices();
-
-        return array_key_exists($this->getStatus(), $type) ? $type[$this->getStatus()] : 'Inconnu';
-    }
-
-    /**
      * Set anno.
      *
      * @param integer $anno

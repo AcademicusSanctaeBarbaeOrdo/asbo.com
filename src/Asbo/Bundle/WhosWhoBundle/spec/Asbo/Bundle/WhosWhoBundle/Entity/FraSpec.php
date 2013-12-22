@@ -195,15 +195,6 @@ class FraSpec extends ObjectBehavior
         $this->shouldThrow(new \InvalidArgumentException('Wrong status, "'.$id.'" given.'))->duringSetStatus($id);
     }
 
-    public function its_status_can_be_convert_to_label_value()
-    {
-        $key = array_rand(FraStatus::getChoices());
-        $value = FraStatus::getChoices()[$key];
-
-        $this->setStatus($key);
-        $this->getStatusLabel()->shouldReturn($value);
-    }
-
     public function it_has_no_anno_by_default()
     {
         $this->getAnno()->shouldReturn(null);

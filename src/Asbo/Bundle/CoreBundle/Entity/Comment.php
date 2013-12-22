@@ -15,7 +15,7 @@ use Sonata\NewsBundle\Entity\BaseComment as BaseComment;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a Comment entity
+ * Represent a Comment entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -34,7 +34,7 @@ class Comment extends BaseComment
     protected $id;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */

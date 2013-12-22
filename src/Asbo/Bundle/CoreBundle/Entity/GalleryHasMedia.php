@@ -15,7 +15,7 @@ use Sonata\MediaBundle\Entity\BaseGalleryHasMedia as BaseGalleryHasMedia;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a GalleryHasMedia entity
+ * Represent a GalleryHasMedia entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -34,7 +34,7 @@ class GalleryHasMedia extends BaseGalleryHasMedia
     protected $id;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */

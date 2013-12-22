@@ -15,7 +15,7 @@ use Sonata\MediaBundle\Entity\BaseGallery as BaseGallery;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a Gallery entity
+ * Represent a Gallery entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -41,7 +41,7 @@ class Gallery extends BaseGallery
     protected $description;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */

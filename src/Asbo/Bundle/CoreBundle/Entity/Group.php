@@ -15,7 +15,7 @@ use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a Group entity
+ * Represent a Group entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *

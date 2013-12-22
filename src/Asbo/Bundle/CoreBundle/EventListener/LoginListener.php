@@ -36,7 +36,7 @@ class LoginListener
     /**
      * Constructor.
      *
-     * @param Session                  $session
+     * @param SessionInterface         $session
      * @param SecurityContextInterface $context
      */
     public function __construct(Session $session, SecurityContextInterface $context)
