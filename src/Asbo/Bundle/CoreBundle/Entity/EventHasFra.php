@@ -20,9 +20,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Asbo core eventHasFra entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
- *
- * @ORM\Table(name="asbo__event_event_has_fra")
- * @ORM\Entity()
  */
 class EventHasFra
 {
@@ -33,10 +30,6 @@ class EventHasFra
 
     /**
      * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 

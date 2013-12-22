@@ -12,24 +12,16 @@
 namespace Asbo\Bundle\CoreBundle\Entity;
 
 use Sonata\NewsBundle\Entity\BaseComment as BaseComment;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Represent a Comment entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
- *
- * @ORM\Table(name="news__comment")
- * @ORM\Entity()
  */
 class Comment extends BaseComment
 {
     /**
      * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 

@@ -12,24 +12,16 @@
 namespace Asbo\Bundle\CoreBundle\Entity;
 
 use Sonata\ClassificationBundle\Entity\BaseCollection as BaseCollection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Represent a Collection entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
- *
- * @ORM\Table(name="news__collection")
- * @ORM\Entity()
  */
 class Collection extends BaseCollection
 {
     /**
      * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 

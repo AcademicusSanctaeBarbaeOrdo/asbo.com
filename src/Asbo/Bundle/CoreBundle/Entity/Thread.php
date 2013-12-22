@@ -11,39 +11,13 @@
 
 namespace Asbo\Bundle\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 use FOS\MessageBundle\Entity\Thread as BaseThread;
 
 /**
  * Represent a Thread entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
- *
- * @ORM\Table(name="message__thread")
- * @ORM\Entity()
  */
 class Thread extends BaseThread
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\generatedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Asbo\Bundle\CoreBundle\Entity\User")
-     */
-    protected $createdBy;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Asbo\Bundle\CoreBundle\Entity\Message", mappedBy="thread")
-     */
-    protected $messages;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Asbo\Bundle\CoreBundle\Entity\ThreadMetadata", mappedBy="thread", cascade={"all"})
-     */
-    protected $metadata;
 }

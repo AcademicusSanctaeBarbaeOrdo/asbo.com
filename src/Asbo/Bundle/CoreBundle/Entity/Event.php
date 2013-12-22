@@ -12,7 +12,6 @@
 namespace Asbo\Bundle\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Asbo\Bundle\EventBundle\Model\Event as BaseEvent;
 use Asbo\Bundle\EventBundle\Model\EventInterface;
 
@@ -20,9 +19,6 @@ use Asbo\Bundle\EventBundle\Model\EventInterface;
  * Asbo core event entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
- *
- * @ORM\Table(name="asbo__event_event")
- * @ORM\Entity()
  */
 class Event extends BaseEvent implements EventInterface
 {
@@ -30,8 +26,6 @@ class Event extends BaseEvent implements EventInterface
      * EventHasFras.
      *
      * @var EventHasFra[]
-     *
-     * @ORM\OneToMany(targetEntity="Asbo\Bundle\CoreBundle\Entity\EventHasFra", mappedBy="event", cascade={"all"}, orphanRemoval=true)
      */
     protected $eventHasFras;
 
