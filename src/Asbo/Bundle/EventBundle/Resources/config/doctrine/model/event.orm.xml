@@ -15,10 +15,10 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Asbo\Bundle\EventBundle\Model\Event" table="asbo__event_event">
-        <id name="id" type="integer" column="id">
+        <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-
+        
         <field name="name" type="string" length="255" />
         <field name="description" type="text" />
         <field name="startsAt" column="starts_at" type="datetime" nullable="true" />
