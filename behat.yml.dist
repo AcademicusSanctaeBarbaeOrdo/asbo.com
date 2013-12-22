@@ -3,15 +3,13 @@
 
 default:
     formatter:
-        name:               pretty
+        name: pretty
     context:
         class: Asbo\Bundle\WebBundle\Behat\FeatureContext
     extensions:
         Behat\MinkExtension\Extension:
             default_session: symfony2
             goutte: ~
-            browser_name: chrome
-            selenium2: ~
-            base_url:   http://localhost
+            browser_name: firefox
         Behat\Symfony2Extension\Extension:
             mink_driver: true
