@@ -561,18 +561,6 @@ class Fra
     }
 
     /**
-     * Get type label.
-     *
-     * @return string
-     */
-    public function getTypeLabel()
-    {
-        $type = FraTypes::getChoices();
-
-        return array_key_exists($this->getType(), $type) ? $type[$this->getType()] : 'Inconnu';
-    }
-
-    /**
      * Set status.
      *
      * @param string $status
@@ -601,18 +589,6 @@ class Fra
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Get type label.
-     *
-     * @return string
-     */
-    public function getStatusLabel()
-    {
-        $type = FraStatus::getChoices();
-
-        return array_key_exists($this->getStatus(), $type) ? $type[$this->getStatus()] : 'Inconnu';
     }
 
     /**
@@ -1308,6 +1284,22 @@ class Fra
         $this->contributor = (bool) $contributor;
 
         return $this;
+    }
+
+    /**
+     * Get total denier based on the posts.
+     *
+     * @return integer
+     */
+    public function getTotalDenier()
+    {
+        $derniers = 0;
+
+        foreach ($this->fraHasPosts as $fraHasPost) {
+            $derniers += $fraHasPost->getPost()->getDenier();
+        }
+
+        return $derniers;
     }
 
     /**

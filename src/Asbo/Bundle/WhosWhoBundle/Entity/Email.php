@@ -122,18 +122,6 @@ class Email implements FraResourceInterface
     }
 
     /**
-     * Get type label.
-     *
-     * @return string
-     */
-    public function getTypeLabel()
-    {
-        $type = EmailTypes::getChoices();
-
-        return array_key_exists($this->getType(), $type) ? $type[$this->getType()] : $type[EmailTypes::UNKNOWN];
-    }
-
-    /**
      * Set fra.
      *
      * @param Fra $fra

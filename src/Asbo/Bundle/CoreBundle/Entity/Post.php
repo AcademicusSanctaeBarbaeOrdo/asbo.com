@@ -15,7 +15,7 @@ use Sonata\NewsBundle\Entity\BasePost as BasePost;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a Post entity
+ * Represent a Post entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -34,17 +34,12 @@ class Post extends BasePost
     protected $id;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    public function __toString()
-    {
-        return (string) parent::__toString();
     }
 }

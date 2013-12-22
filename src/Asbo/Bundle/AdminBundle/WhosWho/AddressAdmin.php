@@ -113,11 +113,7 @@ class AddressAdmin extends Admin
             ->add('locality')
             ->add('postcode')
             ->add('country')
-            ->add('typeLabel', 'text',
-                [
-                    'label' => 'Type',
-                ]
-            )
+            ->add('type')
         ;
 
         if (!$this->isChild()) {

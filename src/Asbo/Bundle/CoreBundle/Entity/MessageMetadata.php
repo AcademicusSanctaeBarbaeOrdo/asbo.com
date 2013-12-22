@@ -14,11 +14,9 @@ namespace Asbo\Bundle\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use FOS\MessageBundle\Entity\MessageMetadata as BaseMessageMetadata;
-use FOS\MessageBundle\Model\MessageInterface;
-use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
- * Represent a MessageMetaData entity
+ * Represent a MessageMetaData entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -43,18 +41,4 @@ class MessageMetadata extends BaseMessageMetadata
      * @ORM\ManyToOne(targetEntity="Asbo\Bundle\CoreBundle\Entity\User")
      */
     protected $participant;
-
-    public function setMessage(MessageInterface $message)
-    {
-        $this->message = $message;
-
-        return $this;
-    }
-
-    public function setParticipant(ParticipantInterface $participant)
-    {
-            $this->participant = $participant;
-
-            return $this;
-    }
 }

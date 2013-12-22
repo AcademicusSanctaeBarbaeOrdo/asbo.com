@@ -20,7 +20,7 @@ use FOS\MessageBundle\Model\ParticipantInterface;
 use Asbo\Bundle\WhosWhoBundle\Model\FraUserInterface;
 
 /**
- * Represent a User entity
+ * Represent a User entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -74,18 +74,21 @@ class User extends BaseUser implements ParticipantInterface, FraUserInterface
     private $slug;
 
     /**
-     * The github id
+     * The github id.
      *
      * @param string
-     * @return  $this
+     *
+     * @return self
      */
     public function setGithubId($githubId)
     {
         $this->githubId = $githubId;
+
+        return $this;
     }
 
     /**
-     * Get the google id
+     * Get the github id.
      *
      * @return string
      */
@@ -95,14 +98,17 @@ class User extends BaseUser implements ParticipantInterface, FraUserInterface
     }
 
     /**
-     * The linkedin id
+     * The linkedin id.
      *
      * @param string
-     * @return  $this
+     *
+     * @return self
      */
     public function setLinkedinId($linkedinId)
     {
         $this->linkedinId = $linkedinId;
+
+        return $this;
     }
 
     /**
@@ -116,7 +122,7 @@ class User extends BaseUser implements ParticipantInterface, FraUserInterface
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -126,10 +132,11 @@ class User extends BaseUser implements ParticipantInterface, FraUserInterface
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
-     * @return $this
+     *
+     * @return self
      */
     public function setSlug($slug)
     {
@@ -166,10 +173,5 @@ class User extends BaseUser implements ParticipantInterface, FraUserInterface
         $this->setUsernameCanonical($emailCanonical);
 
         return $this;
-    }
-
-    public function getFullName()
-    {
-        return $this->firstname.' '.$this->lastname;
     }
 }

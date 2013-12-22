@@ -84,6 +84,12 @@ class EventSpec extends ObjectBehavior
         $this->getStatus()->shouldReturn(null);
     }
 
+    public function its_status_can_take_only_specific_values()
+    {
+        $id = uniqid();
+        $this->shouldThrow(new \InvalidArgumentException('Wrong event status supplied: "'.$id.'" given.'))->duringSetStatus($id);
+    }
+
     public function its_status_should_be_muttable()
     {
         $this->setStatus('confirmed');
@@ -94,6 +100,28 @@ class EventSpec extends ObjectBehavior
     {
         $this->setName('Agapes');
         $this->__toString()->shouldReturn('Agapes');
+    }
+
+    public function it_has_no_created_date_by_default()
+    {
+        $this->getCreatedAt()->shouldReturn(null);
+    }
+
+    public function its_created_date_is_muttable()
+    {
+        $this->setCreatedAt($date = new \DateTime('now'));
+        $this->getCreatedAt()->shouldReturn($date);
+    }
+
+    public function it_has_no_updated_date_by_default()
+    {
+        $this->getCreatedAt()->shouldReturn(null);
+    }
+
+    public function its_updated_date_is_muttable()
+    {
+        $this->setUpdatedAt($date = new \DateTime('now'));
+        $this->getUpdatedAt()->shouldReturn($date);
     }
 
     public function it_has_fluent_interface(DateTime $date, CalendarInterface $calendar)

@@ -178,15 +178,6 @@ class FraSpec extends ObjectBehavior
         $this->shouldThrow(new \InvalidArgumentException('Wrong type, "'.$id.'" given.'))->duringSetType($id);
     }
 
-    public function its_type_can_be_convert_to_label_value()
-    {
-        $key = array_rand(FraTypes::getChoices());
-        $value = FraTypes::getChoices()[$key];
-
-        $this->setType($key);
-        $this->getTypeLabel()->shouldReturn($value);
-    }
-
     public function it_has_status_tyro_by_default()
     {
         $this->getStatus()->shouldReturn(FraStatus::TYRO);
@@ -202,15 +193,6 @@ class FraSpec extends ObjectBehavior
     {
         $id = uniqid();
         $this->shouldThrow(new \InvalidArgumentException('Wrong status, "'.$id.'" given.'))->duringSetStatus($id);
-    }
-
-    public function its_status_can_be_convert_to_label_value()
-    {
-        $key = array_rand(FraStatus::getChoices());
-        $value = FraStatus::getChoices()[$key];
-
-        $this->setStatus($key);
-        $this->getStatusLabel()->shouldReturn($value);
     }
 
     public function it_has_no_anno_by_default()
@@ -782,6 +764,37 @@ class FraSpec extends ObjectBehavior
     {
         $this->setSlug($slug = uniqid());
         $this->getSlug()->shouldReturn($slug);
+    }
+
+    /**
+     * @param \Asbo\Bundle\WhosWhoBundle\Entity\FraHasPost $fraHasPost1
+     * @param \Asbo\Bundle\WhosWhoBundle\Entity\FraHasPost $fraHasPost2
+     *
+     * @param \Asbo\Bundle\WhosWhoBundle\Entity\Post $post1
+     * @param \Asbo\Bundle\WhosWhoBundle\Entity\Post $post2
+     *
+     */
+    public function its_calculates_correct_total_deniers($fraHasPost1, $fraHasPost2, $post1, $post2)
+    {
+        $fraHasPost1->getPost()->shouldBeCalled();
+        $fraHasPost2->getPost()->shouldBeCalled();
+
+        $fraHasPost1->getPost()->willReturn($post1);
+        $fraHasPost2->getPost()->willReturn($post2);
+
+        $post1->getDenier()->shouldBeCalled();
+        $post2->getDenier()->shouldBeCalled();
+
+        $post1->getDenier()->willReturn(4);
+        $post2->getDenier()->willReturn(3);
+
+        $fraHasPost1->setFra($this)->shouldBeCalled();
+        $fraHasPost2->setFra($this)->shouldBeCalled();
+
+        $this->addFraHaspost($fraHasPost1);
+        $this->addFraHaspost($fraHasPost2);
+
+        $this->getTotalDenier()->shouldReturn(7);
     }
 
 }

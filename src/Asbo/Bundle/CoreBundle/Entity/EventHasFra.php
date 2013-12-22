@@ -71,7 +71,7 @@ class EventHasFra
     protected $status;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */
@@ -114,6 +114,8 @@ class EventHasFra
     public function setFra(Fra $fra)
     {
         $this->fra = $fra;
+
+        return $this;
     }
 
     /**
@@ -127,7 +129,7 @@ class EventHasFra
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param  string                    $status
      * @throws \InvalidArgumentException
@@ -141,7 +143,7 @@ class EventHasFra
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -151,19 +153,7 @@ class EventHasFra
     }
 
     /**
-     * Get Type Label
-     *
-     * @return string|null
-     */
-    public function getStatusLabel()
-    {
-        $status = self::getStatusChoices();
-
-        return array_key_exists($this->getStatus(), $status) ? $status[$this->getStatus()] : 'Inconnu';
-    }
-
-    /**
-     * Get The status choices
+     * Get The status choices.
      *
      * @return array
      */

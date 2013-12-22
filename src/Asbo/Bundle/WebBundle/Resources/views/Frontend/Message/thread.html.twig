@@ -40,15 +40,8 @@ file that was distributed with this source code.
             {% set thisUser = ', '~app.user.username %}
             <legend>Répondre à
             <small>
-                {% for user in thread.allParticipantsWithoutUser(app.user) %}
+                {% for user in thread.participants %}
                     {{ user }}
-                    {% if loop.last - 1 %}
-                        et
-                    {% elseif loop.last %}
-
-                    {% else %}
-                        ,
-                    {% endif %}
                 {% endfor %}
             </small></legend>
         </fieldset>

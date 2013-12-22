@@ -17,6 +17,11 @@ class CalendarSpec extends ObjectBehavior
         $this->shouldImplement('Asbo\Bundle\EventBundle\Model\CalendarInterface');
     }
 
+    public function it_has_no_id_by_default()
+    {
+        $this->getId()->shouldReturn(null);
+    }
+
     public function it_should_not_have_name_by_default()
     {
         $this->getName()->shouldReturn(null);

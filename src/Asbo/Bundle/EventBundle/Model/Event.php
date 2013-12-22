@@ -256,7 +256,7 @@ class Event implements EventInterface
     public function setStatus($status = null)
     {
         if (null !== $status && !in_array($status, self::getStatuses())) {
-            throw new InvalidArgumentException('Wrong event status supplied');
+            throw new InvalidArgumentException(sprintf('Wrong event status supplied: "%s" given.', $status));
         }
 
         $this->status = $status;

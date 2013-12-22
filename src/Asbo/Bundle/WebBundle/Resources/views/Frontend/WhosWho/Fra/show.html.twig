@@ -57,7 +57,7 @@ file that was distributed with this source Label.
 
                 <div class="col-lg-6 col-md-6">
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-user"></i> {{ fra.statusLabel }}, anno {{ fra.anno }}</li>
+                        <li><i class="fa fa-user"></i> {{ fra.status }}, anno {{ fra.anno }}</li>
 
                         {% if fra.birthday is not null %}
                             <li>
@@ -102,7 +102,7 @@ file that was distributed with this source Label.
                             <li>
                                 <address>
                                     <i class="fa fa-home"></i>
-                                    <strong>{{ fra.principalAddress.typeLabel }}</strong>
+                                    <strong>{{ fra.principalAddress.type }}</strong>
                                     <br />
                                     {{ fra.principalAddress.street }} {{ fra.principalAddress.number }}<br />
                                     {{ fra.principalAddress.postcode }} {{ fra.principalAddress.locality }}<br />

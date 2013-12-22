@@ -74,11 +74,7 @@ class EmailAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('email')
-            ->add('typeLabel', 'text',
-                [
-                    'label' => 'Type',
-                ]
-            )
+            ->add('type')
         ;
 
         if (!$this->isChild()) {

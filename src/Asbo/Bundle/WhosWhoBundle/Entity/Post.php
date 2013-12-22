@@ -161,18 +161,6 @@ class Post
     }
 
     /**
-     * Get type label.
-     *
-     * @return string
-     */
-    public function getTypeLabel()
-    {
-        $type = PostTypes::getChoices();
-
-        return array_key_exists($this->getType(), $type) ? $type[$this->getType()] : 'Inconnu';
-    }
-
-    /**
      * Set denier.
      *
      * @param integer $denier
@@ -206,7 +194,7 @@ class Post
         $return = $this->name;
 
         if (!empty($this->monogramme)) {
-            $return .= ' ('.$this->getMonogramme().')';
+            $return .= ' ('.$this->monogramme.')';
         }
 
         return $return;

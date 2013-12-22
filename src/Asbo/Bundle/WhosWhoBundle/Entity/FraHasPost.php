@@ -217,6 +217,6 @@ class FraHasPost implements FraResourceInterface
      */
     public function __toString()
     {
-        return (string) $this->getPost();
+        return (string) $this->post;
     }
 }

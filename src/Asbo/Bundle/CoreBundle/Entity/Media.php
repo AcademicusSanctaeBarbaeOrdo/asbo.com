@@ -35,7 +35,7 @@ class Media extends BaseMedia implements FraImageInterface
     protected $id;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer $id
      */
