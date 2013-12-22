@@ -18,7 +18,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        
+
         <field name="name" type="string" length="255" />
         <field name="description" type="text" />
         <field name="startsAt" column="starts_at" type="datetime" nullable="true" />

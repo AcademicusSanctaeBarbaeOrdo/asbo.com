@@ -69,6 +69,7 @@ doctrine:
         resolve_target_entities:
             Asbo\Bundle\WhosWhoBundle\Model\FraUserInterface: Asbo\Bundle\CoreBundle\Entity\User
             Asbo\Bundle\WhosWhoBundle\Model\FraImageInterface: Asbo\Bundle\CoreBundle\Entity\Media
+            Asbo\Bundle\EventBundle\Model\Event: Asbo\Bundle\CoreBundle\Entity\Event
 
 # Swiftmailer Configuration
 swiftmailer:
