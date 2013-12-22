@@ -1,0 +1,26 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    test: ~
+    default_locale:  "fr"
+    session:
+        storage_id: session.storage.mock_file
+
+swiftmailer:
+    disable_delivery: true
+
+doctrine:
+    dbal:
+        dbname:   %database_name%_test
+        driver_class: Asbo\Bundle\CoreBundle\Tests\MySqlDriver
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+        firephp:
+            type:  firephp
+            level: info

@@ -20,3 +20,4 @@ bin/doctrine*
 bin/phpspec
 
 phpspec.yml
+behat.yml
