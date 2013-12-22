@@ -12,24 +12,16 @@
 namespace Asbo\Bundle\CoreBundle\Entity;
 
 use Sonata\MediaBundle\Entity\BaseGalleryHasMedia as BaseGalleryHasMedia;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Represent a GalleryHasMedia entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
- *
- * @ORM\Table(name="media__gallery_media")
- * @ORM\Entity()
  */
 class GalleryHasMedia extends BaseGalleryHasMedia
 {
     /**
      * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 

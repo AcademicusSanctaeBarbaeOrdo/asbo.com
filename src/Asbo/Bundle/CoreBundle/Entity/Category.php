@@ -12,24 +12,16 @@
 namespace Asbo\Bundle\CoreBundle\Entity;
 
 use Sonata\ClassificationBundle\Entity\BaseCategory as BaseCategory;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Represent a Category entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
- *
- * @ORM\Table(name="news__category")
- * @ORM\Entity()
  */
 class Category extends BaseCategory
 {
     /**
      * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 

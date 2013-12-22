@@ -12,24 +12,16 @@
 namespace Asbo\Bundle\CoreBundle\Entity;
 
 use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Represent a Group entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
- *
- * @ORM\Table(name="user__group")
- * @ORM\Entity()
  */
 class Group extends BaseGroup
 {
     /**
      * @var integer $id
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\generatedValue(strategy="AUTO")
      */
      protected $id;
 }
