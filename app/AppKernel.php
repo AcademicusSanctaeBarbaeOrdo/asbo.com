@@ -25,7 +25,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            
+
             // Asbo Bundles.
             new Asbo\Bundle\WhosWhoBundle\AsboWhosWhoBundle(),
             new Asbo\Bundle\AdminBundle\AsboAdminBundle(),
@@ -37,6 +37,7 @@ class AppKernel extends Kernel
 
             new Asbo\Bundle\WebBundle\AsboWebBundle(),
             new Asbo\Bundle\CoreBundle\AsboCoreBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -84,7 +85,6 @@ class AppKernel extends Kernel
 
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
