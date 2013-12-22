@@ -28,7 +28,7 @@
             </call>
         </service>
 
-        <service id="asbo.event.admin.calendar" class="Asbo\Bundle\AdminBundle\event\CalendarAdmin">
+        <service id="asbo.event.admin.calendar" class="Asbo\Bundle\AdminBundle\Event\CalendarAdmin">
             <tag name="sonata.admin" manager_type="orm" label="Calendar" group="%asbo.event.admin.groupname%"  />
             <argument />
             <argument>Asbo\Bundle\EventBundle\Model\Calendar</argument>
