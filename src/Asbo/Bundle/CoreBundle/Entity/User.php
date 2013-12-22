@@ -20,7 +20,7 @@ use FOS\MessageBundle\Model\ParticipantInterface;
 use Asbo\Bundle\WhosWhoBundle\Model\FraUserInterface;
 
 /**
- * Represent a User entity.
+ * Represent an User entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *
@@ -112,7 +112,7 @@ class User extends BaseUser implements ParticipantInterface, FraUserInterface
     }
 
     /**
-     * Get the linkedin id
+     * Get the linkedin id.
      *
      * @return string
      */

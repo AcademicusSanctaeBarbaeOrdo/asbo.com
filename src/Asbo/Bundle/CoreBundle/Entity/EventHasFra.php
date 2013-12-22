@@ -41,7 +41,7 @@ class EventHasFra
     protected $id;
 
     /**
-     * Event
+     * The linked Event.
      *
      * @var EventInterface
      *
@@ -51,7 +51,7 @@ class EventHasFra
     protected $event;
 
     /**
-     * Fra
+     * The linked Fra.
      *
      * @var Fra
      *
@@ -61,7 +61,7 @@ class EventHasFra
     protected $fra;
 
     /**
-     * Status
+     * The Status of event.
      *
      * @var string $status
      *
@@ -133,7 +133,8 @@ class EventHasFra
      *
      * @param  string                    $status
      * @throws \InvalidArgumentException
-     * @return $this
+     *
+     * @return self
      */
     public function setStatus($status)
     {
@@ -177,7 +178,9 @@ class EventHasFra
     }
 
     /**
-     * {@inhertiDoc}
+     * Auto-render on toString.
+     *
+     * @return string
      */
     public function __toString()
     {

@@ -82,7 +82,8 @@ class Enquiry
      * Set the sender name.
      *
      * @param string $name
-     * @return $this
+     *
+     * @return self
      */
     public function setName($name)
     {
@@ -105,7 +106,8 @@ class Enquiry
      * Set the sender email.
      *
      * @param string $email
-     * @return $this
+     *
+     * @return self
      */
     public function setEmail($email)
     {
@@ -128,7 +130,8 @@ class Enquiry
      * Set the message subject.
      *
      * @param string $subject
-     * @return $this
+     *
+     * @return self
      */
     public function setSubject($subject)
     {
@@ -151,7 +154,8 @@ class Enquiry
      * Set the message body.
      *
      * @param string $body
-     * @return $this
+     *
+     * @return self
      */
     public function setBody($body)
     {
@@ -161,10 +165,11 @@ class Enquiry
     }
 
     /**
-     * Sets the created at
+     * Sets the created at.
      *
      * @param \DateTime $createdAt
-     * @return $this
+     *
+     * @return self
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -174,7 +179,7 @@ class Enquiry
     }
 
     /**
-     * Gets the created at
+     * Gets the created at.
      *
      * @return \DateTime
      */
@@ -194,10 +199,11 @@ class Enquiry
     }
 
     /**
-     * Sets the receiver email
+     * Sets the receiver email.
      *
      * @param string $receiver
-     * @return $this
+     *
+     * @return self
      */
     public function setReceiver($receiver)
     {

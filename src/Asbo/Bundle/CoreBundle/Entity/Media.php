@@ -16,7 +16,7 @@ use Sonata\MediaBundle\Entity\BaseMedia as BaseMedia;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Represent a Media entity
+ * Represent a Media entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *

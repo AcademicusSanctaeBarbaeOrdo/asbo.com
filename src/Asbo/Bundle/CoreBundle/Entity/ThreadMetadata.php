@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Entity\ThreadMetadata as BaseThreadMetadata;
 
 /**
- * Represent a ThreadMetadata entity
+ * Represent a ThreadMetadata entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *

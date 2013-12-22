@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Entity\Thread as BaseThread;
 
 /**
- * Represent a Thread entity
+ * Represent a Thread entity.
  *
  * @author De Ron Malian <deronmalian@gmail.com>
  *

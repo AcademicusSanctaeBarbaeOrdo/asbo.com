@@ -97,9 +97,9 @@ class QuizzAnno
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return mixed
      */
     public function getId()
     {
@@ -107,10 +107,11 @@ class QuizzAnno
     }
 
     /**
-     * Set anno
+     * Set anno of quizz.
      *
-     * @param  integer   $anno
-     * @return QuizzAnno
+     * @param integer $anno
+     *
+     * @return self
      */
     public function setAnno($anno)
     {
@@ -120,7 +121,7 @@ class QuizzAnno
     }
 
     /**
-     * Get anno
+     * Get anno of quizz.
      *
      * @return integer
      */
@@ -130,10 +131,11 @@ class QuizzAnno
     }
 
     /**
-     * Set weighting
+     * Set weighting of quizz.
      *
-     * @param  integer   $weighting
-     * @return QuizzAnno
+     * @param integer $weighting
+     *
+     * @return self
      */
     public function setWeighting($weighting)
     {
@@ -143,7 +145,7 @@ class QuizzAnno
     }
 
     /**
-     * Get weighting
+     * Get weighting of quizz.
      *
      * @return integer
      */
@@ -153,10 +155,11 @@ class QuizzAnno
     }
 
     /**
-     * Set date
+     * Set date of quizz.
      *
-     * @param  \DateTime $date
-     * @return QuizzAnno
+     * @param \DateTime $date
+     *
+     * @return self
      */
     public function setDate(\DateTime $date = null)
     {
@@ -166,7 +169,7 @@ class QuizzAnno
     }
 
     /**
-     * Get date
+     * Get date of quizz.
      *
      * @return \DateTime
      */
@@ -176,8 +179,11 @@ class QuizzAnno
     }
 
     /**
+     * Sets linked fras to quizz.
+     *
      * @param array $quizzAnnoHasFras
-     * @return $this
+     *
+     * @return self
      */
     public function setQuizzAnnoHasFras($quizzAnnoHasFras)
     {
@@ -191,7 +197,9 @@ class QuizzAnno
     }
 
     /**
-     * @return \Asbo\Bundle\QuizzBundle\Entity\QuizzAnnoHasFra[]
+     * Get linked fras of quizz.
+     *
+     * @return QuizzAnnoHasFra[]
      */
     public function getQuizzAnnoHasFras()
     {
@@ -199,8 +207,11 @@ class QuizzAnno
     }
 
     /**
+     * Add linked fra to quizz.
+     *
      * @param QuizzAnnoHasFra $quizzAnnoHasFra
-     * @return $this
+     *
+     * @return self
      */
     public function addQuizzAnnoHasFras(QuizzAnnoHasFra $quizzAnnoHasFra)
     {
@@ -212,7 +223,9 @@ class QuizzAnno
     }
 
     /**
-     * @return \Asbo\Bundle\QuizzBundle\Entity\Quizz
+     * Get quizz.
+     *
+     * @return Quizz
      */
     public function getQuizz()
     {
@@ -220,9 +233,13 @@ class QuizzAnno
     }
 
     /**
-     * @param \Asbo\Bundle\QuizzBundle\Entity\Quizz $quizz
+     * Set quizz.
+     *
+     * @param Quizz $quizz
+     *
+     * @return self
      */
-    public function setQuizz($quizz)
+    public function setQuizz(Quizz $quizz)
     {
         $this->quizz = $quizz;
 
@@ -232,7 +249,8 @@ class QuizzAnno
     /**
      * Return the average of this quizz.
      *
-     * @param  null|integer $weighting
+     * @param null|integer $weighting
+     *
      * @return float
      */
     public function getAverageOfWeighting($weighting = null)
