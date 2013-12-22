@@ -141,7 +141,7 @@
             </call>
         </service>
 
-        <service id="asbo.whoswho.admin.externalPost" class="Asbo\Bundle\AdminBundle\WhosWho\externalPostAdmin">
+        <service id="asbo.whoswho.admin.externalPost" class="Asbo\Bundle\AdminBundle\WhosWho\ExternalPostAdmin">
             <tag name="sonata.admin" manager_type="orm" group="%asbo.whoswho.admin.groupname%" label="Poste Externe" />
             <argument />
             <argument>Asbo\Bundle\WhosWhoBundle\Entity\ExternalPost</argument>
