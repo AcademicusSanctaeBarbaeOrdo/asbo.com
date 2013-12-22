@@ -25,6 +25,18 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            
+            // Asbo Bundles.
+            new Asbo\Bundle\WhosWhoBundle\AsboWhosWhoBundle(),
+            new Asbo\Bundle\AdminBundle\AsboAdminBundle(),
+            new Asbo\Bundle\MigrationBundle\AsboMigrationBundle(),
+            new Asbo\Bundle\QuizzBundle\AsboQuizzBundle(),
+            new Asbo\Bundle\ContactBundle\AsboContactBundle(),
+            new Asbo\Bundle\EventBundle\AsboEventBundle(),
+            new Asbo\Bundle\TimelineBundle\AsboTimelineBundle(),
+
+            new Asbo\Bundle\WebBundle\AsboWebBundle(),
+            new Asbo\Bundle\CoreBundle\AsboCoreBundle(),
 
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -80,17 +92,6 @@ class AppKernel extends Kernel
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Spy\TimelineBundle\SpyTimelineBundle(),
 
-            // Asbo Bundles.
-            new Asbo\Bundle\WhosWhoBundle\AsboWhosWhoBundle(),
-            new Asbo\Bundle\AdminBundle\AsboAdminBundle(),
-            new Asbo\Bundle\MigrationBundle\AsboMigrationBundle(),
-            new Asbo\Bundle\QuizzBundle\AsboQuizzBundle(),
-            new Asbo\Bundle\ContactBundle\AsboContactBundle(),
-            new Asbo\Bundle\EventBundle\AsboEventBundle(),
-            new Asbo\Bundle\TimelineBundle\AsboTimelineBundle(),
-
-            new Asbo\Bundle\WebBundle\AsboWebBundle(),
-            new Asbo\Bundle\CoreBundle\AsboCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
