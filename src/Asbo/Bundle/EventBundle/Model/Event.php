@@ -265,9 +265,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Returns all event statuses available.
-     *
-     * @return array of self::STATUS_*
+     * {@inhertidoc}
      */
     public static function getStatuses()
     {
@@ -275,9 +273,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Used in form choice field.
-     *
-     * @return array
+     * {@inhertidoc}
      */
     public static function getStatusChoices()
     {

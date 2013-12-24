@@ -11,7 +11,6 @@
 
 namespace Asbo\Bundle\EventBundle\Form\Type;
 
-use Asbo\Bundle\CoreBundle\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -23,7 +22,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class EventType extends AbstractType
 {
+    /**
+     * @var string Fully qualified class name.
+     */
     protected $dataClass;
+
+    /**
+     * @var array Array of validation groups.
+     */
     protected $validationGroups;
 
     /**
@@ -40,6 +46,9 @@ class EventType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var \Asbo\Bundle\EventBundle\Model\EventInterface $class */
+        $class = $this->dataClass;
+
         $builder
             ->add('name', 'text', array(
                     'label' => 'asbo.form.event.name'
@@ -66,8 +75,8 @@ class EventType extends AbstractType
                 )
             )
             ->add('status', 'choice', array(
-                    'choices' => Event::getStatusChoices(),
-                    'label' => 'asbo.form.event.active'
+                    'choices' => $class::getStatusChoices(),
+                    'label' => 'asbo.form.event.status'
                 )
             )
         ;

@@ -134,4 +134,18 @@ interface EventInterface
      * @return self
      */
     public function setStatus($status = null);
+
+    /**
+     * Returns all event statuses available.
+     *
+     * @return array of self::STATUS_*
+     */
+    public static function getStatuses();
+
+    /**
+     * Used in form choice field.
+     *
+     * @return array
+     */
+    public static function getStatusChoices();
 }

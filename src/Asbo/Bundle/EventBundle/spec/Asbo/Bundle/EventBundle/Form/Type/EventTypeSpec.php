@@ -11,7 +11,7 @@ class EventTypeSpec extends ObjectBehavior
 {
     public function let()
     {
-        $this->beConstructedWith('Event', array('asbo'));
+        $this->beConstructedWith('Asbo\Bundle\EventBundle\Model\Event', array('asbo'));
     }
 
     public function it_is_initializable()
@@ -28,7 +28,7 @@ class EventTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(array(
-                    'data_class'        => 'Event',
+                    'data_class'        => 'Asbo\Bundle\EventBundle\Model\Event',
                     'validation_groups' => array('asbo'),
                 ))
             ->shouldBeCalled()
