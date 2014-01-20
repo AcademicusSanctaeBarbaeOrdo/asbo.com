@@ -49,9 +49,9 @@ parameters:
 
     intercept_redirects_dev:    false
 
-    asbo_contact.emails.info: ****
-    asbo_contact.emails.xxxx: ****
-    asbo_contact.emails.comite: ****
-    asbo_contact.emails.fsb: ****
-    asbo_contact.emails.cavasbo: ****
-    asbo_contact.emails.webmaster: ****
+    asbo_contact.emails.info: info@asbo.com
+    asbo_contact.emails.xxxx: info@asbo.com
+    asbo_contact.emails.comite: info@asbo.com
+    asbo_contact.emails.fsb: info@asbo.com
+    asbo_contact.emails.cavasbo: info@asbo.com
+    asbo_contact.emails.webmaster: info@asbo.com
