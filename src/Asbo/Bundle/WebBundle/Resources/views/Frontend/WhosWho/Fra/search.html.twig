@@ -27,19 +27,19 @@ file that was distributed with this source code.
                 <fieldset>
                     <legend>Concernant les fras ...</legend>
                 <div class="form-group">
-                    {{ form_label(form.firstname) }}
+                    {{ form_label(form.firstname, 'Prénom') }}
                     {{ form_widget(form.firstname, {'attr': {'class': 'form-control input-small'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_label(form.lastname) }}
+                    {{ form_label(form.lastname, 'Nom') }}
                     {{ form_widget(form.lastname, {'attr': {'class': 'form-control input-small'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_label(form.nickname) }}
+                    {{ form_label(form.nickname, 'Surnom') }}
                     {{ form_widget(form.nickname, {'attr': {'class': 'form-control input-small'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_label(form.gender) }}
+                    {{ form_label(form.gender, 'Sexe') }}
                     {{ form_widget(form.gender, {'attr': {'class': 'form-control input-small'}}) }}
                 </div>
 
@@ -64,7 +64,7 @@ file that was distributed with this source code.
                         </div>
 
                         <div class="form-group col-lg-12">
-                            {{ form_label(form.anno) }}
+                            {{ form_label(form.anno, 'Année d\'entrée à l\'ASBO') }}
                             <div class="row">
                                 <div class="col-lg-6">
                                     {{ form_widget(form.anno.condition_operator, {'attr': {'class': 'form-control input-small col-lg-2'}}) }}
@@ -78,11 +78,11 @@ file that was distributed with this source code.
 
                     <div class="row">
                         <div class="form-group col-lg-12">
-                            {{ form_label(form.fraHasPosts.post) }}
+                            {{ form_label(form.fraHasPosts.post, 'Postes occupés à l\'ASBO') }}
                             {{ form_widget(form.fraHasPosts.post, {'attr': {'class': 'form-control input-small'}}) }}
                         </div>
                         <div class="form-group col-lg-12">
-                            {{ form_label(form.fraHasPosts.anno) }}
+                            {{ form_label(form.fraHasPosts.anno, 'Années des postes recherchés') }}
                             <div class="row">
                                 <div class="col-lg-6">
                                     {{ form_widget(form.fraHasPosts.anno.condition_operator, {'attr': {'class': 'form-control input-small col-lg-2'}}) }}

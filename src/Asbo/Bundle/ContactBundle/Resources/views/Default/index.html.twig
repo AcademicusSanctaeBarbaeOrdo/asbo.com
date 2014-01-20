@@ -1,0 +1,57 @@
+
+{% extends 'AsboWebBundle:Frontend:layout.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block title %}
+Contact - {{ parent() }}
+{% endblock %}
+
+{% block headline %}
+    Contacter l'ASBO
+{% endblock headline %}
+
+{% block content_content %}
+
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="{{ path('asbo_contact') }}" method="post" {{ form_enctype(form) }}">
+            <fieldset>
+                    <legend>Formulaire de contact</legend>
+                    {{ form_errors(form) }}
+
+                    {{ form_row(form.destination, {'label': 'Qui contacter ?'}) }}
+                    {{ form_row(form.name, {'label': 'Votre nom et prénom'}) }}
+                    {{ form_row(form.email, {'label': 'Votre e-mail pour vous répondre'}) }}
+                    {{ form_row(form.subject, {'label': 'Quel est le sujet de votre message ?'}) }}
+                    {{ form_row(form.body, {'label': 'Pour finir, votre message !'}) }}
+
+                    {{ form_rest(form) }}
+                    <input type="submit" value="Envoyer" class="btn btn-success btn-block" />
+            </fieldset>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Qui contacter ?
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li>Comité : <a href="mailto:{{ comite }}">{{ comite }}</a></li>
+                        <li>Chancellerie : <a href="mailto:{{ xxxx }}">{{ xxxx }}</a></li>
+                        <li>Fondation Sainte Barbe : <a href="mailto:{{ fsb }}">{{ fsb }}</a></li>
+                        <li>Comité des Anciens : <a href="mailto:{{ cavasbo }}">{{ cavasbo }}</a></li>
+                        <li>Webmaster : <a href="mailto:{{ webmaster }}">{{ webmaster }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

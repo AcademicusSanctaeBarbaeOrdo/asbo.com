@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-lg-12">
+        {{ form_row(form.company, {'label': 'Société'}) }}
+        {{ form_row(form.sector, {'label': 'Secteur'}) }}
+        {{ form_row(form.position, {'label': 'Position/Poste'}) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.date_range.dateBegin, {'label': 'Année de début'}) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.date_range.dateEnd, {'label': 'Année de fin'}) }}
+    </div>
+    {{ form_rest(form) }}
+</div>

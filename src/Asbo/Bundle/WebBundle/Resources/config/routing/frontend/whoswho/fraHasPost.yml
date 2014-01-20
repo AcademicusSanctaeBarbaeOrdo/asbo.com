@@ -1,8 +1,3 @@
-asbo_whoswho_frahaspost_list:
-    pattern: /
-    defaults:
-        _controller: asbo_whoswho.controller.frahaspost:listAction
-        _method: GET|POST
 
 asbo_whoswho_frahaspost_delete:
     pattern: /{id}/delete
@@ -10,6 +5,7 @@ asbo_whoswho_frahaspost_delete:
     defaults:
         _controller: asbo_whoswho.controller.frahaspost:deleteAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/FraHasPost:delete.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -20,6 +16,7 @@ asbo_whoswho_frahaspost_create:
     defaults:
         _controller: asbo_whoswho.controller.frahaspost:createAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/FraHasPost:create.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -30,6 +27,7 @@ asbo_whoswho_frahaspost_update:
     defaults:
         _controller: asbo_whoswho.controller.frahaspost:updateAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/FraHasPost:update.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }

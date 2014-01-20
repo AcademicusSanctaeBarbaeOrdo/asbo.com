@@ -1,9 +1,3 @@
-asbo_whoswho_address_list:
-    pattern: /
-    defaults:
-        _controller: asbo_whoswho.controller.address:listAction
-        _method: GET|POST
-
 asbo_whoswho_address_delete:
     pattern: /{id}/delete
     methods: [GET, DELETE]

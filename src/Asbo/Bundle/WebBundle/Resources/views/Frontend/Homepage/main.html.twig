@@ -83,11 +83,11 @@ file that was distributed with this source code.
                     </div>
                 </div>
             </div>
-            {% if asbo.fra %}
+            {#
                 <div class="row">
                     {{ render(controller('AsboTimelineBundle:Timeline:timeline', {'_sylius': {'criteria': {'slug': asbo.fra.slug},'template': 'AsboWebBundle:Frontend/Timeline:timeline.html.twig'}})) }}
                 </div>
-            {% endif %}
+            #}
         {% endif %}
     {% else %}
         <div class="panel panel-default">

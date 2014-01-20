@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-lg-12">
+        {{ form_row(form.post, {'label': 'Poste occupé'}) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.date.type,{'label': ' '}) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.date.date, {'label': 'Anno ou Année Civil'}) }}
+    </div>
+</div>
+
+{{ form_rest(form) }}

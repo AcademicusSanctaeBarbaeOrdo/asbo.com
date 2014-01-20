@@ -1,15 +1,10 @@
-asbo_whoswho_externalpost_list:
-    pattern: /
-    defaults:
-        _controller: asbo_whoswho.controller.externalpost:listAction
-        _method: GET|POST
-
 asbo_whoswho_externalpost_delete:
     pattern: /{id}/delete
     methods: [GET, DELETE]
     defaults:
         _controller: asbo_whoswho.controller.externalpost:deleteAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/ExternalPost:delete.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -20,6 +15,7 @@ asbo_whoswho_externalpost_create:
     defaults:
         _controller: asbo_whoswho.controller.externalpost:createAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/ExternalPost:create.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -30,6 +26,7 @@ asbo_whoswho_externalpost_update:
     defaults:
         _controller: asbo_whoswho.controller.externalpost:updateAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/ExternalPost:update.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }

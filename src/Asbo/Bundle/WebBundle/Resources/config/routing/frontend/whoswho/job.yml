@@ -1,15 +1,10 @@
-asbo_whoswho_job_list:
-    pattern: /
-    defaults:
-        _controller: asbo_whoswho.controller.job:listAction
-        _method: GET|POST
-
 asbo_whoswho_job_delete:
     pattern: /{id}/delete
     methods: [GET, DELETE]
     defaults:
         _controller: asbo_whoswho.controller.job:deleteAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Job:delete.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -20,6 +15,7 @@ asbo_whoswho_job_create:
     defaults:
         _controller: asbo_whoswho.controller.job:createAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Job:create.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -30,6 +26,7 @@ asbo_whoswho_job_update:
     defaults:
         _controller: asbo_whoswho.controller.job:updateAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Job:update.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }

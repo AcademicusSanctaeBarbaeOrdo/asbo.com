@@ -1,0 +1,7 @@
+parameters:
+    asbo_contact.emails.info: info@asbo.com
+    asbo_contact.emails.xxxx: xxxx@asbo.com
+    asbo_contact.emails.comite: comite@asbo.com
+    asbo_contact.emails.fsb: ca.fsb@asbo.com
+    asbo_contact.emails.cavasbo: comite.cavasbo@asbo.com
+    asbo_contact.emails.webmaster: vaguemestre@asbo.com

@@ -1,0 +1,26 @@
+Installation
+
+- Usual app/AppKernel.php stuff.
+- Usual app/autoload.php stuff.
+
+- Add the following route to app/config/routing.yml :
+
+AsboContactBundle:
+    resource: "@AsboContactBundle/Resources/config/routing.yml"
+    prefix:   /
+
+- Add the following import in app/config/config.yml :
+
+imports:
+    // previous imports
+    - { resource: @AsboContactBundle/Resources/config/config.yml }
+    
+- Configure swiftmailer by adding the following lines in app/config/paramaters.ini (for example) :
+
+	mailer_transport="gmail"
+	mailer_encryption="ssl"
+	mailer_auth_mode="login"
+	mailer_host="smtp.gmail.com"
+	mailer_user="user@gmail.com"
+	mailer_password="yourpassword"
+    

@@ -38,3 +38,9 @@ asbo_whoswho_comite_last:
         _method: GET
         _sylius:
             template: AsboWebBundle:Frontend/WhosWho/Comite:anno.html.twig
+
+asbo_contact:
+    pattern:  /contact
+    defaults: { _controller: AsboContactBundle:Default:index }
+    requirements:
+        _method:  GET|POST

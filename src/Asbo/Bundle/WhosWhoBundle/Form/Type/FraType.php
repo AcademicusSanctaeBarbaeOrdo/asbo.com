@@ -49,11 +49,21 @@ class FraType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
+            ->add('firstname', 'text', [
+                    'read_only' => true,
+                    'disabled' => true,
+                ]
+            )
+            ->add('lastname', 'text', [
+                    'read_only' => true,
+                    'disabled' => true,
+                ]
+            )
             ->add('nickname')
             ->add('gender', 'choice',
                 [
+                    'read_only' => true,
+                    'disabled' => true,
                     'choices' =>
                         [
                             'm' => 'Homme',
@@ -73,11 +83,15 @@ class FraType extends AbstractType
             )
             ->add('anno', 'choice', [
                     'choices' => AnnoManipulator::getAnnos(),
+                    'disabled' => true,
+                    'read_only' => true,
                 ]
             )
             ->add('pontif', 'checkbox',
                 [
                     'required' => false,
+                    'disabled' => true,
+                    'read_only' => true,
                 ]
             )
         ;

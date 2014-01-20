@@ -68,4 +68,4 @@ asbo_event_fullcalendar:
             paginate: false
             limit: null
             criteria:
-                active: true
+                status: confirmed

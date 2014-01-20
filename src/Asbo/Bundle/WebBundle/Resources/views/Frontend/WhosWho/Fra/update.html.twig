@@ -13,7 +13,7 @@ file that was distributed with this source code.
 
 {% block title %}{{ fra }} | {{ parent() }}{% endblock %}
 
-{% block headline "Editer son profil" %}
+{% block headline "Éditer son profil" %}
 
 {% block asbo_whoswho_content %}
 
@@ -27,36 +27,36 @@ file that was distributed with this source code.
 
         <div class="row">
             <div class="col-lg-4">
-                {{ form_row(form.firstname) }}
-                {{ form_row(form.lastname) }}
-                {{ form_row(form.nickname) }}
-                {{ form_row(form.gender) }}
-                {{ form_row(form.birthday) }}
-                {{ form_row(form.birthplace) }}
+                {{ form_row(form.firstname, {'label': 'Prénom'}) }}
+                {{ form_row(form.lastname, {'label': 'Nom'}) }}
+                {{ form_row(form.nickname, {'label': 'Surnom'}) }}
+                {{ form_row(form.gender, {'label': 'Sexe'}) }}
+                {{ form_row(form.birthday, {'label': 'Anniversaire'}) }}
+                {{ form_row(form.birthplace, {'label': 'Lieu de naissance'}) }}
             </div>
             <div class="col-lg-4">
                     {{ form_row(form.type) }}
                     {{ form_row(form.status) }}
                     {{ form_row(form.anno) }}
-                    {{ form_row(form.pontif) }}
+                    {{ form_widget(form.pontif) }}
             </div>
             <div class="col-lg-4">
                 {% if form.principalAddress is defined %}
-                        {{ form_row(form.principalAddress) }}
+                        {{ form_row(form.principalAddress, {'label': 'Adresse principale'}) }}
                 {% endif %}
 
                 {% if form.principalPhone is defined %}
-                        {{ form_row(form.principalPhone) }}
+                        {{ form_row(form.principalPhone, {'label': 'Numéro de téléphone principal'}) }}
                 {% endif %}
 
                 {% if form.principalEmail is defined %}
-                        {{ form_row(form.principalEmail) }}
+                        {{ form_row(form.principalEmail, {'label': 'E-mail principale'}) }}
                 {% endif %}
             </div>
         </div>
 
         {{ form_rest(form) }}
-        <input type="submit" value="Editer" class="btn btn-success" />
+        <input type="submit" value="Sauvegarder les changements" class="btn btn-success" />
     </form>
 
 {% endblock %}

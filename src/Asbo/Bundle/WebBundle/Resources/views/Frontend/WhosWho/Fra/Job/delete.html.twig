@@ -1,0 +1,57 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/WhosWho:layout.html.twig" %}
+
+{% block title %}{{ block('headline') }} | {{ job.fra }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Supprimer un job' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous">
+                <a href="{{ path('asbo_whoswho_fra_show', {'slug': job.fra.slug}) }}">&larr; Retourner au profil de {{ job.fra }}</a>
+            </li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block asbo_whoswho_content %}
+
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="well">
+                        Êtes-vous sûr de vouloir supprimer ce job ?
+                        <div class="text-center"><br /><strong>{{ job }}</strong> ? <br /></div>
+                        Cette action est irréversible !
+                    </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {{ form_start(form, {'action': path('asbo_whoswho_job_delete', {'slug': job.fra.slug, 'id': job.id}), 'method': 'POST'}) }}
+                <input type="hidden" name="_method" value="DELETE" />
+                {{ form_row(form.submit, {'attr': {'class': 'btn btn-danger col-lg-12 col-md-12 col-sm-12 col-xs-12'}, 'label': 'Confirmer la suppression'}) }}
+                {{ form_rest(form) }}
+            </div>
+
+        </div>
+
+    {% endblock %}

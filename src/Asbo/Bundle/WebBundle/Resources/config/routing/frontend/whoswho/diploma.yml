@@ -10,6 +10,7 @@ asbo_whoswho_diploma_delete:
     defaults:
         _controller: asbo_whoswho.controller.diploma:deleteAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Diploma:delete.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -20,6 +21,7 @@ asbo_whoswho_diploma_create:
     defaults:
         _controller: asbo_whoswho.controller.diploma:createAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Diploma:create.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -30,6 +32,7 @@ asbo_whoswho_diploma_update:
     defaults:
         _controller: asbo_whoswho.controller.diploma:updateAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Diploma:update.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }

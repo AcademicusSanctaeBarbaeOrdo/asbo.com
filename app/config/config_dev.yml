@@ -39,3 +39,6 @@ web_profiler_extra:
 doctrine:
     dbal:
         dbname: %database_name%_dev
+
+swiftmailer:
+    disable_delivery:  true

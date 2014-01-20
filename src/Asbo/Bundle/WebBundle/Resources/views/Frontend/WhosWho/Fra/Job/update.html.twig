@@ -1,0 +1,68 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/WhosWho:layout.html.twig" %}
+
+{% block title %}{{ block('headline') }} | {{ job.fra }} | {{ parent() }} {% endblock %}
+
+
+
+{% block headline 'Modifier un job' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous">
+                <a href="{{ path('asbo_whoswho_fra_show', {'slug': job.fra.slug}) }}">&larr; Retourner au profil de {{ job.fra }}</a>
+            </li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block asbo_whoswho_content %}
+
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6">
+                <form{% if app.debug %}novalidate="true"{% endif %} action="{{ path('asbo_whoswho_job_update', {'slug': job.fra.slug, 'id': job.id}) }}" {{ form_enctype(form) }} method="POST" id="add-job">
+                    {% include 'AsboWebBundle:Frontend/WhosWho/Fra/Job:_form.html.twig' %}
+                    <input type="submit" value="Sauvegarder les changements" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+                </form>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="bs-callout-info bs-callout">
+                    <h4>Jobs déjà encodés !</h4>
+                    {% if job.fra.jobs is not empty %}
+                        <ul class="list-unstyled">
+                            {% for other in job.fra.jobs %}
+                                <li>
+                                    <a href="{{ path('asbo_whoswho_job_update', {'slug': other.fra.slug, 'id': other.id}) }}">{{ other }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        Ceci est votre premier job ! Félicitation !
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+    {% endblock %}

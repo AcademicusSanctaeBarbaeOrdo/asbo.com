@@ -48,3 +48,10 @@ parameters:
     asbo_frontend_domain:       http://www.asbo.com
 
     intercept_redirects_dev:    false
+
+    asbo_contact.emails.info: ****
+    asbo_contact.emails.xxxx: ****
+    asbo_contact.emails.comite: ****
+    asbo_contact.emails.fsb: ****
+    asbo_contact.emails.cavasbo: ****
+    asbo_contact.emails.webmaster: ****

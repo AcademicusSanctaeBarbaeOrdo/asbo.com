@@ -99,7 +99,7 @@ class MenuBuilder
 
         $menu->addChild('contact',
             [
-                'route' => 'homepage',
+                'route' => 'asbo_contact',
                 'linkAttributes' => array('title' => $this->trans('asbo.frontend.menu.main.contact')),
                 'attributes' => array('class' => 'green'),
                 'labelAttributes' => array('icon' => 'fa fa-envelope', 'iconOnly' => false)
@@ -146,10 +146,10 @@ class MenuBuilder
                     'linkAttributes' => array('title' => $this->trans('asbo.frontend.menu.sidebar.main.profile')),
                 ))->setLabel($this->trans('asbo.frontend.menu.sidebar.main.profile'));
 
-            $menu->addChild('message', array(
+            /*$menu->addChild('message', array(
                     'route' => 'fos_message_inbox',
                     'linkAttributes' => array('title' => $this->trans('asbo.frontend.menu.sidebar.main.message')),
-                ))->setLabel($this->trans('asbo.frontend.menu.sidebar.main.message').' ('.$this->asbo->getUser()->getUnreadMessages().')');
+                ))->setLabel($this->trans('asbo.frontend.menu.sidebar.main.message').' ('.$this->asbo->getUser()->getUnreadMessages().')'); */
 
             $menu->addChild('events', array(
                     'route' => 'asbo_event_upcoming',

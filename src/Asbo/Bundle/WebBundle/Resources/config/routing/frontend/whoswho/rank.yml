@@ -1,15 +1,10 @@
-asbo_whoswho_rank_list:
-    pattern: /
-    defaults:
-        _controller: asbo_whoswho.controller.rank:listAction
-        _method: GET|POST
-
 asbo_whoswho_rank_delete:
     pattern: /{id}/delete
     methods: [GET, DELETE]
     defaults:
         _controller: asbo_whoswho.controller.rank:deleteAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Rank:delete.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -20,6 +15,7 @@ asbo_whoswho_rank_create:
     defaults:
         _controller: asbo_whoswho.controller.rank:createAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Rank:create.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }
@@ -30,6 +26,7 @@ asbo_whoswho_rank_update:
     defaults:
         _controller: asbo_whoswho.controller.rank:updateAction
         _sylius:
+            template: AsboWebBundle:Frontend/WhosWho/Fra/Rank:update.html.twig
             redirect:
                 route: asbo_whoswho_fra_show
                 parameters: { 'slug': $slug }

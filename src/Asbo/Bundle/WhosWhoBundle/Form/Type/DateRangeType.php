@@ -72,7 +72,7 @@ class DateRangeType extends AbstractType
 
         $resolver->setDefaults(
             [
-                'start' => date('Y') - 10,
+                'start' => date('Y') - 30,
                 'end' => date('Y'),
                 'range' => $range,
                 'inverse' => true,

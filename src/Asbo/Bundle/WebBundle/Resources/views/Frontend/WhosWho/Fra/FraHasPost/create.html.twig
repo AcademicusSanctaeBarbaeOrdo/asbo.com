@@ -1,0 +1,67 @@
+{#
+
+This file is part of the ASBO package.
+
+(c) De Ron Malian <deronmalian@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends "AsboWebBundle:Frontend/WhosWho:layout.html.twig" %}
+
+{% block title %}{{ block('headline') }} | {{ frahaspost.fra }} | {{ parent() }} {% endblock %}
+
+{% block headline 'Ajouter un poste interne à l\'ASBO' %}
+
+    {% block page_header %}
+
+        <ul class="pager">
+            <li class="previous">
+                <a href="{{ path('asbo_whoswho_fra_show', {'slug': frahaspost.fra.slug}) }}">&larr; Retourner au profil de {{ frahaspost.fra }}</a>
+            </li>
+        </ul>
+
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block asbo_whoswho_content %}
+
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6">
+                <form novalidate="novalidate" action="{{ path('asbo_whoswho_frahaspost_create', {'slug': frahaspost.fra.slug}) }}" {{ form_enctype(form) }} method="POST" id="add-frahaspost">
+                    {% include 'AsboWebBundle:Frontend/WhosWho/Fra/FraHasPost:_form.html.twig' %}
+                    <input type="submit" value="Ajouter le poste" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+                </form>
+            </div>
+
+
+            <div class="col-lg-6 col-md-6">
+                <div class="bs-callout-info bs-callout">
+                    <h4>Postes ASBO déjà encodés</h4>
+                    {% if frahaspost.fra.frahasposts is not empty %}
+                        <ul class="list-unstyled">
+                            {% for other in frahaspost.fra.frahasposts %}
+                                <li>
+                                    <a href="{{ path('asbo_whoswho_frahaspost_update', {'slug': other.fra.slug, 'id': other.id}) }}">{{ other }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        Ceci est votre premier poste à l'ASBO
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+    {% endblock %}
