@@ -80,7 +80,7 @@ class Fra
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="date", nullable=true)
-     * @Assert\date
+     * @Assert\Date
      */
     private $birthday;
 
