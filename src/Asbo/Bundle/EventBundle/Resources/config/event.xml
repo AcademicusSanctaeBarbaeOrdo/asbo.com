@@ -18,7 +18,6 @@
 
     <parameters>
         <parameter key="asbo.form.type.event.class">Asbo\Bundle\EventBundle\Form\Type\EventType</parameter>
-
     </parameters>
 
     <services>

@@ -1,0 +1,40 @@
+{
+    "name": "asbo/event-bundle",
+    "type": "asbo-bundle",
+    "description": "Event component for ASBO.",
+    "keywords": ["calendar", "evant", "asbo"],
+    "license": "CC-BY-NC-SA-3.0",
+    "authors": [
+        {
+            "name":     "De Ron Malian",
+            "homepage": "http://github.com/Malian"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/AcademicusSanctaeBarbaeOrdo/asbo.com/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle": "~2.3",
+        "sylius/resource-bundle": "1.0.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec":      "2.0.*@dev",
+        "doctrine/orm":         "~2.3",
+        "symfony/form":       "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Asbo\\Bundle\\EventBundle\\": "" }
+    },
+    "target-dir": "Asbo/Bundle/EventBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
