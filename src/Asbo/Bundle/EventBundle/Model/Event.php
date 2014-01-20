@@ -21,7 +21,7 @@ use InvalidArgumentException;
 class Event implements EventInterface
 {
     /**
-     * Id
+     * Id.
      *
      * @var integer
      */

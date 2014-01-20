@@ -26,6 +26,19 @@ class AppKernel extends Kernel
     {
         $bundles = array(
 
+            // Asbo Bundles.
+            new Asbo\Bundle\WhosWhoBundle\AsboWhosWhoBundle(),
+            new Asbo\Bundle\AdminBundle\AsboAdminBundle(),
+            new Asbo\Bundle\MigrationBundle\AsboMigrationBundle(),
+            new Asbo\Bundle\QuizzBundle\AsboQuizzBundle(),
+            new Asbo\Bundle\ContactBundle\AsboContactBundle(),
+            new Asbo\Bundle\EventBundle\AsboEventBundle(),
+            new Asbo\Bundle\TimelineBundle\AsboTimelineBundle(),
+
+            new Asbo\Bundle\WebBundle\AsboWebBundle(),
+            new Asbo\Bundle\CoreBundle\AsboCoreBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+
             // Core bundles.
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
@@ -72,7 +85,6 @@ class AppKernel extends Kernel
 
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
@@ -80,17 +92,6 @@ class AppKernel extends Kernel
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Spy\TimelineBundle\SpyTimelineBundle(),
 
-            // Asbo Bundles.
-            new Asbo\Bundle\WhosWhoBundle\AsboWhosWhoBundle(),
-            new Asbo\Bundle\AdminBundle\AsboAdminBundle(),
-            new Asbo\Bundle\MigrationBundle\AsboMigrationBundle(),
-            new Asbo\Bundle\QuizzBundle\AsboQuizzBundle(),
-            new Asbo\Bundle\ContactBundle\AsboContactBundle(),
-            new Asbo\Bundle\EventBundle\AsboEventBundle(),
-            new Asbo\Bundle\TimelineBundle\AsboTimelineBundle(),
-
-            new Asbo\Bundle\WebBundle\AsboWebBundle(),
-            new Asbo\Bundle\CoreBundle\AsboCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
