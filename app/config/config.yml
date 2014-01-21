@@ -6,7 +6,6 @@ imports:
     - { resource: asbo.yml }
     - { resource: partials/sonata_admin.yml }
     - { resource: partials/sonata_media.yml }
-    - { resource: partials/sonata_news.yml }
     - { resource: partials/sonata_formatter.yml }
     - { resource: partials/sonata_message.yml }
 

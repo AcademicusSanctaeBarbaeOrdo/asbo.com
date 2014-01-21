@@ -134,7 +134,10 @@ class User extends BaseUser implements ParticipantInterface, FraUserInterface
     public function setEmail($email)
     {
         parent::setEmail($email);
-        $this->setUsername($email);
+
+        if ($this->username === null) {
+            $this->setUsername($email);
+        }
 
         return $this;
     }
@@ -145,7 +148,10 @@ class User extends BaseUser implements ParticipantInterface, FraUserInterface
     public function setEmailCanonical($emailCanonical)
     {
         parent::setEmailCanonical($emailCanonical);
-        $this->setUsernameCanonical($emailCanonical);
+
+        if ($this->usernameCanonical === null) {
+            $this->setUsernameCanonical($emailCanonical);
+        }
 
         return $this;
     }

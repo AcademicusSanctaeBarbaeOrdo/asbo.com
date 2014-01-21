@@ -7,6 +7,10 @@
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
+        <many-to-one target-entity="Asbo\Bundle\CoreBundle\Entity\Post" field="post">
+            <join-column nullable="false" name="post_id" referenced-column-name="id" />
+        </many-to-one>
     </entity>
 
 </doctrine-mapping>

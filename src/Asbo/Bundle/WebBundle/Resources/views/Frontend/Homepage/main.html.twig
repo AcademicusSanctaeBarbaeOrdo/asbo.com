@@ -39,7 +39,24 @@ file that was distributed with this source code.
 
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 
-        {{ render(controller('asbo_core.controller.post:getLastPostAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Quizz:last.html.twig'}})) }}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-paperclip"></i> Dernière News :
+                    Ephémérides Q2 - 2013-2014
+                    <span class="pull-right"><i class="fa fa-calendar"></i> 21/01/2014</span>
+                </div>
+                <div class="panel-body">
+                    <article class="sonata-blog-post-container">
+
+                        <div class="sonata-blog-post-abstract">
+
+                        </div>
+
+
+                    </article>
+                </div>
+            </div>
+
 
         {% if is_granted('ROLE_WHOSWHO_USER') %}
             <div class="row">

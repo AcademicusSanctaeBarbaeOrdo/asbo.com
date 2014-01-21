@@ -17,6 +17,9 @@ sonata_news:
         tag:        Asbo\Bundle\CoreBundle\Entity\Tag
         collection: Asbo\Bundle\CoreBundle\Entity\Collection
         media:      Asbo\Bundle\CoreBundle\Entity\Media
+    admin:
+        post:
+            class: Asbo\Bundle\AdminBundle\News\PostAdmin
 
 sonata_classification:
     class:

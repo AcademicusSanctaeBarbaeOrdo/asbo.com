@@ -60,10 +60,6 @@ sonata_gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
     prefix:   /media/gallery
 
-sonata_news:
-    resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
-    prefix:   /news
-
 sonata_user_admin_security_logout:
     path: /admin/logout
 

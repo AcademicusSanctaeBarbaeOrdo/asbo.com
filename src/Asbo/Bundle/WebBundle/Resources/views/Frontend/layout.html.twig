@@ -78,37 +78,37 @@ file that was distributed with this source code.
 
             {% block content %}
 
-            {% set sidebar = knp_menu_get('sidebar.main') %}
-            {% set menu = sidebar.hasChildren %}
+                {% set sidebar = knp_menu_get('sidebar.main') %}
+                {% set menu = sidebar.hasChildren %}
 
-            {% if menu %}
-                <div class="col-lg-2 col-lg-push-10 col-md-2 col-md-push-10" id="sidebar-left">
-                    <div class="sidebar-affix">
-                    {% block content_sidebar %}
+                {% if menu %}
+                    <div class="col-lg-2 col-lg-push-10 col-md-2 col-md-push-10" id="sidebar-left">
+                        <div class="sidebar-affix">
+                        {% block content_sidebar %}
 
-                    <div class="row">
-                        {% block blason %}
-                            <div id="blason" class="col-lg-12 col-md-12">
-                                <img src="{{ asset('assets/img/blason.png') }}" alt="blason" />
-                            </div>
-                        {% endblock %}
+                        <div class="row">
+                            {% block blason %}
+                                <div id="blason" class="col-lg-12 col-md-12">
+                                    <img src="{{ asset('assets/img/blason.png') }}" alt="blason" />
+                                </div>
+                            {% endblock %}
 
-                        {% block sidebar_menu_main %}
-                            <div class="col-lg-12 col-md-12 col-sm-6">
-                                {{ knp_menu_render('sidebar.main', {'currentAsLink': false, 'depth': 1,'template': 'AsboWebBundle:Frontend/Menu:sidebar.html.twig'}) }}
-                            </div>
-                        {% endblock %}
+                            {% block sidebar_menu_main %}
+                                <div class="col-lg-12 col-md-12 col-sm-6">
+                                    {{ knp_menu_render('sidebar.main', {'currentAsLink': false, 'depth': 1,'template': 'AsboWebBundle:Frontend/Menu:sidebar.html.twig'}) }}
+                                </div>
+                            {% endblock %}
 
-                        {% block sidebar_menu_admin %}
-                            <div class="col-lg-12 col-md-12 col-sm-6">
-                                {{ knp_menu_render('sidebar.admin', {'template': 'AsboWebBundle:Frontend/Menu:sidebar.html.twig'})  }}
-                            </div>
-                        {% endblock %}
+                            {% block sidebar_menu_admin %}
+                                <div class="col-lg-12 col-md-12 col-sm-6">
+                                    {{ knp_menu_render('sidebar.admin', {'template': 'AsboWebBundle:Frontend/Menu:sidebar.html.twig'})  }}
+                                </div>
+                            {% endblock %}
+                        </div>
+                        {% endblock content_sidebar %}
+                        </div>
                     </div>
-                    {% endblock content_sidebar %}
-                    </div>
-                </div>
-            {% endif %}
+                {% endif %}
 
             <div class="{% if menu %}col-md-9 col-lg-9 col-lg-pull-2 col-md-pull-2{% else %}col-lg-10 col-md-10{% endif %} col-lg-offset-1 col-md-offset-1">
 
