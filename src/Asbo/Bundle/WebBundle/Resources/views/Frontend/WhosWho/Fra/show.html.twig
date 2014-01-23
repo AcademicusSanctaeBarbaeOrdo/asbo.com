@@ -154,7 +154,7 @@ file that was distributed with this source Label.
                             {% for email in fra.emails %}
                                 {% if email != fra.principalEmail or allowed_to_edit_fra %}
                                     <div class="col-lg-12">
-                                        {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_email.html.twig', {'email': email}, with_context = false) }}
+                                        {{ include('AsboWebBundle:Frontend/WhosWho/Fra/partials:_email.html.twig', {'email': email}, with_context = false) }}
                                         {% if allowed_to_edit_fra %}
                                             <span class="edit-mode">
                                                 <a href="{{ path('asbo_whoswho_email_update', {'slug': fra.slug, 'id': email.id}) }}"><i class="fa fa-edit"></i></a>
@@ -198,7 +198,7 @@ file that was distributed with this source Label.
                             {% for phone in fra.phones %}
                                 {% if phone != fra.principalPhone or allowed_to_edit_fra %}
                                     <div class="col-lg-6">
-                                        {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_phone.html.twig', {'phone': phone}, with_context = false) }}
+                                        {{ include('AsboWebBundle:Frontend/WhosWho/Fra/partials:_phone.html.twig', {'phone': phone}, with_context = false) }}
                                         {% if allowed_to_edit_fra %}
                                             <span class="edit-mode">
                                                 <a href="{{ path('asbo_whoswho_phone_update', {'slug': fra.slug, 'id': phone.id}) }}"><i class="fa fa-edit"></i></a>
@@ -240,7 +240,7 @@ file that was distributed with this source Label.
 
                                 {% if address != fra.principalAddress or allowed_to_edit_fra %}
                                     <div class="col-lg-6">
-                                        {% embed "AsboWebBundle:Frontend/WhosWho/Fra/Partials:_address.html.twig" with { 'address': address, 'allowed_to_edit_fra': allowed_to_edit_fra, 'fra': fra } only %}
+                                        {% embed "AsboWebBundle:Frontend/WhosWho/Fra/partials:_address.html.twig" with { 'address': address, 'allowed_to_edit_fra': allowed_to_edit_fra, 'fra': fra } only %}
 
                                             {% block address %}
                                                 {{ address.street }} {{ address.number }}<br />
@@ -298,7 +298,7 @@ file that was distributed with this source Label.
                         <div class="row">
                             {% for diploma in fra.diplomas %}
                                 <div class="col-lg-12">
-                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_diploma.html.twig', {'diploma': diploma}, with_context = false) }}
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/partials:_diploma.html.twig', {'diploma': diploma}, with_context = false) }}
                                     {% if allowed_to_edit_fra %}
                                         <span class="edit-mode">
                                                 <a href="{{ path('asbo_whoswho_diploma_update', {'slug': fra.slug, 'id': diploma.id}) }}"><i class="fa fa-edit"></i></a>
@@ -341,7 +341,7 @@ file that was distributed with this source Label.
                         <div class="row">
                             <div class="col-lg-12">
                                 {% for job in fra.jobs  %}
-                                    {% embed "AsboWebBundle:Frontend/WhosWho/Fra/Partials:_job.html.twig" with { 'fra': fra, 'job': job, 'allowed_to_edit_fra': allowed_to_edit_fra } only %}
+                                    {% embed "AsboWebBundle:Frontend/WhosWho/Fra/partials:_job.html.twig" with { 'fra': fra, 'job': job, 'allowed_to_edit_fra': allowed_to_edit_fra } only %}
 
                                         {% block company %}
                                             {{ parent() }}
@@ -405,7 +405,7 @@ file that was distributed with this source Label.
 
                             {% for post in post_asbo %}
                                 <div class="col-lg-12">
-                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_post.html.twig', {'post': post}, with_context = false) }}
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/partials:_post.html.twig', {'post': post}, with_context = false) }}
                                     {% if allowed_to_edit_fra %}
                                         <span class="edit-mode">
                                                 <a href="{{ path('asbo_whoswho_frahaspost_update', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-edit"></i></a>
@@ -421,7 +421,7 @@ file that was distributed with this source Label.
 
                             {% for post in post_civil %}
                                 <div class="col-lg-12">
-                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_post.html.twig', {'post': post}, with_context = false) }}
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/partials:_post.html.twig', {'post': post}, with_context = false) }}
                                     {% if allowed_to_edit_fra %}
                                         <span class="edit-mode">
                                                 <a href="{{ path('asbo_whoswho_frahaspost_update', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-edit"></i></a>
@@ -461,7 +461,7 @@ file that was distributed with this source Label.
                         <div class="row">
                             {% for post in fra.externalPosts %}
                                 <div class="col-lg-12">
-                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_external.html.twig', {'post': post}, with_context = false) }}
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/partials:_external.html.twig', {'post': post}, with_context = false) }}
                                     {% if allowed_to_edit_fra %}
                                         <span class="edit-mode">
                                                 <a href="{{ path('asbo_whoswho_externalpost_update', {'slug': fra.slug, 'id': post.id}) }}"><i class="fa fa-edit"></i></a>
@@ -501,7 +501,7 @@ file that was distributed with this source Label.
                         <div class="row">
                             {% for rank in fra.ranks %}
                                 <div class="col-lg-12">
-                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/Partials:_rank.html.twig', {'rank': rank}, with_context = false) }}
+                                    {{ include('AsboWebBundle:Frontend/WhosWho/Fra/partials:_rank.html.twig', {'rank': rank}, with_context = false) }}
                                     {% if allowed_to_edit_fra %}
                                         <span class="edit-mode">
                                             <a href="{{ path('asbo_whoswho_rank_update', {'slug': fra.slug, 'id': rank.id}) }}"><i class="fa fa-edit"></i></a>

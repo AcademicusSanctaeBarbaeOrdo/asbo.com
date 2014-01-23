@@ -50,7 +50,7 @@ file that was distributed with this source code.
                                 <div class="panel-heading"><i class="fa fa-gift fa-fw"></i> Prochains anniversaires</div>
                                 <div class="panel-body">
                                     {{ render(controller('asbo_whoswho.controller.fra:getNextBirthdayInAnIntervalOfAction',
-                                    {'_sylius': {'template': 'AsboWebBundle:Frontend/WhosWho/Fra/Partials:_birthdayBetween.html.twig'}})) }}
+                                    {'_sylius': {'template': 'AsboWebBundle:Frontend/WhosWho/Fra/partials:_birthdayBetween.html.twig'}})) }}
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@ file that was distributed with this source code.
                             <div class="panel panel-default">
                                 <div class="panel-heading"><i class="fa fa-clock-o"></i> Derniers connectés</div>
                                 <div class="panel-body">
-                                    {{ render(controller('asbo_whoswho.controller.fra:getLastLoginAction', {'nb': 5, '_sylius': {'template': 'AsboWebBundle:Frontend/WhosWho/Fra/Partials:_lastConnection.html.twig'}})) }}
+                                    {{ render(controller('asbo_whoswho.controller.fra:getLastLoginAction', {'nb': 5, '_sylius': {'template': 'AsboWebBundle:Frontend/WhosWho/Fra/partials:_lastConnection.html.twig'}})) }}
                                 </div>
                             </div>
                         </div>

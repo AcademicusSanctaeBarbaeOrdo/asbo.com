@@ -66,7 +66,7 @@ file that was distributed with this source code.
                         <div class="row">
                             {% if next_fras_birthdays|length > 0 %}
                                 <div class="col-lg-12">
-                                    {% include 'AsboWebBundle:Frontend/WhosWho/Fra/Partials:_birthdayBetween.html.twig' with {'fras': next_fras_birthdays} only %}
+                                    {% include 'AsboWebBundle:Frontend/WhosWho/Fra/partials:_birthdayBetween.html.twig' with {'fras': next_fras_birthdays} only %}
                                 </div>
                             {% endif %}
 
@@ -94,7 +94,7 @@ file that was distributed with this source code.
                         {% endif %}
                         <div class="col-lg-12">
                             {% if last_fras_login %}
-                                {% include 'AsboWebBundle:Frontend/WhosWho/Fra/Partials:_lastConnection.html.twig' with {'fras': last_fras_login} only %}
+                                {% include 'AsboWebBundle:Frontend/WhosWho/Fra/partials:_lastConnection.html.twig' with {'fras': last_fras_login} only %}
                             {% endif %}
                         </div>
                     </div>
