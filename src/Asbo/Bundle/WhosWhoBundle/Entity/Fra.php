@@ -28,7 +28,7 @@ use Asbo\Bundle\WhosWhoBundle\Validator;
  * @ORM\Entity(repositoryClass="Asbo\Bundle\WhosWhoBundle\Doctrine\FraRepository")
 
  * @Assert\Callback(methods={
- *     { "Asbo\Bundle\WhosWhobundle\Validator\StatusTypeValidator", "isValid"}
+ *     {"Asbo\Bundle\WhosWhoBundle\Validator\StatusTypeValidator", "isValid"}
  * })
  */
 class Fra
