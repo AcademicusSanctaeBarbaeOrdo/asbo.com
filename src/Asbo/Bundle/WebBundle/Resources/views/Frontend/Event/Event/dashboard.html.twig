@@ -23,11 +23,11 @@ file that was distributed with this source code.
     <div class="row">
 
         <div class="col-lg-6">
-            {{ render(controller('asbo.controller.event:indexAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Event/Event/partials:_dashboard_upcoming_events.html.twig', 'paginate': false, 'method': 'findUpcomingConfirmedEvents', 'arguments': [10]}}))}}
+            {{ render(controller('asbo.controller.event:indexAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Event/Event/Partials:_dashboard_upcoming_events.html.twig', 'paginate': false, 'method': 'findUpcomingConfirmedEvents', 'arguments': [10]}}))}}
         </div>
 
         <div class="col-lg-6">
-            {{ render(controller('asbo.controller.event:indexAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Event/Event/partials:_dashboard_past_events.html.twig', 'paginate': false, 'method': 'findPastConfirmedEvents', 'arguments': [10], 'sortable': {'startsAt': 'DESC'}}}))}}
+            {{ render(controller('asbo.controller.event:indexAction', {'_sylius': {'template': 'AsboWebBundle:Frontend/Event/Event/Partials:_dashboard_past_events.html.twig', 'paginate': false, 'method': 'findPastConfirmedEvents', 'arguments': [10], 'sortable': {'startsAt': 'DESC'}}}))}}
         </div>
     </div>
     <div class="row">
