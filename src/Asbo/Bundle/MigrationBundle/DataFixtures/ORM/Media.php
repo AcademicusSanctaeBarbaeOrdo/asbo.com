@@ -78,7 +78,7 @@ class Media extends AbstractFixture implements OrderedFixtureInterface, Containe
         $entity->setCdnIsFlushable((bool) $data['cdn_is_flushable']);
         $entity->setCdnFlushAt($data['cdn_flush_at']);
 
-        $filename = __DIR__."/../../../../../../../old.asbo/uploads/".$data['provider_reference'];
+        $filename = __DIR__."/../../../../../../old/uploads/".$data['provider_reference'];
 
         if (file_exists($filename)) {
             $entity->setBinaryContent($filename);

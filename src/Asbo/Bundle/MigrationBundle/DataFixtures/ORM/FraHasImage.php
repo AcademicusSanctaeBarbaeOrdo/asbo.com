@@ -80,7 +80,7 @@ class FraHasImage extends AbstractFixture implements OrderedFixtureInterface, Co
         $image->setProviderName('sonata.media.provider.image');
         $image->setEnabled(true);
 
-        $filename = __DIR__."/../../../../../../../old.asbo/whoswho/".$data['fra_id'].'/'.$data['path'];
+        $filename = __DIR__."/../../../../../../old/whoswho/".$data['fra_id'].'/'.$data['path'];
 
         $image->setBinaryContent($filename);
 
